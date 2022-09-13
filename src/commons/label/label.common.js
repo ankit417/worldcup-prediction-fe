@@ -1,5 +1,5 @@
 import React from "react";
 
-export const Label = () => {
-  return <div>Label</div>;
+export const Label = ({ title }) => {
+  return <div className="label-wrapper">{title}</div>;
 };

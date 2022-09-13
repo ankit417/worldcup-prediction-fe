@@ -1,0 +1,17 @@
+.radioButton {
+  margin-right: 25px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  .label {
+    margin-left: 5px;
+  }
+
+  input[type="radio"] {
+    border: 0px;
+    width: 15px;
+    height: 15px;
+    outline-color: red;
+  }
+}

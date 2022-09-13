@@ -1,0 +1,27 @@
+// COLORS
+$red: #fb482c;
+$white: #ffffff;
+$black: #353535;
+$light_black: #a1a1a1;
+$grey: #e1e1e1;
+$light_grey: #f1f1f1;
+$extralight_grey: #f8f8f8;
+$primarycolor: #358600;
+$primarycolor_dark: darken($primarycolor,10%);
+
+// FONT FAMILIES
+$robotoBold: RobotoBold;
+$robotoMedium: RobotoMedium;
+$robotoRegular: RobotoRegular;
+
+// FONT SIZES
+$large_heading: 90px;
+$heading_one: 24px; // Bold
+$heading_two: 20px; // Bold
+$text: 16px; // Medium for Links/Text/SubHeaing, Regular
+
+$small: 14px;
+$hairline: 12px;
+
+// WIDTH
+$default_width: 85%;

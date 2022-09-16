@@ -7,3 +7,5 @@ export * from "./title/title.common";
 export * from "./compWrapper/compWrapper.common";
 export * from "./nav/nav.common";
 export * from "./bottomNav/bottomNav.common";
+export * from "./hoc/Card.hoc";
+export * from "./hrLine/hrLine.common";

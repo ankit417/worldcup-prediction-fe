@@ -1,0 +1,232 @@
+.inputfield {
+  position: relative;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid $defaultborder;
+  // padding: 0px 10px;
+  font-size: $extrathin;
+  background-color: $grey400;
+  font-family: $avertaSemiBold;
+  color: $defaulttextcolor;
+  transition: border 0.2s, background 0.2s;
+  overflow: hidden;
+  input,
+  select,
+  textarea {
+    resize: none;
+    padding: 10px 6px;
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-family: $avertaSemiBold;
+  }
+
+  &.borderless {
+    border: none;
+    outline: none;
+    background-color: #fafafa;
+
+    &:focus {
+      outline-offset: 0px;
+      background-color: #fafafa;
+      outline: none;
+      border: none;
+    }
+
+    &:hover {
+      border: none;
+    }
+  }
+
+  &::placeholder {
+    font-family: $avertaSemiBold;
+    color: $grey100;
+  }
+
+  &:hover {
+    background-color: $grey400;
+    border: 1px solid $primary200;
+  }
+
+  &:focus {
+    background-color: $white;
+    outline-offset: 0px;
+    outline: none;
+    // border: 1px solid $primary200;
+  }
+
+  &.error {
+    border: 1px solid $red;
+
+    &:focus {
+      border: 1px solid $red;
+    }
+  }
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
+
+input[type='datetime-local']::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.disabled {
+  background-color: $grey200;
+  color: $grey400;
+  &:hover {
+    background-color: $grey200;
+
+    border: 1px solid $defaultborder;
+  }
+}
+
+.isFocused {
+  background-color: $grey400;
+  border: 1px solid $primary200;
+}
+
+.searchbox {
+  position: relative;
+
+  .searchfield {
+    position: relative;
+    width: 100%;
+    padding: 10px 25px 10px 12px;
+    border: none;
+    outline: none;
+    border: 1px solid $defaultborder;
+    border-radius: 4px;
+    background-color: $white;
+    font-size: $extrathin;
+    font-family: $avertaSemiBold;
+    color: $defaulttextcolor;
+    transition: border 0.2s, background 0.2s;
+    resize: none;
+
+    &::placeholder {
+      font-family: $avertaSemiBold;
+      color: $grey100;
+    }
+
+    &:hover {
+      background-color: $white;
+      border: 1px solid $primary200;
+    }
+
+    &:focus {
+      background-color: $white;
+      outline-offset: 0px;
+      outline: none;
+      border: 1px solid $primary200;
+    }
+
+    &.error {
+      border: 1px solid $red;
+
+      &:focus {
+        border: 1px solid $red;
+      }
+    }
+  }
+
+  .icon {
+    cursor: pointer;
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-40%);
+    color: $grey200;
+  }
+}
+
+.rti--container {
+  // --rti-bg: #fff;
+  // --rti-border: #e1e1e1 !important;
+  // --rti-main: transparent !important;
+  // --rti-radius: 0.375rem;
+  // --rti-s: 0.5rem; /* spacing */
+  // --rti-tag: #edf2f7;
+  // --rti-tag-remove: #e53e3e;
+
+  // border: 1px solid $defaultborder;
+  // background-color: $grey400;
+  // width: 100%;
+
+  position: relative;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid $defaultborder;
+  // padding: 0px 10px;
+  font-size: $extrathin;
+  background-color: $grey400;
+  font-family: $avertaSemiBold;
+  color: $defaulttextcolor;
+  transition: border 0.2s, background 0.2s;
+  overflow: hidden;
+  padding: 10px 6px;
+  .rti--tag {
+    background: white;
+    border-radius: 4px;
+    border: $grey200 1px solid;
+    flex-direction: row;
+    gap: 4px;
+    padding: 4px;
+    margin: 0px 4px 4px 0px;
+  }
+
+  input {
+    // width: 100%;
+    // background-color: transparent;
+    resize: none;
+
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-family: $avertaSemiBold;
+    margin-top: 10px;
+  }
+  &:hover {
+    // background-color: $grey400;
+    border: 1px solid $primary200;
+  }
+  &:focus {
+    background-color: $white;
+    outline-offset: 0px;
+    outline: none;
+    border: 1px solid $primary200 !important;
+  }
+}

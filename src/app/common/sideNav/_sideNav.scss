@@ -1,0 +1,169 @@
+// side nav styles
+$sidenav_icon_width: 40px;
+
+.sidenav-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: transparent;
+  z-index: 100;
+
+  .sidenav {
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow-x: hidden;
+    // width: 300px;
+    width: 90px;
+    height: 100%;
+    background-color: $black;
+    box-shadow: 4px 0px 8px rgba(0, 0, 0, 0.2);
+
+    @include scrollbar(4px, $black200, $black, darken($black200, 10%));
+
+    &-header {
+      width: 70%;
+      margin: 30px auto 20px auto;
+      height: 70px;
+      padding: 10px;
+      padding-bottom: 6px;
+      border-radius: 10px;
+      background: $white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &-logo1 {
+        width: 50px;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      &-logo2 {
+        width: 140px;
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+
+    &-nav-group {
+      padding: 0px 20px;
+      margin: 10px 0px;
+      user-select: none;
+
+      &-title {
+        display: flex;
+        align-items: center;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        overflow-x: hidden;
+
+        .sidenav-title {
+          padding: 16px;
+          flex: 1;
+          display: flex;
+          align-items: center;
+
+          &-icon {
+            color: $white;
+            position: relative;
+            top: 2px;
+            display: inline-block;
+            width: $sidenav_icon_width;
+          }
+
+          &-text {
+            font-size: 14px;
+            color: $white;
+            font-weight: bold;
+            white-space: nowrap;
+          }
+        }
+
+        .dropdownicon {
+          color: $white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 20px;
+          height: 20px;
+          margin-right: 16px;
+        }
+
+        &:hover {
+          background-color: rgba(119, 119, 119, 0.3);
+        }
+
+        &.active {
+          background-color: $primary200;
+          box-shadow: 0px 4px 8px rgba(20, 160, 195, 0.18);
+
+          .sidenav-title {
+          }
+        }
+
+        &.hasChild {
+          background-color: rgba(119, 119, 119, 0.3);
+        }
+      }
+
+      .sidenav-navitems {
+        .navitems-item {
+          a {
+            color: $white;
+            text-decoration: none;
+            padding: 16px;
+            margin: 10px 0px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+            // display: flex;
+            // align-items: center;
+            display: grid;
+            grid-template-columns: $sidenav_icon_width 1fr;
+
+            .navitems-item-alias {
+              font-weight: normal;
+              width: $sidenav_icon_width;
+              white-space: nowrap;
+            }
+
+            .navitems-item-name {
+              white-space: nowrap;
+            }
+
+            &:hover {
+              background-color: rgba(119, 119, 119, 0.3);
+            }
+          }
+
+          &.active {
+            a {
+              background-color: $primary200;
+              box-shadow: 0px 4px 8px rgba(20, 160, 195, 0.18);
+
+              .navitems-item-alias {
+              }
+
+              .navitems-item-name {
+              }
+            }
+          }
+
+          &:last-child {
+            a {
+              margin-bottom: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

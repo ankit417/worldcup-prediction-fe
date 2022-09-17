@@ -1,0 +1,30 @@
+.matchCard_wrapper {
+  padding-top: 20px;
+  text-align: center;
+  .match_wrapper {
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include responsive-for(sm) {
+      flex-direction: column;
+    }
+
+    img {
+      height: 100px;
+      width: 100px;
+      @include responsive-for(sm) {
+        height: 50px;
+        width: 50px;
+      }
+    }
+  }
+  .prediction_button_wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex: 1;
+    padding: 5px;
+  }
+}

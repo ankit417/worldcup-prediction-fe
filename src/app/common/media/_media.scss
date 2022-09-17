@@ -1,0 +1,21 @@
+.imageRender {
+  position: relative;
+  display: inline-block;
+  border: 1px solid $grey200;
+  padding: 10px;
+  overflow: hidden;
+  border-radius: 8px;
+  // &:hover {
+  //   overflow: visible;
+  // }
+
+  .hoverimage {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    overflow: hidden;
+    &:hover {
+      // transform: scale(2);
+    }
+  }
+}

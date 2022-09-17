@@ -1,0 +1,60 @@
+.tab {
+  display: flex;
+  list-style-type: none;
+  align-self: flex-end;
+  flex: 1;
+
+  .tab-list-item {
+    cursor: pointer;
+    margin-right: 10px;
+
+    div {
+      text-decoration: none;
+      display: block;
+      background: transparent;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      border-radius: 8px;
+      transition: background 0.2s, box-shadow 0.2s;
+      z-index: 1;
+
+      .activeoverlay {
+        background: $primary200;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        border-radius: 8px;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.12);
+      }
+
+      span.title {
+        color: $defaulttextcolor;
+        font-weight: bold;
+        padding: 0px 10px;
+        transition: color 0.2s;
+      }
+    }
+
+    &:hover {
+      div {
+        background: $grey300;
+      }
+    }
+
+    &.active {
+      div {
+        background: $primary200;
+
+        span.title {
+          color: $white;
+        }
+      }
+    }
+  }
+}

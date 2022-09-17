@@ -1,0 +1,30 @@
+// TAB STYLES
+.tab-v1 {
+  &-title {
+    display: flex;
+    border-bottom: 1px solid $defaultborder;
+
+    &-text {
+      padding: 20px 0px 10px 0px;
+      margin-right: 40px;
+      font-family: $avertaSemiBold;
+      cursor: pointer;
+      color: $black200;
+
+      &:first-child {
+        margin-left: 30px;
+      }
+
+      &:last-child {
+        margin-right: 30px;
+      }
+
+      &.active {
+        border-bottom: 3px solid $primary200;
+        color: $black;
+      }
+    }
+  }
+
+  //   &-content {}
+}

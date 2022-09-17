@@ -1,0 +1,9 @@
+.home-wrapper {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  .home-card-title {
+    display: flex;
+    justify-content: space-between;
+  }
+}

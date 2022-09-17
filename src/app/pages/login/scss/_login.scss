@@ -1,0 +1,76 @@
+.login-container {
+  .login {
+    width: 30%;
+    margin: 0px auto;
+    padding: 50px 0px;
+
+    @include responsive-for(md) {
+      width: $default_width;
+      margin: 0px auto;
+    }
+
+    &-contents {
+      padding: 20px 10px;
+    }
+
+    &-head {
+      font-family: $avertaBold;
+      font-size: $heading_one;
+      color: $defaulttextcolor;
+      margin-bottom: 20px;
+    }
+
+    &-fields {
+      margin-bottom: 20px;
+
+      &-title {
+        font-family: $avertaSemiBold;
+        font-size: $text;
+        color: $defaulttextcolor;
+        padding-bottom: 8px;
+      }
+    }
+
+    &-forgot {
+      cursor: pointer;
+      margin-bottom: 20px;
+      font-family: $avertaLight;
+      font-size: $text;
+      color: $primary200;
+    }
+
+    &-action {
+      width: 100%;
+    }
+
+    &-info {
+      margin-top: 26px;
+      text-align: center;
+      font-family: $avertaLight;
+      font-size: $text;
+      color: $lighttextcolor;
+
+      span {
+        cursor: pointer;
+        color: $primary200;
+        font-family: $avertaLight;
+      }
+    }
+
+    &-footer {
+      border-top: 1px solid $grey300;
+      padding-top: 20px;
+      margin-top: 26px;
+      text-align: center;
+      font-family: $avertaLight;
+      font-size: $text;
+      color: $lighttextcolor;
+
+      span {
+        cursor: pointer;
+        color: $primary200;
+        font-family: $avertaLight;
+      }
+    }
+  }
+}

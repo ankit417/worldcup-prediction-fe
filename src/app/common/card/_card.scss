@@ -1,0 +1,17 @@
+// CARD HOC STYLES
+
+.card-container {
+  width: 100%;
+  background-color: $white;
+  border-radius: $default_radius;
+  border: 1px solid $defaultborder;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.08);
+
+  .header {
+    border-bottom: 1px solid $defaultborder;
+  }
+
+  .body {
+    // overflow: hidden;
+  }
+}

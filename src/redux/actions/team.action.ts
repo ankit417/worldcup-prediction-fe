@@ -35,8 +35,8 @@ export function addTeam(body: any, callBack?: any) {
     let res
     try {
       dispatch({ type: ADD_TEAM.LOADING })
-      res = await api(`${APIS.group}`, 'POST', body)
-      console.log('tournament add group', res)
+      res = await api(`${APIS.team}`, 'POST', body)
+      console.log('team', res)
       const { success, message } = res.data
       console.log('res data add group', message)
       if (success) {

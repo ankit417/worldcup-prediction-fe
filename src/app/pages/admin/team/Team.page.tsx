@@ -2,11 +2,11 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 // import { useNavigation } from 'react-auth-navigation'
 
-import { getAllTeam, deleteTeam, RootState } from '../../../../redux'
+import { getAllTeam, addTeam, deleteTeam, RootState } from '../../../../redux'
 import { FILE_URL } from '../../../../config'
 
 import { CompWrapper, Table } from '../../../common'
-
+import { AddTeam } from './component'
 const Team = () => {
   // const {
   //     params,
@@ -29,9 +29,24 @@ const Team = () => {
     )
   }
 
+  const addTeamHandler = (formData: any) => {
+    console.log('form data', formData)
+    dispatch(
+      addTeam(formData, () => {
+        dispatch(getAllTeam())
+      })
+    )
+  }
   return (
     <CompWrapper>
-      <div>Team</div>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <AddTeam onSubmit={addTeamHandler} />
+      </div>
 
       <Table
         columns={[
@@ -45,14 +60,6 @@ const Team = () => {
             name: 'Logo',
             render: (rowData: any) => (
               <>
-                {/* <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    gap: 30,
-                  }}
-                /> */}
                 <img src={FILE_URL + rowData} height={50} width={50} />
               </>
             ),

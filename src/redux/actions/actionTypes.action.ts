@@ -121,3 +121,9 @@ export const GROUP = createActionSet('GROUP')
 export const ADD_GROUP = createActionSet('ADD_GROUP')
 export const EDIT_GROUP = createActionSet('EDIT_GROUP')
 export const DELETE_GROUP = createActionSet('DELETE_GROUP')
+
+//TEAM
+export const TEAM = createActionSet('TEAM')
+export const ADD_TEAM = createActionSet('ADD_TEAM')
+export const EDIT_TEAM = createActionSet('EDIT_TEAM')
+export const DELETE_TEAM = createActionSet('DELETE_TEAM')

@@ -2,7 +2,7 @@ import { apiGenerator } from '../helpers'
 
 // // export const LOCAL_SERVER_URL = 'http://localhost:8848/api'
 export const BASE_URL = 'http://localhost:8081/api/v1' // Dev Server API -
-export const FILE_URL = 'http://143.110.251.101:8849/assets' // Dev FILE URL
+export const FILE_URL = 'http://localhost:8081/files/' // Dev Server API -
 
 export const TABLE_LIMIT = 5
 

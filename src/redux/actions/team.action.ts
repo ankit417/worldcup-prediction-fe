@@ -86,18 +86,18 @@ export function updateTeam(groupId: number, body: any, callBack?: any) {
   }
 }
 
-export function deleteTeam(groupId: number, callBack?: any) {
+export function deleteTeam(teamId: number, callBack?: any) {
   return async function (dispatch: any) {
     let res
     try {
       dispatch({ type: DELETE_TEAM.LOADING })
-      res = await api(`${APIS.group}/group/${groupId}`, 'DELETE')
+      res = await api(`${APIS.team}/${teamId}`, 'DELETE')
       const { success, message } = res.data
       if (success) {
         dispatch({
           type: DELETE_TEAM.SUCCESS,
         })
-        toast.success('Group deleted')
+        toast.success('Team deleted')
         callBack && callBack()
         return 1
       } else {

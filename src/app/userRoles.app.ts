@@ -13,6 +13,7 @@ export const userRoles = {
       '/dashboard/*',
       '/order/*',
       '/tournament/*',
+      '/match/*',
       '/team/*',
     ],
   },

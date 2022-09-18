@@ -7,6 +7,7 @@ import { dashboardReducer } from './dashboard.reducer'
 import { tournamentReducer } from './tournament.reducer'
 import { groupReducer } from './group.reducer'
 import { teamReducer } from './team.reducer'
+import { gameReducer } from './game.reducer'
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   tournament: tournamentReducer,
   group: groupReducer,
   team: teamReducer,
+  game: gameReducer,
 })
 
 export default rootReducer

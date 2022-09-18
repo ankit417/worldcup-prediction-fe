@@ -127,3 +127,6 @@ export const TEAM = createActionSet('TEAM')
 export const ADD_TEAM = createActionSet('ADD_TEAM')
 export const EDIT_TEAM = createActionSet('EDIT_TEAM')
 export const DELETE_TEAM = createActionSet('DELETE_TEAM')
+
+//GAME
+export const GAME = createActionSet('GAME')

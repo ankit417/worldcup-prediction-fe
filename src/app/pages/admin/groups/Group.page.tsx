@@ -19,26 +19,26 @@ const Group = () => {
     params,
     navigation: { navigate },
   }: any = useNavigation()
-  const { id } = params
+  const { tournamentId } = params
   const dispatch = useDispatch()
   const { groupLoading, groupList } = useSelector(
     (state: RootState) => state.group
   )
   useEffect(() => {
-    dispatch(getAllGroups(id))
+    dispatch(getAllGroups(tournamentId))
   }, [dispatch])
 
   const onSubmitHandler = (requestBody: any) => {
     dispatch(
       addGroups(
         {
-          tournament_id: id,
+          tournament_id: tournamentId,
           group_name: requestBody.name,
           match_point: requestBody.point,
           is_final: requestBody.isFinal, //todo
         },
         () => {
-          dispatch(getAllGroups(id))
+          dispatch(getAllGroups(tournamentId))
           setVisible(false)
         }
       )
@@ -48,7 +48,7 @@ const Group = () => {
   const deleteHandler = (groupId: number) => {
     dispatch(
       deleteGroup(groupId, () => {
-        dispatch(getAllGroups(id))
+        dispatch(getAllGroups(tournamentId))
       })
     )
   }
@@ -103,7 +103,7 @@ const Group = () => {
         }}
         onViewHandler={(data: any) => {
           //   console.log(data)
-          navigate(`/tournament/${data?.id}`)
+          navigate(`view/${tournamentId}/group/${data?.id}`)
         }}
         onDeleteHandler={(data: any) => {
           //   toast.error(data?.id)

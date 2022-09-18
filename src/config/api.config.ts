@@ -37,4 +37,5 @@ export const APIS = {
   tournament: '/tournament',
   group: '/groups',
   team: '/teams',
+  game: '/game',
 }

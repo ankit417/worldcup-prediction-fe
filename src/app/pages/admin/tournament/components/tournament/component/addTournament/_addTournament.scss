@@ -1,0 +1,9 @@
+.addTournament-title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .addTournament-close-button {
+    cursor: pointer;
+  }
+}

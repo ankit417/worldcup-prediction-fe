@@ -59,6 +59,7 @@ export function addGroups(body: any, callBack?: any) {
     }
   }
 }
+
 export function updateGroup(groupId: number, body: any, callBack?: any) {
   return async function (dispatch: any) {
     let res

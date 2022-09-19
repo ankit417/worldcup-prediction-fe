@@ -5,7 +5,11 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { BsPlusCircleFill } from 'react-icons/bs'
 import { AddTournament } from './component'
-import { getAllTournaments, RootState } from '../../../../../../redux'
+import {
+  getAllTournaments,
+  addTournament,
+  RootState,
+} from '../../../../../../redux'
 import { Hrline, Title } from '../../../../../common'
 
 const TournamentList = ({ onPress }: any) => {
@@ -42,7 +46,13 @@ const TournamentList = ({ onPress }: any) => {
   }
 
   const onAddTournament = (requestBody: any) => {
-    console.log('request body', requestBody)
+    console.log('request body add tournaments', requestBody)
+    dispatch(
+      addTournament(requestBody, () => {
+        dispatch(getAllTournaments())
+        setAddTournamentModal(false)
+      })
+    )
   }
 
   return (
@@ -54,7 +64,6 @@ const TournamentList = ({ onPress }: any) => {
             size={24}
             className="add-tournament"
             onClick={handleAddTournamentModal}
-            onSubmit={onAddTournament}
           />
         </div>
         <Hrline />
@@ -62,6 +71,7 @@ const TournamentList = ({ onPress }: any) => {
       <AddTournament
         visible={addTournamentVisible}
         onClose={handleAddTournamentModal}
+        onSubmit={onAddTournament}
       />
       {tournamentList.map((item: any, index: number) => {
         return (

@@ -115,6 +115,7 @@ export const GET_ORDER_ITEM_BY_ID = createActionSet('GET_ORDER_ITEM_BY_ID')
 
 //TOURNAMENTS
 export const TOURNAMENT = createActionSet('TOURNAMENT')
+export const ADD_TOURNAMENT = createActionSet('ADD_TOURNAMENT')
 
 //GROUP
 export const GROUP = createActionSet('GROUP')

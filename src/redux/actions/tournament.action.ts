@@ -1,7 +1,7 @@
 import { toast } from 'react-hot-toast'
 import { api, APIS } from '../../config'
 
-import { TOURNAMENT } from '.'
+import { TOURNAMENT, ADD_TOURNAMENT } from '.'
 
 export function getAllTournaments() {
   return async function (dispatch: any) {
@@ -9,7 +9,6 @@ export function getAllTournaments() {
     try {
       dispatch({ type: TOURNAMENT.LOADING })
       res = await api(`${APIS.tournament}`)
-      console.log('tournament', res)
       const { success, data } = res.data
 
       if (success) {
@@ -26,6 +25,35 @@ export function getAllTournaments() {
     } catch ({ message }) {
       dispatch({ type: TOURNAMENT.ERROR })
       toast.error('Error getting tournaments')
+      return 0
+    }
+  }
+}
+
+export function addTournament(body: any, callBack?: any) {
+  return async function (dispatch: any) {
+    let res
+    try {
+      dispatch({ type: ADD_TOURNAMENT.LOADING })
+      res = await api(`${APIS.tournament}`, 'POST', body)
+      console.log('create tournament res', res)
+      const { success, message } = res.data
+      console.log('res data add group', message)
+      if (success) {
+        dispatch({
+          type: ADD_TOURNAMENT.SUCCESS,
+        })
+        toast.success('Tournament created')
+        callBack && callBack()
+        return 1
+      } else {
+        dispatch({ type: ADD_TOURNAMENT.ERROR })
+        toast.error(message)
+        return 0
+      }
+    } catch ({ message }) {
+      dispatch({ type: ADD_TOURNAMENT.ERROR })
+      toast.error('Error Adding Tournament')
       return 0
     }
   }

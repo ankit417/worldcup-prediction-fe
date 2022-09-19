@@ -13,18 +13,19 @@ import {
 const AddTournament = ({ visible, onClose, onSubmit }: any) => {
   const [data, { onChange, clear }] = useFormInput({
     tournament_name: '',
-    start_date: '',
-    end_date: '',
+    starting_from: '',
+    ending_at: '',
     prediction_deadline: '',
   })
 
   const onSubmitHandler = (e: any) => {
     e.preventDefault()
-    const { tournament_name, start_date, end_date, prediction_deadline } = data
+    const { tournament_name, starting_from, ending_at, prediction_deadline } =
+      data
     const requestBody = {
       tournament_name,
-      start_date,
-      end_date,
+      starting_from,
+      ending_at,
       prediction_deadline,
     }
     onSubmit(requestBody)
@@ -59,8 +60,8 @@ const AddTournament = ({ visible, onClose, onSubmit }: any) => {
               <FormInput label="Start Date" required>
                 <InputField
                   placeholder="Start Date"
-                  name="start_date"
-                  value={data.start_date}
+                  name="starting_from"
+                  value={data.starting_from}
                   onChange={onChange}
                   type="date"
                   required
@@ -69,8 +70,8 @@ const AddTournament = ({ visible, onClose, onSubmit }: any) => {
               <FormInput label="End Date" required>
                 <InputField
                   placeholder="End Date"
-                  name="end_date"
-                  value={data.end_date}
+                  name="ending_at"
+                  value={data.ending_at}
                   onChange={onChange}
                   type="date"
                   required

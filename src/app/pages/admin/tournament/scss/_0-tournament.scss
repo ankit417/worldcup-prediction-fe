@@ -1,0 +1,7 @@
+@import '../components/tournament/tournament';
+@import '../components/group/group';
+
+.tournament-container {
+  display: flex;
+  justify-content: space-between;
+}

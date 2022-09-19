@@ -1,0 +1,14 @@
+@import './component/addTournament/addTournament';
+.tournament-title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .add-tournament {
+    cursor: pointer;
+  }
+}
+
+.tournament-item {
+  cursor: pointer;
+}

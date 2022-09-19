@@ -17,7 +17,6 @@ interface teamProps {
 export const AddMatch = ({ onSubmit, teams }: any) => {
   const [teamA, setTeamA] = useState<teamProps>()
   const [teamB, setTeamB] = useState<teamProps>()
-
   const submitHandler = () => {
     if (teamA && teamB) {
       if (teamA.id !== teamB.id) {

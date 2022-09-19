@@ -1,10 +1,11 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation } from 'react-auth-navigation'
 import { toast } from 'react-hot-toast'
 
+import { GroupList, TournamentList } from './components'
 import { getAllTournaments, RootState } from '../../../../redux'
-import { CompWrapper, Table } from '../../../common'
+import { Card, CompWrapper, Table } from '../../../common'
 
 const DATA = [
   {
@@ -20,6 +21,9 @@ const DATA = [
 ]
 
 const Tournament = () => {
+  const [initialTournamentId, setInitialTournamentId] = useState<number | null>(
+    null
+  )
   const {
     navigation: { navigate },
     // history,
@@ -33,8 +37,26 @@ const Tournament = () => {
   useEffect(() => {
     dispatch(getAllTournaments())
   }, [dispatch])
+
+  const activeTournament = (tournamentId: number) => {
+    setInitialTournamentId(tournamentId)
+  }
   return (
     <CompWrapper>
+      <div className="tournament-container">
+        <Card containerStyle={{ width: '30%', marginRight: 20 }}>
+          <div>
+            <TournamentList onPress={activeTournament} />
+          </div>
+        </Card>
+        <Card>
+          <div>
+            <GroupList selectedTournament={initialTournamentId} />
+          </div>
+        </Card>
+      </div>
+
+      {/* Remove this later */}
       <div>Tournament</div>
       <Table
         columns={[

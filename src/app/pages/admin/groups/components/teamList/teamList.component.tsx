@@ -1,26 +1,54 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigation } from 'react-auth-navigation'
 
 import { AiFillEdit } from 'react-icons/ai'
 import { BsPlusCircleFill } from 'react-icons/bs'
 
+import { updateGroup, getAllGroups } from '../../../../../../redux'
+import { EditGroup } from '../groupList/component'
+import { AddGame } from './component'
 import { RootState, getAllGame } from '../../../../../../redux'
 import { Hrline, Title, Table } from '../../../../../common'
 
-const TeamList = ({ selectedGroup, activeGroupIndex }: any) => {
-  console.log(selectedGroup, activeGroupIndex)
+const TeamList = ({ selectedGroup }: any) => {
+  const [editGroupVisible, setEditGroupVisible] = useState<boolean>(false)
+  const [addGameModalVisible, setAddGameModalVisible] = useState<boolean>(false)
+  const {
+    params,
+  }: // navigation: { navigate },
+  any = useNavigation()
+  const { tournamentId } = params
 
   const dispatch = useDispatch()
   const { gameLoading, gameList } = useSelector(
     (state: RootState) => state.game
   )
 
-  console.log('game loading', gameList)
   useEffect(() => {
     if (selectedGroup) {
       dispatch(getAllGame(selectedGroup?.id))
     }
   }, [dispatch, selectedGroup])
+
+  const handleEditGroupModal = () => {
+    setEditGroupVisible((prev) => !prev)
+  }
+  const onEditGroup = (requestBody: any) => {
+    if (requestBody) {
+      requestBody.tournament_id = tournamentId
+      dispatch(
+        updateGroup(selectedGroup?.id, requestBody, () => {
+          dispatch(getAllGroups(tournamentId))
+          handleEditGroupModal()
+        })
+      )
+    }
+  }
+
+  const hanldeAddGameModal = () => {
+    setAddGameModalVisible((prev) => !prev)
+  }
 
   return (
     <div className="group-team-wrapper">
@@ -28,41 +56,47 @@ const TeamList = ({ selectedGroup, activeGroupIndex }: any) => {
       <div>
         <div className="group-team-header">
           <div className="title-wrapper">
-            <Title>Group Name</Title>
+            <Title>{selectedGroup?.group_name}</Title>
             <AiFillEdit
               size={24}
               className="edit-group"
-              // onClick={handleEditTournamentModal}
+              onClick={handleEditGroupModal}
             />
           </div>
-          <BsPlusCircleFill
-            size={24}
-            className="add-tournament"
-            //   onClick={() =>
-            //     navigate(`tournament/view/${selectedTournament?.id}`)
-            //   }
-          />
         </div>
         <Hrline />
         <div className="group-header-team-info">
-          <div>
-            Starting From:
-            {/* {selectedTournament?.starting_from.split('T')[0]} */}
-          </div>
-          <div>
-            Ending At:
-            {/* {selectedTournament?.ending_at.split('T')[0]} */}
-          </div>
-          <div>
-            Prediction Deadline:
-            {/* {selectedTournament?.prediction_deadline.split('T')[0]} */}
-          </div>
+          <div>Match Point: {selectedGroup?.match_point}</div>
         </div>
         <Hrline />
       </div>
+      <EditGroup
+        visible={editGroupVisible}
+        onClose={handleEditGroupModal}
+        onSubmit={onEditGroup}
+        groupData={selectedGroup}
+      />
+      <AddGame
+        visible={addGameModalVisible}
+        onClose={hanldeAddGameModal}
+        groupId={selectedGroup?.id}
+      />
       <div>
-        <div>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginTop: 20,
+            marginBottom: 20,
+          }}
+        >
           <Title>Teams</Title>
+          <BsPlusCircleFill
+            size={24}
+            className="add-tournament"
+            style={{ cursor: 'pointer' }}
+            onClick={hanldeAddGameModal}
+          />
         </div>
         <Table
           columns={[
@@ -91,10 +125,6 @@ const TeamList = ({ selectedGroup, activeGroupIndex }: any) => {
             //   setVisible(true)
             // if (data?.orders?.is_paid) {
             // } else navigate(`/order/${data?.orders?.id}/edit`)
-          }}
-          onViewHandler={(data: any) => {
-            console.log(data)
-            // navigate(`view/${selectedTournament}/group/${data?.id}`)
           }}
           onDeleteHandler={(data: any) => {
             //   toast.error(data?.id)

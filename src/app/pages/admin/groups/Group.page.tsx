@@ -76,7 +76,7 @@ const Group = () => {
           <div>
             <TeamList
               selectedGroup={initialGroup}
-              activeGroupIndex={activeGroupIndex}
+              // activeGroupIndex={activeGroupIndex}
             />
           </div>
         </Card>

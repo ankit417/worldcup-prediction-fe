@@ -1,13 +1,16 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation } from 'react-auth-navigation'
 
 import { BsPlusCircleFill } from 'react-icons/bs'
 
-import { getAllGroups, RootState } from '../../../../../../redux'
+import { AddGroup } from './component'
+
+import { getAllGroups, addGroups, RootState } from '../../../../../../redux'
 import { Hrline, Title } from '../../../../../common'
 
 const GroupList = ({ activeGroupIndex, onPress }: any) => {
+  const [addGroupVisible, setAddGroupVisible] = useState<boolean>(false)
   const {
     params,
   }: // navigation: { navigate },
@@ -33,6 +36,40 @@ const GroupList = ({ activeGroupIndex, onPress }: any) => {
     onPress(group, index)
   }
 
+  const handleAddGroupModal = () => {
+    setAddGroupVisible((prev) => !prev)
+  }
+
+  const onAddGroup = (requestBody: any) => {
+    console.log(requestBody)
+    dispatch(
+      addGroups(
+        {
+          tournament_id: tournamentId,
+          group_name: requestBody.name,
+          match_point: requestBody.point,
+          is_final: requestBody.isFinal, //todo
+        },
+        () => {
+          dispatch(getAllGroups(tournamentId))
+          handleAddGroupModal()
+        }
+      )
+    )
+    // dispatch(
+    //   addTournament(requestBody, () => {
+    //     dispatch(getAllTournaments())
+    //     setAddTournamentModal(false)
+    //   })
+    // )
+  }
+
+  // ;<AddGroup
+  //   visible={addGroupVisible}
+  //   onClose={handleAddGroupModal}
+  //   onSubmit={onAddGroup}
+  // />
+
   return (
     <div>
       <div>
@@ -41,11 +78,17 @@ const GroupList = ({ activeGroupIndex, onPress }: any) => {
           <BsPlusCircleFill
             size={24}
             className="add-group"
-            // onClick={handleAddTournamentModal}
+            onClick={handleAddGroupModal}
           />
         </div>
         <Hrline />
       </div>
+      <AddGroup
+        visible={addGroupVisible}
+        onClose={handleAddGroupModal}
+        onSubmit={onAddGroup}
+      />
+
       {groupList.map((item: any, index: number) => {
         return (
           <div

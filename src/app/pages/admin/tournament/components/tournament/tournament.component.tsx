@@ -12,7 +12,7 @@ import {
 } from '../../../../../../redux'
 import { Hrline, Title } from '../../../../../common'
 
-const TournamentList = ({ onPress }: any) => {
+const TournamentList = ({ onPress, activeTournamentIndex }: any) => {
   const [addTournamentVisible, setAddTournamentModal] = useState<boolean>(false)
   // const {
   //   navigation: { navigate },
@@ -30,15 +30,15 @@ const TournamentList = ({ onPress }: any) => {
 
   useEffect(() => {
     if (tournamentList.length > 0) {
-      activeTournament(tournamentList[0].id)
+      activeTournament(
+        tournamentList[activeTournamentIndex],
+        activeTournamentIndex
+      )
     }
   }, [tournamentList])
 
-  console.log(tournamentList, tournamentLoading)
-
-  const activeTournament = (tournamentId: number) => {
-    console.log('tournament id', tournamentId)
-    onPress(tournamentId)
+  const activeTournament = (tournament: any, index: number) => {
+    onPress(tournament, index)
   }
 
   const handleAddTournamentModal = () => {
@@ -46,7 +46,6 @@ const TournamentList = ({ onPress }: any) => {
   }
 
   const onAddTournament = (requestBody: any) => {
-    console.log('request body add tournaments', requestBody)
     dispatch(
       addTournament(requestBody, () => {
         dispatch(getAllTournaments())
@@ -78,7 +77,7 @@ const TournamentList = ({ onPress }: any) => {
           <div
             key={index}
             className="tournament-item"
-            onClick={() => activeTournament(item.id)}
+            onClick={() => activeTournament(item, index)}
           >
             <div>{item.tournament_name}</div>
             {tournamentList.length != index + 1 && <Hrline />}

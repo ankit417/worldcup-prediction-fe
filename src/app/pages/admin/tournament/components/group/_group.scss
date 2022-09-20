@@ -1,0 +1,25 @@
+.tournament-group-wrapper {
+  .group-tournament-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+
+    .title-wrapper {
+      .edit-tournament {
+        margin-left: 10px;
+        cursor: pointer;
+      }
+    }
+    .add-tournament {
+      cursor: pointer;
+    }
+  }
+  .group-header-tournament-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}

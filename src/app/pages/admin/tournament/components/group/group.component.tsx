@@ -1,16 +1,23 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation } from 'react-auth-navigation'
+import { BsPlusCircleFill } from 'react-icons/bs'
+import { AiFillEdit } from 'react-icons/ai'
 
 import {
   getAllGroups,
   // addGroups,
   // deleteGroup,
   RootState,
+  editTournament,
+  getAllTournaments,
 } from '../../../../../../redux'
-import { Table } from '../../../../../common'
+import { Hrline, Table, Title } from '../../../../../common'
+import { EditTournament } from '../tournament/component'
 
 const GroupList = ({ selectedTournament }: any) => {
+  const [editTournamentVisible, setEditTournamentVisible] =
+    useState<boolean>(false)
   const {
     // params,
     navigation: { navigate },
@@ -21,13 +28,68 @@ const GroupList = ({ selectedTournament }: any) => {
     (state: RootState) => state.group
   )
   useEffect(() => {
-    dispatch(getAllGroups(selectedTournament))
+    dispatch(getAllGroups(selectedTournament?.id))
   }, [dispatch, selectedTournament])
 
+  const handleEditTournamentModal = () => {
+    setEditTournamentVisible((prev) => !prev)
+  }
+
+  const onEditTournament = (requestBody: any) => {
+    console.log('Request body edit tournament', requestBody)
+    dispatch(
+      editTournament(selectedTournament.id, requestBody, () => {
+        dispatch(getAllTournaments())
+        setEditTournamentVisible(false)
+        // activeTournament(selectedTournament)
+      })
+    )
+  }
+
   return (
-    <div>
-      {selectedTournament}
+    <div className="tournament-group-wrapper">
+      {/* {selectedTournament} */}
+      {selectedTournament && (
+        <div>
+          <div className="group-tournament-header">
+            <div className="title-wrapper">
+              <Title>{selectedTournament?.tournament_name}</Title>
+              <AiFillEdit
+                size={24}
+                className="edit-tournament"
+                onClick={handleEditTournamentModal}
+              />
+            </div>
+            <BsPlusCircleFill
+              size={24}
+              className="add-tournament"
+              onClick={handleEditTournamentModal}
+            />
+          </div>
+          <Hrline />
+          <div className="group-header-tournament-info">
+            <div>
+              Starting From:{selectedTournament?.starting_from.split('T')[0]}
+            </div>
+            <div>Ending At: {selectedTournament?.ending_at.split('T')[0]}</div>
+            <div>
+              Prediction Deadline:
+              {selectedTournament?.prediction_deadline.split('T')[0]}
+            </div>
+          </div>
+          <Hrline />
+        </div>
+      )}
+      <EditTournament
+        visible={editTournamentVisible}
+        onClose={handleEditTournamentModal}
+        onSubmit={onEditTournament}
+        tournamentData={selectedTournament}
+      />
       <div>
+        <div>
+          <Title>Groups</Title>
+        </div>
         <Table
           columns={[
             {

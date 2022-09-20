@@ -21,7 +21,7 @@ import {
 } from '../../../../../../../common'
 import toast from 'react-hot-toast'
 
-const AddGame = ({ visible, onClose, groupId }: any) => {
+const EditGame = ({ visible, onClose, groupId, gameData }: any) => {
   console.log('group id', groupId)
   const dispatch = useDispatch()
 
@@ -34,6 +34,10 @@ const AddGame = ({ visible, onClose, groupId }: any) => {
     dispatch(getAllTeam())
     // dispatch(getAllGame(groupId))
     setValue('group_id', groupId)
+    setValue('teamA_id', gameData?.teamA_id)
+    setValue('teamB_id', gameData?.teamB_id)
+    setValue('match_date', gameData?.match_date)
+    setValue('status', gameData?.status)
   }, [dispatch, groupId])
 
   const [data, { setValue, clear }] = useFormInput({
@@ -66,11 +70,12 @@ const AddGame = ({ visible, onClose, groupId }: any) => {
     }
   }
 
+  console.log('teamlist', teamList)
   return (
     <Modal visible={visible}>
       <div style={{ height: '70%' }}>
         <div className="addTournament-title-wrapper">
-          <Title>Add Game</Title>
+          <Title>Edit Game</Title>
           <AiFillCloseCircle
             size={24}
             className="addTournament-close-button"
@@ -86,6 +91,13 @@ const AddGame = ({ visible, onClose, groupId }: any) => {
                   disablePortal
                   id="combo-box-demo"
                   options={teamList}
+                  value={
+                    teamList[
+                      teamList.findIndex((object: any) => {
+                        return object.id == gameData.teamA_id
+                      })
+                    ]
+                  }
                   // sx={{ width: 300 }}
                   getOptionLabel={(option: any) => option.team_name}
                   onChange={(_, value) => setValue('teamA_id', value.id)}
@@ -99,6 +111,13 @@ const AddGame = ({ visible, onClose, groupId }: any) => {
                   disablePortal
                   id="combo-box-demo"
                   options={teamList}
+                  value={
+                    teamList[
+                      teamList.findIndex((object: any) => {
+                        return object.id == gameData.teamB_id
+                      })
+                    ]
+                  }
                   // sx={{ width: 300 }}
                   getOptionLabel={(option: any) => option.team_name}
                   onChange={(_, value) => setValue('teamB_id', value.id)}
@@ -115,4 +134,4 @@ const AddGame = ({ visible, onClose, groupId }: any) => {
     </Modal>
   )
 }
-export { AddGame }
+export { EditGame }

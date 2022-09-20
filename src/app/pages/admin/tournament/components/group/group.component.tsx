@@ -36,12 +36,10 @@ const GroupList = ({ selectedTournament }: any) => {
   }
 
   const onEditTournament = (requestBody: any) => {
-    console.log('Request body edit tournament', requestBody)
     dispatch(
       editTournament(selectedTournament.id, requestBody, () => {
         dispatch(getAllTournaments())
         setEditTournamentVisible(false)
-        // activeTournament(selectedTournament)
       })
     )
   }
@@ -114,16 +112,6 @@ const GroupList = ({ selectedTournament }: any) => {
           dataLoader={groupLoading}
           totalCount={groupList.length}
           actions
-          onEditHandler={(data: any) => {
-            console.log('data', data)
-            //   setVisible(true)
-            // if (data?.orders?.is_paid) {
-            // } else navigate(`/order/${data?.orders?.id}/edit`)
-          }}
-          onViewHandler={(data: any) => {
-            //   console.log(data)
-            navigate(`view/${selectedTournament}/group/${data?.id}`)
-          }}
           onDeleteHandler={(data: any) => {
             //   toast.error(data?.id)
             console.log('delete handler data', data)

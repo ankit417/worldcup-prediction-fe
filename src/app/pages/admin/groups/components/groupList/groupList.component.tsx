@@ -11,10 +11,7 @@ import { Hrline, Title } from '../../../../../common'
 
 const GroupList = ({ activeGroupIndex, onPress }: any) => {
   const [addGroupVisible, setAddGroupVisible] = useState<boolean>(false)
-  const {
-    params,
-  }: // navigation: { navigate },
-  any = useNavigation()
+  const { params }: any = useNavigation()
 
   const { tournamentId } = params
   const dispatch = useDispatch()
@@ -56,19 +53,7 @@ const GroupList = ({ activeGroupIndex, onPress }: any) => {
         }
       )
     )
-    // dispatch(
-    //   addTournament(requestBody, () => {
-    //     dispatch(getAllTournaments())
-    //     setAddTournamentModal(false)
-    //   })
-    // )
   }
-
-  // ;<AddGroup
-  //   visible={addGroupVisible}
-  //   onClose={handleAddGroupModal}
-  //   onSubmit={onAddGroup}
-  // />
 
   return (
     <div>

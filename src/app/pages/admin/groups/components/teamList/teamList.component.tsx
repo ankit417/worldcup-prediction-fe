@@ -7,17 +7,18 @@ import { BsPlusCircleFill } from 'react-icons/bs'
 
 import { updateGroup, getAllGroups } from '../../../../../../redux'
 import { EditGroup } from '../groupList/component'
-import { AddGame } from './component'
+import { AddGame, EditGame } from './component'
 import { RootState, getAllGame } from '../../../../../../redux'
 import { Hrline, Title, Table } from '../../../../../common'
 
 const TeamList = ({ selectedGroup }: any) => {
   const [editGroupVisible, setEditGroupVisible] = useState<boolean>(false)
   const [addGameModalVisible, setAddGameModalVisible] = useState<boolean>(false)
-  const {
-    params,
-  }: // navigation: { navigate },
-  any = useNavigation()
+  const [editGameModalVisible, setEditGameModalVisible] =
+    useState<boolean>(false)
+
+  const [editGameData, setEditGameData] = useState<any>()
+  const { params }: any = useNavigation()
   const { tournamentId } = params
 
   const dispatch = useDispatch()
@@ -46,13 +47,16 @@ const TeamList = ({ selectedGroup }: any) => {
     }
   }
 
-  const hanldeAddGameModal = () => {
+  const handleAddGameModal = () => {
     setAddGameModalVisible((prev) => !prev)
+  }
+
+  const handleEditGameModal = () => {
+    setEditGameModalVisible((prev) => !prev)
   }
 
   return (
     <div className="group-team-wrapper">
-      {/* <div>{activeGroupIndex}</div> */}
       <div>
         <div className="group-team-header">
           <div className="title-wrapper">
@@ -78,8 +82,14 @@ const TeamList = ({ selectedGroup }: any) => {
       />
       <AddGame
         visible={addGameModalVisible}
-        onClose={hanldeAddGameModal}
+        onClose={handleAddGameModal}
         groupId={selectedGroup?.id}
+      />
+      <EditGame
+        visible={editGameModalVisible}
+        onClose={handleEditGameModal}
+        groupId={selectedGroup?.id}
+        gameData={editGameData}
       />
       <div>
         <div
@@ -95,7 +105,7 @@ const TeamList = ({ selectedGroup }: any) => {
             size={24}
             className="add-tournament"
             style={{ cursor: 'pointer' }}
-            onClick={hanldeAddGameModal}
+            onClick={handleAddGameModal}
           />
         </div>
         <Table
@@ -121,7 +131,9 @@ const TeamList = ({ selectedGroup }: any) => {
           totalCount={gameList.length}
           actions
           onEditHandler={(data: any) => {
-            console.log('data', data)
+            setEditGameData(data)
+            handleEditGameModal()
+            console.log('data edit handler', data)
             //   setVisible(true)
             // if (data?.orders?.is_paid) {
             // } else navigate(`/order/${data?.orders?.id}/edit`)

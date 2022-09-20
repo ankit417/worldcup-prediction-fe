@@ -73,6 +73,11 @@ export const privatePaths = [
           },
         ],
       },
+      {
+        name: 'View',
+        path: '/view/:tournamentId',
+        component: Group,
+      },
     ],
   },
   {

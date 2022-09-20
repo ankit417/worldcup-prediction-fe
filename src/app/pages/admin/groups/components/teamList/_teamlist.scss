@@ -1,0 +1,25 @@
+.group-team-wrapper {
+  .group-team-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+
+    .title-wrapper {
+      .edit-tournament {
+        margin-left: 10px;
+        cursor: pointer;
+      }
+    }
+    .add-group {
+      cursor: pointer;
+    }
+  }
+  .group-header-team-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}

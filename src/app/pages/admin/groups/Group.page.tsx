@@ -3,17 +3,20 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation } from 'react-auth-navigation'
 // import { toast } from 'react-hot-toast'
 
+import { GroupList, TeamList } from './components'
 import {
   getAllGroups,
   addGroups,
   deleteGroup,
   RootState,
 } from '../../../../redux'
-import { CompWrapper, Table, Button } from '../../../common'
+import { CompWrapper, Table, Button, Card } from '../../../common'
 
 import { AddGroupModal } from './component/AddGroup'
 const Group = () => {
   const [visible, setVisible] = useState<boolean>(false)
+  const [activeGroupIndex, setActiveGroupIndex] = useState<number>(0)
+  const [initialGroup, setInitialGroup] = useState<number | null>(null)
 
   const {
     params,
@@ -53,8 +56,32 @@ const Group = () => {
     )
   }
 
+  const activeGroup = (group: any, index: number) => {
+    setInitialGroup(group)
+    setActiveGroupIndex(index)
+  }
+
   return (
     <CompWrapper>
+      <div className="group-container">
+        <Card containerStyle={{ width: '30%' }}>
+          <div>
+            <GroupList
+              onPress={activeGroup}
+              activeGroupIndex={activeGroupIndex}
+            />
+          </div>
+        </Card>
+        <Card>
+          <div>
+            <TeamList
+              selectedGroup={initialGroup}
+              activeGroupIndex={activeGroupIndex}
+            />
+          </div>
+        </Card>
+      </div>
+      {/* REMOVE FROM HERE */}
       <div
         style={{
           width: 200,

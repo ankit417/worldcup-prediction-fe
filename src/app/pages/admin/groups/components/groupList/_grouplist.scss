@@ -1,0 +1,9 @@
+.groups-title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .add-group {
+    cursor: pointer;
+  }
+}

@@ -63,7 +63,9 @@ const GroupList = ({ selectedTournament }: any) => {
             <BsPlusCircleFill
               size={24}
               className="add-tournament"
-              onClick={handleEditTournamentModal}
+              onClick={() =>
+                navigate(`tournament/view/${selectedTournament?.id}`)
+              }
             />
           </div>
           <Hrline />

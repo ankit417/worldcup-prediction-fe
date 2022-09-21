@@ -13,7 +13,7 @@ import {
   UserHome,
 } from './pages'
 
-import { Tournament, Team, Group, GamePage } from './pages/admin'
+import { Tournament, Team, Group } from './pages/admin'
 
 import { DashboardPage } from './pages/dashboard'
 
@@ -65,13 +65,6 @@ export const privatePaths = [
         name: 'Group',
         path: '/:tournamentId',
         component: Group,
-        subPaths: [
-          {
-            name: 'Match',
-            path: '/:tournamentId/group/:groupId',
-            component: GamePage,
-          },
-        ],
       },
       {
         name: 'View',

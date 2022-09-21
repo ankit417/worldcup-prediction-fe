@@ -1,6 +1,11 @@
 import { Modal } from 'react-uicomp'
 import { useFormInput } from 'use-form-input'
 import { AiFillCloseCircle } from 'react-icons/ai'
+
+import Radio from '@mui/material/Radio'
+import RadioGroup from '@mui/material/RadioGroup'
+import FormControlLabel from '@mui/material/FormControlLabel'
+
 import {
   Box,
   Button,
@@ -15,19 +20,25 @@ const AddGroup = ({ visible, onClose, onSubmit }: any) => {
     name: '',
     point: '',
     isFinal: false,
+    user_select: false,
+    number_of_team: 0,
   })
-
   const onSubmitHandler = (e: any) => {
     e.preventDefault()
-    const { name, point, isFinal } = data
+    const { name, point, isFinal, user_select, number_of_team } = data
     const requestBody = {
       name,
       point,
       isFinal,
+      user_select,
+      number_of_team,
     }
+
     onSubmit(requestBody)
     clear()
   }
+
+  console.log('user select', data?.user_select)
 
   return (
     <Modal visible={visible}>
@@ -60,11 +71,63 @@ const AddGroup = ({ visible, onClose, onSubmit }: any) => {
                   name="point"
                   value={data.point}
                   onChange={onChange}
-                  type="text"
+                  type="number"
                   required
                 />
               </FormInput>
 
+              <FormInput label="Is this final ?" required>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="isFinal"
+                  onChange={onChange}
+                >
+                  <FormControlLabel
+                    value={true}
+                    control={<Radio />}
+                    label="Yes"
+                  />
+                  <FormControlLabel
+                    value={false}
+                    control={<Radio />}
+                    label="No"
+                  />
+                </RadioGroup>
+              </FormInput>
+
+              <FormInput label="Team Selected By User?" required>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="user_select"
+                  onChange={onChange}
+                >
+                  <FormControlLabel
+                    value={true}
+                    control={<Radio />}
+                    label="Yes"
+                  />
+                  <FormControlLabel
+                    value={false}
+                    control={<Radio />}
+                    label="No"
+                  />
+                </RadioGroup>
+              </FormInput>
+
+              {data?.user_select && (
+                <FormInput label="Number of Team" required>
+                  <InputField
+                    placeholder="Number of Team"
+                    name="number_of_team"
+                    value={data.number_of_team}
+                    onChange={onChange}
+                    type="number"
+                    required
+                  />
+                </FormInput>
+              )}
               <Button title="Submit" type="submit" />
             </Box>
           </form>

@@ -7,7 +7,7 @@ import { BsPlusCircleFill } from 'react-icons/bs'
 
 import { updateGroup, getAllGroups } from '../../../../../../redux'
 import { EditGroup } from '../groupList/component'
-import { AddGame, EditGame } from './component'
+import { AddGame, AddTiesheet, EditGame } from './component'
 import { RootState, getAllGame } from '../../../../../../redux'
 import { Hrline, Title, Table } from '../../../../../common'
 
@@ -16,6 +16,7 @@ const TeamList = ({ selectedGroup }: any) => {
   const [addGameModalVisible, setAddGameModalVisible] = useState<boolean>(false)
   const [editGameModalVisible, setEditGameModalVisible] =
     useState<boolean>(false)
+  const [addTieSheetVisible, setAddTieSheetVisible] = useState<boolean>(false)
 
   const [editGameData, setEditGameData] = useState<any>()
   const { params }: any = useNavigation()
@@ -55,6 +56,11 @@ const TeamList = ({ selectedGroup }: any) => {
     setEditGameModalVisible((prev) => !prev)
   }
 
+  const handleAddTieSheetModal = () => {
+    setAddTieSheetVisible((prev) => !prev)
+  }
+
+  console.log('selected group', selectedGroup)
   return (
     <div className="group-team-wrapper">
       <div>
@@ -91,6 +97,10 @@ const TeamList = ({ selectedGroup }: any) => {
         groupId={selectedGroup?.id}
         gameData={editGameData}
       />
+      <AddTiesheet
+        visible={addTieSheetVisible}
+        onClose={handleAddTieSheetModal}
+      />
       <div>
         <div
           style={{
@@ -105,7 +115,11 @@ const TeamList = ({ selectedGroup }: any) => {
             size={24}
             className="add-tournament"
             style={{ cursor: 'pointer' }}
-            onClick={handleAddGameModal}
+            onClick={
+              selectedGroup?.user_select == 1
+                ? handleAddTieSheetModal
+                : handleAddGameModal
+            }
           />
         </div>
         <Table

@@ -45,7 +45,9 @@ const GroupList = ({ activeGroupIndex, onPress }: any) => {
           tournament_id: tournamentId,
           group_name: requestBody.name,
           match_point: requestBody.point,
-          is_final: requestBody.isFinal, //todo
+          is_final: requestBody.isFinal == 'true',
+          user_select: requestBody.user_select == 'true',
+          number_of_team: requestBody.number_of_team,
         },
         () => {
           dispatch(getAllGroups(tournamentId))

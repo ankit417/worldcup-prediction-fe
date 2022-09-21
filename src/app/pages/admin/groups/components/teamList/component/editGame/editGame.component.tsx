@@ -23,22 +23,23 @@ import {
 import toast from 'react-hot-toast'
 
 const EditGame = ({ visible, onClose, groupId, gameData }: any) => {
-  //console.log('group id', groupId)
-  //console.log('game data', gameData)
+  console.log('group id', groupId)
+  console.log('game data', gameData)
   const dispatch = useDispatch()
 
-  const { teamList } = useSelector((state: RootState) => state.team)
+  const { teamLoading, teamList } = useSelector(
+    (state: RootState) => state.team
+  )
 
-  //console.log(teamLoading)
+  console.log(teamLoading)
   useEffect(() => {
     dispatch(getAllTeam())
-    // dispatch(getAllGame(groupId))
     setValue('group_id', groupId)
     setValue('teamA_id', gameData?.teamA_id)
     setValue('teamB_id', gameData?.teamB_id)
     setValue('match_date', gameData?.match_date)
     setValue('status', gameData?.status)
-  }, [dispatch, groupId])
+  }, [dispatch, groupId, gameData])
 
   const [data, { setValue, clear }] = useFormInput({
     group_id: '',
@@ -57,7 +58,7 @@ const EditGame = ({ visible, onClose, groupId, gameData }: any) => {
       match_date,
       status,
     }
-    //console.log('Request body , game id', requestBody, gameData.id)
+
     if (teamA_id !== teamB_id) {
       dispatch(
         updateGame(gameData.id, requestBody, () => {
@@ -71,7 +72,6 @@ const EditGame = ({ visible, onClose, groupId, gameData }: any) => {
     }
   }
 
-  // //console.log('teamlist', teamList)
   if (!gameData) {
     return null
   }
@@ -95,18 +95,11 @@ const EditGame = ({ visible, onClose, groupId, gameData }: any) => {
                   disablePortal
                   id="combo-box-demo"
                   options={teamList}
-                  value={
-                    teamList[
-                      teamList.findIndex((object: any) => {
-                        return object.id == gameData.teamA_id
-                      })
-                    ]
-                  }
                   // sx={{ width: 300 }}
                   getOptionLabel={(option: any) => option.team_name}
                   onChange={(_, value) => setValue('teamA_id', value.id)}
                   renderInput={(params) => (
-                    <TextField {...params} label="Team A" />
+                    <TextField {...params} label={gameData?.teama_name} />
                   )}
                 />
               </FormInput>
@@ -115,18 +108,11 @@ const EditGame = ({ visible, onClose, groupId, gameData }: any) => {
                   disablePortal
                   id="combo-box-demo"
                   options={teamList}
-                  value={
-                    teamList[
-                      teamList.findIndex((object: any) => {
-                        return object.id == gameData.teamB_id
-                      })
-                    ]
-                  }
                   // sx={{ width: 300 }}
                   getOptionLabel={(option: any) => option.team_name}
                   onChange={(_, value) => setValue('teamB_id', value.id)}
                   renderInput={(params) => (
-                    <TextField {...params} label="Team B" />
+                    <TextField {...params} label={gameData?.teamb_name} />
                   )}
                 />
               </FormInput>

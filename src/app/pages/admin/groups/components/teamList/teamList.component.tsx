@@ -131,6 +131,7 @@ const TeamList = ({ selectedGroup }: any) => {
           totalCount={gameList.length}
           actions
           onEditHandler={(data: any) => {
+            console.log('game data start', data)
             setEditGameData(data)
             handleEditGameModal()
             //console.log('data edit handler', data)

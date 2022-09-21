@@ -9,7 +9,7 @@ export function getAllGame(groupId: number) {
     try {
       dispatch({ type: GAME.LOADING })
       res = await api(`${APIS.game}/${groupId}`)
-      console.log('tournament', res)
+      //console.log('tournament', res)
       const { success, data } = res.data
 
       if (success) {
@@ -37,9 +37,9 @@ export function addGame(body: any, callBack?: any) {
     try {
       dispatch({ type: ADD_GAME.LOADING })
       res = await api(`${APIS.game}`, 'POST', body)
-      console.log('team', res)
+      //console.log('team', res)
       const { success, message } = res.data
-      console.log('res data add group', message)
+      //console.log('res data add group', message)
       if (success) {
         dispatch({
           type: ADD_GAME.SUCCESS,
@@ -66,9 +66,9 @@ export function updateGame(id: number, body: any, callBack?: any) {
     try {
       dispatch({ type: UPDATE_GAME.LOADING })
       res = await api(`${APIS.game}/${id}`, 'PATCH', body)
-      console.log('team', res)
+      //console.log('team', res)
       const { success, message } = res.data
-      console.log('res data add group', message)
+      //console.log('res data add group', message)
       if (success) {
         dispatch({
           type: UPDATE_GAME.SUCCESS,

@@ -30,7 +30,7 @@ const Team = () => {
   }
 
   const addTeamHandler = (formData: any) => {
-    console.log('form data', formData)
+    //console.log('form data', formData)
     dispatch(
       addTeam(formData, () => {
         dispatch(getAllTeam())

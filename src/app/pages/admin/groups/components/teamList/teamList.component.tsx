@@ -133,7 +133,7 @@ const TeamList = ({ selectedGroup }: any) => {
           onEditHandler={(data: any) => {
             setEditGameData(data)
             handleEditGameModal()
-            console.log('data edit handler', data)
+            //console.log('data edit handler', data)
             //   setVisible(true)
             // if (data?.orders?.is_paid) {
             // } else navigate(`/order/${data?.orders?.id}/edit`)

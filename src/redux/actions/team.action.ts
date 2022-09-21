@@ -36,9 +36,9 @@ export function addTeam(body: any, callBack?: any) {
     try {
       dispatch({ type: ADD_TEAM.LOADING })
       res = await api(`${APIS.team}`, 'POST', body)
-      console.log('team', res)
+      //console.log('team', res)
       const { success, message } = res.data
-      console.log('res data add group', message)
+      //console.log('res data add group', message)
       if (success) {
         dispatch({
           type: ADD_TEAM.SUCCESS,
@@ -64,7 +64,7 @@ export function updateTeam(groupId: number, body: any, callBack?: any) {
     try {
       dispatch({ type: EDIT_TEAM.LOADING })
       res = await api(`${APIS.group}/group/${groupId}`, 'PATCH', body)
-      console.log('tournament edit group', res)
+      //console.log('tournament edit group', res)
       const { success, message } = res.data
       if (success) {
         dispatch({

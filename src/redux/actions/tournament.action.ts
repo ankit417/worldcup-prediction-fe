@@ -36,9 +36,9 @@ export function addTournament(body: any, callBack?: any) {
     try {
       dispatch({ type: ADD_TOURNAMENT.LOADING })
       res = await api(`${APIS.tournament}`, 'POST', body)
-      console.log('create tournament res', res)
+      //console.log('create tournament res', res)
       const { success, message } = res.data
-      console.log('res data add group', message)
+      //console.log('res data add group', message)
       if (success) {
         dispatch({
           type: ADD_TOURNAMENT.SUCCESS,

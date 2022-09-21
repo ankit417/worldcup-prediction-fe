@@ -22,14 +22,12 @@ import {
 import toast from 'react-hot-toast'
 
 const AddGame = ({ visible, onClose, groupId }: any) => {
-  console.log('group id', groupId)
+  //console.log('group id', groupId)
   const dispatch = useDispatch()
 
-  const { teamLoading, teamList } = useSelector(
-    (state: RootState) => state.team
-  )
+  const { teamList } = useSelector((state: RootState) => state.team)
 
-  console.log(teamLoading)
+  //console.log(teamLoading)
   useEffect(() => {
     dispatch(getAllTeam())
     // dispatch(getAllGame(groupId))

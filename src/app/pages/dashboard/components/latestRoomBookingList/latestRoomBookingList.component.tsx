@@ -58,7 +58,7 @@ function LatestRoomBookingListComp() {
             const startDate = moment(el.booking_detail.checkin)
             const endDate = moment(el.booking_detail.checkout)
             const diff = endDate.diff(startDate, 'days')
-            console.log(diff)
+            //console.log(diff)
 
             return (
               <Box key={el.booking_detail.id}>

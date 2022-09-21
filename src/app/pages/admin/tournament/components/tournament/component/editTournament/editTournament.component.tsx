@@ -25,7 +25,7 @@ const EditTournament = ({
     prediction_deadline: '',
   })
 
-  console.log('tournament data', tournamentData)
+  //console.log('tournament data', tournamentData)
   useEffect(() => {
     setValue('tournament_name', tournamentData?.tournament_name ?? '')
     setValue('starting_from', tournamentData?.starting_from ?? '')

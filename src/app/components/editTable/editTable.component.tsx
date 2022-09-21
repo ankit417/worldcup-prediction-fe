@@ -129,7 +129,7 @@ export const EditTable = ({
           {newData?.length ? (
             <TableBody>
               {newData?.map((item: any, index: number) => {
-                console.log('item in newData: ', item)
+                //console.log('item in newData: ', item)
                 return (
                   <StyledTableRow key={index}>
                     {columns.map((col: any, i: number) => {
@@ -229,7 +229,7 @@ export const EditTable = ({
                                     </ToolTip>
                                   }
                                   onClick={() => {
-                                    console.log('item for update: ', item)
+                                    //console.log('item for update: ', item)
                                     return onItemUpdateHandler(item)
                                   }}
                                 />
@@ -404,7 +404,7 @@ const CustomInputField = ({ col, item, setNewData, defaultValue }: any) => {
         setValue(e.target.value)
         setNewData((prev: any) => {
           return prev.map((obj: any) => {
-            console.log('obj and item: ', obj, item)
+            //console.log('obj and item: ', obj, item)
             if (obj.menuItemId) {
               if (obj.menuItemId === item.menuItemId) {
                 return {

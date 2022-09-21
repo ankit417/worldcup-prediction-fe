@@ -13,15 +13,13 @@ export const GamePage = () => {
   }: // navigation: { navigate },
   any = useNavigation()
   const dispatch = useDispatch()
-  const { teamLoading, teamList } = useSelector(
-    (state: RootState) => state.team
-  )
+  const { teamList } = useSelector((state: RootState) => state.team)
   const { gameLoading, gameList } = useSelector(
     (state: RootState) => state.game
   )
 
-  console.log(teamLoading, gameLoading)
-  console.log(gameList)
+  //console.log(teamLoading, gameLoading)
+  //console.log(gameList)
   useEffect(() => {
     dispatch(getAllTeam())
     dispatch(getAllGame(params.groupId))

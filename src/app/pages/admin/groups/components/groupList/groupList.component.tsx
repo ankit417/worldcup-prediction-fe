@@ -29,7 +29,7 @@ const GroupList = ({ activeGroupIndex, onPress }: any) => {
   }, [groupList])
 
   const activeGroup = (group: any, index: number) => {
-    console.log(group, index)
+    //console.log(group, index)
     onPress(group, index)
   }
 
@@ -38,7 +38,7 @@ const GroupList = ({ activeGroupIndex, onPress }: any) => {
   }
 
   const onAddGroup = (requestBody: any) => {
-    console.log(requestBody)
+    //console.log(requestBody)
     dispatch(
       addGroups(
         {

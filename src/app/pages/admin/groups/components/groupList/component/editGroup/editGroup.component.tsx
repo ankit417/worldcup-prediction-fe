@@ -20,7 +20,7 @@ const EditGroup = ({ visible, onClose, onSubmit, groupData }: any) => {
     match_point: '',
   })
 
-  //   console.log('tournament data', tournamentData)
+  //   //console.log('tournament data', tournamentData)
   useEffect(() => {
     // setValue('tournament_id', groupData?.tournament_id ?? '')
     setValue('group_name', groupData?.group_name ?? '')

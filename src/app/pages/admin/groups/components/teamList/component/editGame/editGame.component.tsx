@@ -10,7 +10,8 @@ import {
   getAllTeam,
   getAllGame,
   RootState,
-  addGame,
+  // addGame,
+  updateGame,
 } from '../../../../../../../../redux'
 import {
   Hrline,
@@ -23,6 +24,7 @@ import toast from 'react-hot-toast'
 
 const EditGame = ({ visible, onClose, groupId, gameData }: any) => {
   console.log('group id', groupId)
+  console.log('game data', gameData)
   const dispatch = useDispatch()
 
   const { teamLoading, teamList } = useSelector(
@@ -59,7 +61,7 @@ const EditGame = ({ visible, onClose, groupId, gameData }: any) => {
     }
     if (teamA_id !== teamB_id) {
       dispatch(
-        addGame(requestBody, () => {
+        updateGame(gameData.game_id, requestBody, () => {
           dispatch(getAllGame(groupId))
           onClose()
           clear()
@@ -70,7 +72,10 @@ const EditGame = ({ visible, onClose, groupId, gameData }: any) => {
     }
   }
 
-  console.log('teamlist', teamList)
+  // console.log('teamlist', teamList)
+  if (!gameData) {
+    return null
+  }
   return (
     <Modal visible={visible}>
       <div style={{ height: '70%' }}>

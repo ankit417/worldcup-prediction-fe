@@ -100,6 +100,7 @@ const TeamList = ({ selectedGroup }: any) => {
       <AddTiesheet
         visible={addTieSheetVisible}
         onClose={handleAddTieSheetModal}
+        groupId={selectedGroup?.id}
       />
       <div>
         <div

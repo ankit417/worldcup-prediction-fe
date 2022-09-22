@@ -123,7 +123,7 @@ const TeamList = ({ selectedGroup }: any) => {
             }
           />
         </div>
-        {selectedGroup.user_select == 1 ? (
+        {selectedGroup?.user_select == 1 ? (
           <TieSheetTable groupId={selectedGroup?.id} />
         ) : (
           <Table

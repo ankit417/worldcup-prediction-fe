@@ -4,13 +4,14 @@ import { api, APIS } from '../../config'
 import { TIESHEET, ADD_TIESHEET, DELETE_TIESHEET } from '.'
 
 export function getAllTieSheet(groupId: number) {
+  console.log('tiesheet Called here', groupId)
   return async function (dispatch: any) {
     let res
     try {
       dispatch({ type: TIESHEET.LOADING })
       res = await api(`${APIS.tiesheet}/${groupId}`)
+      console.log('tiesheet response', res)
       const { success, data } = res.data
-
       if (success) {
         dispatch({
           type: TIESHEET.SUCCESS,

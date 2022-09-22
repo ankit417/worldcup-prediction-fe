@@ -22,7 +22,6 @@ const TieSheetTable = ({ groupId }: any) => {
   console.log('group id', groupId, tiesheetList)
   return (
     <div>
-      {groupId}
       <Table
         columns={[
           {

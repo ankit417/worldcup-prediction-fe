@@ -5,7 +5,11 @@ import { useNavigation } from 'react-auth-navigation'
 import { AiFillEdit } from 'react-icons/ai'
 import { BsPlusCircleFill } from 'react-icons/bs'
 
-import { updateGroup, getAllGroups } from '../../../../../../redux'
+import {
+  updateGroup,
+  getAllGroups,
+  getAllTieSheet,
+} from '../../../../../../redux'
 import { EditGroup } from '../groupList/component'
 import { AddGame, AddTiesheet, EditGame, TieSheetTable } from './component'
 import { RootState, getAllGame } from '../../../../../../redux'
@@ -58,6 +62,7 @@ const TeamList = ({ selectedGroup }: any) => {
 
   const handleAddTieSheetModal = () => {
     setAddTieSheetVisible((prev) => !prev)
+    dispatch(getAllTieSheet(selectedGroup?.id))
   }
 
   console.log('selected group', selectedGroup)

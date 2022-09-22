@@ -6,7 +6,11 @@ import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 import { useFormInput } from 'use-form-input'
 
-import { getAllTeam, RootState } from '../../../../../../../../redux'
+import {
+  addTieSheet,
+  getAllTeam,
+  RootState,
+} from '../../../../../../../../redux'
 import { Button, Hrline, Title, Box } from '../../../../../../../common'
 
 const AddTiesheet = ({ visible, onClose, groupId }: any) => {
@@ -14,7 +18,6 @@ const AddTiesheet = ({ visible, onClose, groupId }: any) => {
   const { teamList } = useSelector((state: RootState) => state.team)
   useEffect(() => {
     dispatch(getAllTeam())
-    // dispatch(getAllGame(groupId))
     setValue('groupId', groupId)
   }, [dispatch, groupId])
 
@@ -26,12 +29,13 @@ const AddTiesheet = ({ visible, onClose, groupId }: any) => {
     e.preventDefault()
     const { teamId, groupId } = data
     const requestBody = {
-      teamId,
-      groupId,
+      group_id: groupId,
+      team_id: teamId,
     }
+    dispatch(addTieSheet(requestBody))
+    clear()
     console.log('request body', requestBody, groupId)
-    console.log('clear', clear)
-    //[todo dispatch add team to tiesheet]
+    onClose()
   }
 
   return (

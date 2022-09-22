@@ -8,6 +8,7 @@ import { tournamentReducer } from './tournament.reducer'
 import { groupReducer } from './group.reducer'
 import { teamReducer } from './team.reducer'
 import { gameReducer } from './game.reducer'
+import { tieSheetReducer } from './tiesheet.reducer'
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   group: groupReducer,
   team: teamReducer,
   game: gameReducer,
+  tiesheet: tieSheetReducer,
 })
 
 export default rootReducer

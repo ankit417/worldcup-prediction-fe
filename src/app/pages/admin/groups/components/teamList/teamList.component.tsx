@@ -7,7 +7,7 @@ import { BsPlusCircleFill } from 'react-icons/bs'
 
 import { updateGroup, getAllGroups } from '../../../../../../redux'
 import { EditGroup } from '../groupList/component'
-import { AddGame, AddTiesheet, EditGame } from './component'
+import { AddGame, AddTiesheet, EditGame, TieSheetTable } from './component'
 import { RootState, getAllGame } from '../../../../../../redux'
 import { Hrline, Title, Table } from '../../../../../common'
 
@@ -123,43 +123,47 @@ const TeamList = ({ selectedGroup }: any) => {
             }
           />
         </div>
-        <Table
-          columns={[
-            {
-              field: 'teama_name',
-              name: 'Team A Name',
-              render: (rowData: any) => rowData,
-            },
-            {
-              field: 'teamb_name',
-              name: 'Team B Name',
-              render: (rowData: any) => rowData,
-            },
-            {
-              field: 'match_date',
-              name: 'Match Date',
-              render: (rowData: any) => rowData,
-            },
-          ]}
-          data={gameList}
-          dataLoader={gameLoading}
-          totalCount={gameList.length}
-          actions
-          onEditHandler={(data: any) => {
-            console.log('game data start', data)
-            setEditGameData(data)
-            handleEditGameModal()
-            //console.log('data edit handler', data)
-            //   setVisible(true)
-            // if (data?.orders?.is_paid) {
-            // } else navigate(`/order/${data?.orders?.id}/edit`)
-          }}
-          onDeleteHandler={(data: any) => {
-            //   toast.error(data?.id)
-            console.log('delete handler data', data)
-            // deleteHandler(data?.id)
-          }}
-        />
+        {selectedGroup.user_select == 1 ? (
+          <TieSheetTable groupId={selectedGroup?.id} />
+        ) : (
+          <Table
+            columns={[
+              {
+                field: 'teama_name',
+                name: 'Team A Name',
+                render: (rowData: any) => rowData,
+              },
+              {
+                field: 'teamb_name',
+                name: 'Team B Name',
+                render: (rowData: any) => rowData,
+              },
+              {
+                field: 'match_date',
+                name: 'Match Date',
+                render: (rowData: any) => rowData,
+              },
+            ]}
+            data={gameList}
+            dataLoader={gameLoading}
+            totalCount={gameList.length}
+            actions
+            onEditHandler={(data: any) => {
+              console.log('game data start', data)
+              setEditGameData(data)
+              handleEditGameModal()
+              //console.log('data edit handler', data)
+              //   setVisible(true)
+              // if (data?.orders?.is_paid) {
+              // } else navigate(`/order/${data?.orders?.id}/edit`)
+            }}
+            onDeleteHandler={(data: any) => {
+              //   toast.error(data?.id)
+              console.log('delete handler data', data)
+              // deleteHandler(data?.id)
+            }}
+          />
+        )}
       </div>
     </div>
   )

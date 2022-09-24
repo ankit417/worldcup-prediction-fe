@@ -13,7 +13,7 @@ import {
   UserHome,
 } from './pages'
 
-import { Tournament, Team, Group } from './pages/admin'
+import { Tournament, Team, Group, Predictions } from './pages/admin'
 
 import { DashboardPage } from './pages/dashboard'
 
@@ -77,6 +77,14 @@ export const privatePaths = [
     name: 'Team',
     path: '/team',
     component: Team,
+    props: {
+      icon: <MdDashboard />,
+    },
+  },
+  {
+    name: 'Prediction',
+    path: '/prediction-result',
+    component: Predictions,
     props: {
       icon: <MdDashboard />,
     },

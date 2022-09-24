@@ -15,6 +15,7 @@ export const userRoles = {
       '/tournament/*',
       '/match/*',
       '/team/*',
+      '/prediction-result/*',
     ],
   },
   [userType.USER]: {

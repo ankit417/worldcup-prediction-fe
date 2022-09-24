@@ -98,6 +98,7 @@ const SideNavComponent = () => {
         {getNavGroup(routes['Order'])}
         {getNavGroup(routes['Tournament'])}
         {getNavGroup(routes['Team'])}
+        {getNavGroup(routes['Prediction'])}
       </AnimatedBlock>
     </div>
   )

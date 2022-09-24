@@ -139,3 +139,6 @@ export const UPDATE_GAME = createActionSet('UPDATE_GAME')
 export const TIESHEET = createActionSet('TIESHEET')
 export const ADD_TIESHEET = createActionSet('ADD_TIESHEET')
 export const DELETE_TIESHEET = createActionSet('DELETE_TIESHEET')
+
+//PREDICTION
+export const PREDICTION = createActionSet('PREDICTION')

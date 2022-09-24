@@ -39,4 +39,5 @@ export const APIS = {
   team: '/teams',
   game: '/game',
   tiesheet: '/tiesheet',
+  prediction: '/prediction',
 }

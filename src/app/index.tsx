@@ -15,7 +15,7 @@ const MemoChild = ({ children }: { children: any }) => {
   const [authLoading, setAuthLoading] = useState(true)
 
   const [config, setConfig] = useState({
-    isLoggedIn: true,
+    isLoggedIn: false,
     userRole: userType.ADMIN,
   })
 

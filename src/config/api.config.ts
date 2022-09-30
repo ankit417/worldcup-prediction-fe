@@ -21,7 +21,6 @@ export const APIS = {
   forgot: '/auth/forget',
 
   change: '/auth/change',
-  user: '/users',
 
   common: '/common',
 
@@ -40,4 +39,5 @@ export const APIS = {
   game: '/game',
   tiesheet: '/tiesheet',
   prediction: '/prediction',
+  user: '/auth/user',
 }

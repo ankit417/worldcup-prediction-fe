@@ -1,5 +1,5 @@
 export const userType = {
-  ADMIN: 'ADMIN',
+  ADMIN: 'admin',
   USER: 'user',
 }
 
@@ -19,6 +19,6 @@ export const userRoles = {
     ],
   },
   [userType.USER]: {
-    access: ['/', '/login'],
+    access: ['/', '/login', '/predict'],
   },
 }

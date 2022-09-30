@@ -44,9 +44,11 @@ export const LoginPage = () => {
     }
 
     let body = {
-      email,
+      username: email,
       password,
     }
+
+    console.log('Login body', body)
     dispatch(loginAction(body, handleLogin))
   }
 

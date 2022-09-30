@@ -11,24 +11,27 @@ export function userAuthAction(
     let res
     try {
       if (!getCookie('token')) {
+        console.log('No cookie')
         return loading(false)
       }
-
+      console.log(' cookie here', getCookie('token'))
       dispatch({ type: USER.LOADING })
+      console.log('Hitting user api')
       res = await api(APIS.user)
       const { success, data } = res.data
+      console.log('Token success', data, success)
       if (success) {
-        dispatch({ type: USER.SUCCESS, payload: data.data })
-
-        if (data.type === 'success') {
-          loginSuccess('ADMIN')
+        dispatch({ type: USER.SUCCESS, payload: data })
+        if (success) {
+          loginSuccess(data.role)
         } else {
           loginFailure()
         }
-
         loading(false)
         return 1
       } else {
+        console.log('Login failure called')
+        loginFailure()
         dispatch({ type: USER.ERROR })
         loading(false)
         return 0
@@ -43,12 +46,12 @@ export function userAuthAction(
 
 export function userAuthLogoutAction(callback: () => void) {
   return async function () {
-    let res
+    // let res
     try {
-      res = await api(APIS.logout)
+      // res = await api(APIS.logout)
 
-      const { success } = res.data
-
+      // const { success } = res.data
+      const success = true
       if (success) {
         callback()
         return 1

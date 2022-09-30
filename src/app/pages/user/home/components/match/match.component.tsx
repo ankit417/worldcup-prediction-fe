@@ -27,7 +27,9 @@ const MatchComponent = ({ data }: MatchComponentProps) => {
       {data.map((item, index) => {
         return (
           <div key={index.toString()} className="matchCard_wrapper">
-            <Title>{item.teama_name}</Title>
+            <Title>
+              {item.teama_name} Vs. {item.teamb_name}
+            </Title>
             <div className="match_wrapper">
               <div>
                 <img src={FILE_URL + item.teama_logo} alt={item.teama_logo} />

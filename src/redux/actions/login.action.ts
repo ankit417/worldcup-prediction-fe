@@ -14,21 +14,24 @@ export function loginAction(body: any, callback: any) {
   return async function (dispatch: any) {
     let res
     try {
+      console.log('Here')
       dispatch({ type: LOGIN.LOADING })
       res = await api(APIS.login, 'POST', body)
+      console.log('Login action', res)
 
       const { success, data, message } = res.data
-
+      console.log('login action', res)
       if (success) {
-        if (data.data.user.role === 'ADMIN') {
-          dispatch({ type: LOGIN.SUCCESS })
-          dispatch({ type: USER.SUCCESS, payload: data.data })
-          callback && callback(data.data.token, 'ADMIN')
+        console.log('user login success', data)
+        // if (data.role === 'ADMIN') {
+        dispatch({ type: LOGIN.SUCCESS })
+        dispatch({ type: USER.SUCCESS, payload: data })
+        callback && callback(data.accessToken, data.role)
 
-          toast.success(data.message)
-        } else {
-          toast.error('Only Admin login is allowed')
-        }
+        toast.success(data.message)
+        // } else {
+        //   toast.error('Only Admin login is allowed')
+        // }
         return 1
       } else {
         dispatch({ type: LOGIN.ERROR })
@@ -46,21 +49,24 @@ export function loginAction(body: any, callback: any) {
 
 export function logoutAction(callback: any) {
   return async function (dispatch: any) {
-    let res
+    // let res
     try {
       dispatch({ type: LOGOUT.LOADING })
-      res = await api(APIS.logout)
+      // res = await api(APIS.logout)
 
-      const { success, data } = res.data
+      // const { success, data } = res.data
+      const success = true
 
       if (success) {
         dispatch({ type: LOGOUT.SUCCESS })
         callback && callback()
-        toast.success(data.message)
+        toast.success('Successful')
+        // toast.success(data.message)
         return 1
       } else {
         dispatch({ type: LOGOUT.ERROR })
-        toast.error(data.message)
+        toast.error('Error logging out')
+        // toast.error(data.message)
         return 0
       }
     } catch ({ message }) {

@@ -15,7 +15,7 @@ import {
 
 import { Tournament, Team, Group, Predictions } from './pages/admin'
 
-import { DashboardPage } from './pages/dashboard'
+// import { DashboardPage } from './pages/dashboard'
 
 // const Redirect = ({ to }: { to: any }): any => {
 //   const {
@@ -29,11 +29,12 @@ import { DashboardPage } from './pages/dashboard'
 //   return null;
 // };
 
+console.log('user home', UserHome)
 export const publicPaths = [
   {
     name: 'Root',
     path: '/',
-    component: UserHome,
+    component: LoginPage,
     restricted: true,
   },
   {
@@ -45,13 +46,18 @@ export const publicPaths = [
 ]
 
 export const privatePaths = [
+  // {
+  //   name: 'Dashboard',
+  //   path: '/dashboard',
+  //   component: DashboardPage,
+  //   props: {
+  //     icon: <MdDashboard />,
+  //   },
+  // },
   {
-    name: 'Dashboard',
-    path: '/dashboard',
-    component: DashboardPage,
-    props: {
-      icon: <MdDashboard />,
-    },
+    name: 'Predict',
+    path: '/predict',
+    component: UserHome,
   },
   {
     name: 'Tournament',

@@ -5,7 +5,10 @@ import { useDispatch } from 'react-redux'
 import { publicPaths, privatePaths } from './routes.app'
 import { userRoles, userType } from './userRoles.app'
 
-import { userAuthAction, userAuthLogoutAction } from '../redux'
+import {
+  userAuthAction,
+  // userAuthLogoutAction
+} from '../redux'
 import { removeCookie, setCookie } from '../helpers'
 import { SideNav } from './common'
 import { Toaster } from 'react-hot-toast'
@@ -58,12 +61,12 @@ const MemoChild = ({ children }: { children: any }) => {
           loginSuccess(role)
         },
         handleLogout: () => {
-          dispatch(
-            userAuthLogoutAction(() => {
-              removeCookie('token')
-              loginFailure()
-            })
-          )
+          // dispatch(
+          //   userAuthLogoutAction(() => {
+          removeCookie('token')
+          loginFailure()
+          // })
+          // )
         },
       }}
     >

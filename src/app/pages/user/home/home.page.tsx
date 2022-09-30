@@ -25,7 +25,7 @@ export const UserHome = ({}) => {
       <div className="home-wrapper">
         <Card containerStyle={{ width: '65%', margin: 30 }}>
           <div className="home-card-title">
-            <Title>Tournament</Title>
+            <Title>World Cup</Title>
           </div>
           <Hrline gap={12} />
           <TabsComponent />

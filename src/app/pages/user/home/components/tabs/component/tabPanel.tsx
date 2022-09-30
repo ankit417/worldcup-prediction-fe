@@ -17,7 +17,11 @@ export const TabPanel = (props: TabPanelProps) => {
       {...other}
     >
       {value === index &&
-        (group.user_select === 0 ? <SelectGame /> : <SelectTeam />)}
+        (group.user_select === 0 ? (
+          <SelectGame groupId={group.id} />
+        ) : (
+          <SelectTeam />
+        ))}
     </div>
   )
 }

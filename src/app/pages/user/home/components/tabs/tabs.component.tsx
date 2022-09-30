@@ -55,11 +55,7 @@ const TabsComponent = () => {
       </Box>
 
       {groupList.map((_item: any, index: number) => {
-        return (
-          <TabPanel value={value} index={index} group={_item}>
-            hello {value}
-          </TabPanel>
-        )
+        return <TabPanel value={value} index={index} group={_item} />
       })}
     </Box>
   )

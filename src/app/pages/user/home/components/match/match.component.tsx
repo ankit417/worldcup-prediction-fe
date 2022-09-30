@@ -3,18 +3,19 @@ import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 
 import { Hrline, Title } from '../../../../../common'
+import { FILE_URL } from '../../../../../../config'
 
 interface MatchProps {
+  group_id: number
   id: number
-  title: string
-  teamA: {
-    title: string
-    image: string
-  }
-  teamB: {
-    title: string
-    image: string
-  }
+  match_date: string
+  status: number
+  teamA_id: number
+  teamB_id: number
+  teama_logo: string
+  teama_name: string
+  teamb_logo: string
+  teamb_name: string
 }
 
 interface MatchComponentProps {
@@ -26,10 +27,10 @@ const MatchComponent = ({ data }: MatchComponentProps) => {
       {data.map((item, index) => {
         return (
           <div key={index.toString()} className="matchCard_wrapper">
-            <Title>{item.title}</Title>
+            <Title>{item.teama_name}</Title>
             <div className="match_wrapper">
               <div>
-                <img src={item.teamA.image} alt={item.teamA.title} />
+                <img src={FILE_URL + item.teama_logo} alt={item.teama_logo} />
               </div>
               <div className="prediction_button_wrapper">
                 <RadioGroup
@@ -40,9 +41,9 @@ const MatchComponent = ({ data }: MatchComponentProps) => {
                   //   onChange={(e) => handleChange(e, item.id)}
                 >
                   <FormControlLabel
-                    value={item.teamA.title}
+                    value={item.teama_name}
                     control={<Radio />}
-                    label={item.teamA.title}
+                    label={item.teama_name}
                   />
                   <FormControlLabel
                     value="Draw"
@@ -50,18 +51,18 @@ const MatchComponent = ({ data }: MatchComponentProps) => {
                     label="Draw"
                   />
                   <FormControlLabel
-                    value={item.teamB.title}
+                    value={item.teamb_name}
                     control={<Radio />}
-                    label={item.teamB.title}
+                    label={item.teamb_name}
                   />
                 </RadioGroup>
               </div>
               <div>
                 <img
-                  src={item.teamB.image}
+                  src={FILE_URL + item.teamb_logo}
                   height={100}
                   width={100}
-                  alt={item.teamB.title}
+                  alt={item.teamb_logo}
                 />
               </div>
             </div>

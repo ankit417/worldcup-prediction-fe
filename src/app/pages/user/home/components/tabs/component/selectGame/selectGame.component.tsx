@@ -1,65 +1,23 @@
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { getAllGame, RootState } from '../../../../../../../../redux'
 import { MatchComponent } from '../../../.'
 
-const DATA = [
-  {
-    id: 1,
-    title: 'Argentina vs nepal',
-    teamA: {
-      title: 'Argentina',
-      image: 'https://www.worldatlas.com/r/w768/img/flag/ar-flag.jpg',
-    },
-    teamB: {
-      title: 'Nepal',
-      image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Flag_of_Nepal.svg/1200px-Flag_of_Nepal.svg.png',
-    },
-  },
-  {
-    id: 2,
-    title: 'Argentina vs nepal',
-    teamA: {
-      title: 'Argentina',
-      image: 'https://www.worldatlas.com/r/w768/img/flag/ar-flag.jpg',
-    },
-    teamB: {
-      title: 'Nepal',
-      image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Flag_of_Nepal.svg/1200px-Flag_of_Nepal.svg.png',
-    },
-    selected: 'Nepal',
-  },
-  {
-    id: 3,
-    title: 'Argentina vs nepal',
-    teamA: {
-      title: 'Argentina',
-      image: 'https://www.worldatlas.com/r/w768/img/flag/ar-flag.jpg',
-    },
-    teamB: {
-      title: 'Nepal',
-      image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Flag_of_Nepal.svg/1200px-Flag_of_Nepal.svg.png',
-    },
-  },
-  {
-    id: 4,
-    title: 'Argentina vs nepal',
-    teamA: {
-      title: 'Argentina',
-      image: 'https://www.worldatlas.com/r/w768/img/flag/ar-flag.jpg',
-    },
-    teamB: {
-      title: 'Nepal',
-      image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Flag_of_Nepal.svg/1200px-Flag_of_Nepal.svg.png',
-    },
-  },
-]
+const SelectGame = ({ groupId }: any) => {
+  const dispatch = useDispatch()
 
-const SelectGame = () => {
+  const { gameLoading, gameList } = useSelector(
+    (state: RootState) => state.game
+  )
+  console.log('Game list ', gameList, gameLoading)
+  useEffect(() => {
+    dispatch(getAllGame(groupId))
+  }, [dispatch, groupId])
+
   return (
     <div>
-      <MatchComponent data={DATA} />
+      <MatchComponent data={gameList} />
     </div>
   )
 }

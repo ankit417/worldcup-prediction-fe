@@ -13,7 +13,7 @@ import { removeCookie, setCookie } from '../helpers'
 import { SideNav } from './common'
 import { Toaster } from 'react-hot-toast'
 
-const MemoChild = ({ children }: { children: any }) => {
+const MemoChild = ({ children, getRole }: { children: any; getRole: any }) => {
   const dispatch = useDispatch()
   const [authLoading, setAuthLoading] = useState(true)
 
@@ -30,6 +30,7 @@ const MemoChild = ({ children }: { children: any }) => {
       isLoggedIn: true,
       userRole: role,
     })
+    getRole(role)
   }
 
   const loginFailure = () => {
@@ -76,12 +77,14 @@ const MemoChild = ({ children }: { children: any }) => {
 }
 
 const App = () => {
+  const [userRole, setRole] = useState<string | null>(null)
+  console.log('User role app', userRole)
   return (
-    <MemoChild>
+    <MemoChild getRole={setRole}>
       {
         <>
           <Auth.Screens />
-          <SideNav />
+          {userRole == 'admin' && <SideNav />}
           <Toaster position="top-right" reverseOrder={false} />
         </>
       }

@@ -9,7 +9,8 @@ import { getAllTeam, RootState } from '../../../../../../../../redux'
 import Autocomplete from '@mui/material/Autocomplete'
 import { Button, Box } from '../../../../../../../common'
 
-const SelectTeam = () => {
+const SelectTeam = ({ groupId }: any) => {
+  console.log('Select group group Id', groupId)
   const dispatch = useDispatch()
   const { teamList } = useSelector((state: RootState) => state.team)
 

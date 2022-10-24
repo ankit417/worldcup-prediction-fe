@@ -1,11 +1,15 @@
-import { PREDICTION } from '../actions'
+import { PREDICTION, USER_PREDICTION } from '../actions'
 
 const initialState: {
   predictionLoading: boolean
   predictionList: Array<object>
+  userPredictionLoading: boolean
+  userPredictionList: Array<object>
 } = {
   predictionLoading: false,
   predictionList: [],
+  userPredictionLoading: false,
+  userPredictionList: [],
 }
 
 export function predictionReducer(state = initialState, action: any) {
@@ -21,6 +25,16 @@ export function predictionReducer(state = initialState, action: any) {
       }
     case PREDICTION.ERROR:
       return { ...state, predictionLoading: false }
+    case USER_PREDICTION.LOADING:
+      return { ...state, userPredictionLoading: true }
+    case USER_PREDICTION.SUCCESS:
+      return {
+        ...state,
+        userPredictionLoading: false,
+        userPredictionList: payload.data,
+      }
+    case USER_PREDICTION.ERROR:
+      return { ...state, userPredictionLoading: false }
     default:
       return state
   }

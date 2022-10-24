@@ -42,4 +42,6 @@ export const APIS = {
   userPrediction: '/prediction/predicted',
   user: '/auth/user',
   predictGame: 'prediction/predict',
+  userTiesheetPredictions: 'tiesheetprediction',
+  groupInfo: 'groups/group',
 }

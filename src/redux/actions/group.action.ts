@@ -1,7 +1,7 @@
 import { toast } from 'react-hot-toast'
 import { api, APIS } from '../../config'
 
-import { GROUP, ADD_GROUP, EDIT_GROUP, DELETE_GROUP } from '.'
+import { GROUP, ADD_GROUP, EDIT_GROUP, DELETE_GROUP, GROUP_INFO } from '.'
 
 export function getAllGroups(groupId: number) {
   return async function (dispatch: any) {
@@ -110,6 +110,34 @@ export function deleteGroup(groupId: number, callBack?: any) {
     } catch ({ message }) {
       dispatch({ type: DELETE_GROUP.ERROR })
       toast.error('Error Editing Group')
+      return 0
+    }
+  }
+}
+
+export function getGroupInfo(groupId: number) {
+  return async function (dispatch: any) {
+    let res
+    try {
+      dispatch({ type: GROUP_INFO.LOADING })
+      res = await api(`${APIS.groupInfo}/${groupId}`)
+      //console.log('tournament', res)
+      const { success, data } = res.data
+
+      if (success) {
+        dispatch({
+          type: GROUP_INFO.SUCCESS,
+          payload: { data: data },
+        })
+        return 1
+      } else {
+        dispatch({ type: GROUP_INFO.ERROR })
+        toast.error('Error getting group info')
+        return 0
+      }
+    } catch ({ message }) {
+      dispatch({ type: GROUP_INFO.ERROR })
+      toast.error('Error getting group info')
       return 0
     }
   }

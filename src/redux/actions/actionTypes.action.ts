@@ -123,6 +123,7 @@ export const GROUP = createActionSet('GROUP')
 export const ADD_GROUP = createActionSet('ADD_GROUP')
 export const EDIT_GROUP = createActionSet('EDIT_GROUP')
 export const DELETE_GROUP = createActionSet('DELETE_GROUP')
+export const GROUP_INFO = createActionSet('GROUP_INFO')
 
 //TEAM
 export const TEAM = createActionSet('TEAM')
@@ -148,4 +149,7 @@ export const CREATE_USER_PREDICTION = createActionSet('CREATE_USER_PREDICTION')
 //USER TIESHEET PREDICTION
 export const GET_TIESHEET_PREDICTION = createActionSet(
   'GET_TIESHEET_PREDICTION'
+)
+export const ADD_TIESHEET_PREDICTION = createActionSet(
+  'ADD_TIESHEET_PREDICTION'
 )

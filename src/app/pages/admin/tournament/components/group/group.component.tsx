@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation } from 'react-auth-navigation'
-import { BsPlusCircleFill } from 'react-icons/bs'
-import { AiFillEdit } from 'react-icons/ai'
+// import { BsPlusCircleFill } from 'react-icons/bs'
+import { AiFillEdit, AiOutlineEye } from 'react-icons/ai'
 
 import {
   getAllGroups,
@@ -54,12 +54,14 @@ const GroupList = ({ selectedTournament }: any) => {
               <Title>{selectedTournament?.tournament_name}</Title>
               <AiFillEdit
                 size={24}
+                color={'#465775'}
                 className="edit-tournament"
                 onClick={handleEditTournamentModal}
               />
             </div>
-            <BsPlusCircleFill
+            <AiOutlineEye
               size={24}
+              color={'#EF6F6C'}
               className="add-tournament"
               onClick={() =>
                 navigate(`tournament/view/${selectedTournament?.id}`)
@@ -69,11 +71,11 @@ const GroupList = ({ selectedTournament }: any) => {
           <Hrline />
           <div className="group-header-tournament-info">
             <div>
-              Starting From:{selectedTournament?.starting_from.split('T')[0]}
+              Starting From : {selectedTournament?.starting_from.split('T')[0]}
             </div>
-            <div>Ending At: {selectedTournament?.ending_at.split('T')[0]}</div>
+            <div>Ending At : {selectedTournament?.ending_at.split('T')[0]}</div>
             <div>
-              Prediction Deadline:
+              Prediction Deadline :{' '}
               {selectedTournament?.prediction_deadline.split('T')[0]}
             </div>
           </div>
@@ -87,7 +89,7 @@ const GroupList = ({ selectedTournament }: any) => {
         tournamentData={selectedTournament}
       />
       <div>
-        <div>
+        <div style={{ marginTop: 10, marginBottom: 10 }}>
           <Title>Groups</Title>
         </div>
         <Table

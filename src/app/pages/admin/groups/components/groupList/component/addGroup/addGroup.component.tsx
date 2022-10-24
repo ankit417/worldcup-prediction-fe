@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Modal } from 'react-uicomp'
 import { useFormInput } from 'use-form-input'
 import { AiFillCloseCircle } from 'react-icons/ai'
@@ -16,6 +17,7 @@ import {
 } from '../../../../../../../common'
 
 const AddGroup = ({ visible, onClose, onSubmit }: any) => {
+  const [showTeamInput, setTeamInput] = useState<boolean>(false)
   const [data, { onChange, clear }] = useFormInput({
     name: '',
     point: '',
@@ -38,7 +40,15 @@ const AddGroup = ({ visible, onClose, onSubmit }: any) => {
     clear()
   }
 
-  console.log('user select', data?.user_select)
+  // useEffect(() => {
+  //   if (data?.user_select) {
+  //     setTeamInput(true)
+  //   } else {
+  //     setTeamInput(false)
+  //   }
+  // }, [data?.user_select])
+
+  console.log('user select', data?.user_select, showTeamInput)
 
   return (
     <Modal visible={visible}>
@@ -107,16 +117,18 @@ const AddGroup = ({ visible, onClose, onSubmit }: any) => {
                     value={true}
                     control={<Radio />}
                     label="Yes"
+                    onChange={() => setTeamInput(true)}
                   />
                   <FormControlLabel
                     value={false}
                     control={<Radio />}
                     label="No"
+                    onChange={() => setTeamInput(false)}
                   />
                 </RadioGroup>
               </FormInput>
 
-              {data?.user_select && (
+              {showTeamInput && (
                 <FormInput label="Number of Team" required>
                   <InputField
                     placeholder="Number of Team"
@@ -124,6 +136,8 @@ const AddGroup = ({ visible, onClose, onSubmit }: any) => {
                     value={data.number_of_team}
                     onChange={onChange}
                     type="number"
+                    // step={1}
+                    min={2}
                     required
                   />
                 </FormInput>

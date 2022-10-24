@@ -14,12 +14,18 @@ import {
 import { Button, Hrline, Title, Box } from '../../../../../../../common'
 
 const AddTiesheet = ({ visible, onClose, groupId }: any) => {
+  // console.log('group id id ', groupId)
+  const GROUP_ID = groupId
   const dispatch = useDispatch()
   const { teamList } = useSelector((state: RootState) => state.team)
   useEffect(() => {
     dispatch(getAllTeam())
-    setValue('groupId', groupId)
+    // setValue('groupId', groupId)
   }, [dispatch, groupId])
+
+  useEffect(() => {
+    setValue('groupId', groupId)
+  }, [groupId])
 
   const [data, { setValue, clear }] = useFormInput({
     teamId: '',
@@ -29,7 +35,8 @@ const AddTiesheet = ({ visible, onClose, groupId }: any) => {
     e.preventDefault()
     const { teamId, groupId } = data
     const requestBody = {
-      group_id: groupId,
+      // group_id: groupId,
+      group_id: GROUP_ID,
       team_id: teamId,
     }
     dispatch(addTieSheet(requestBody))
@@ -39,8 +46,8 @@ const AddTiesheet = ({ visible, onClose, groupId }: any) => {
   }
 
   return (
-    <Modal visible={visible}>
-      <div style={{ marginBottom: 50 }}>
+    <Modal visible={visible} style={{ width: '30%', height: '60%' }}>
+      <div>
         <div className="addTournament-title-wrapper">
           <Title>Add Team</Title>
           <AiFillCloseCircle
@@ -50,7 +57,7 @@ const AddTiesheet = ({ visible, onClose, groupId }: any) => {
           />
         </div>
         <Hrline />
-        <div>
+        <Box mt={40}>
           <form onSubmit={onSubmitHandler}>
             <Box flexBox vertical columnGap={20}>
               <Autocomplete
@@ -68,7 +75,7 @@ const AddTiesheet = ({ visible, onClose, groupId }: any) => {
               <Button title={'Submit'} type="submit" />
             </Box>
           </form>
-        </div>
+        </Box>
       </div>
     </Modal>
   )

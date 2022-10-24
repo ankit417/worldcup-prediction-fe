@@ -77,10 +77,13 @@ const TournamentList = ({ onPress, activeTournamentIndex }: any) => {
           <div
             key={index}
             className="tournament-item"
+            style={{
+              backgroundColor: activeTournamentIndex === index && '#CBEAA6',
+            }}
             onClick={() => activeTournament(item, index)}
           >
-            <div>{item.tournament_name}</div>
-            {tournamentList.length != index + 1 && <Hrline />}
+            <div className="tournament-item-text">{item.tournament_name}</div>
+            {/* {tournamentList.length != index + 1 && <Hrline />} */}
           </div>
         )
       })}

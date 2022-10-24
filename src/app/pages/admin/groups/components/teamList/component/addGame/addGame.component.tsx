@@ -23,6 +23,7 @@ import toast from 'react-hot-toast'
 
 const AddGame = ({ visible, onClose, groupId }: any) => {
   //console.log('group id', groupId)
+  const GROUP_ID = groupId
   const dispatch = useDispatch()
 
   const { teamList } = useSelector((state: RootState) => state.team)
@@ -31,11 +32,11 @@ const AddGame = ({ visible, onClose, groupId }: any) => {
   useEffect(() => {
     dispatch(getAllTeam())
     // dispatch(getAllGame(groupId))
-    setValue('group_id', groupId)
+    // setValue('group_id', groupId)
   }, [dispatch, groupId])
 
   const [data, { setValue, clear }] = useFormInput({
-    group_id: '',
+    // group_id: '',
     teamA_id: '',
     teamB_id: '',
     match_date: '2022-12-11',
@@ -43,9 +44,15 @@ const AddGame = ({ visible, onClose, groupId }: any) => {
   })
   const onSubmitHandler = (e: any) => {
     e.preventDefault()
-    const { teamA_id, teamB_id, match_date, status, group_id } = data
+    const {
+      teamA_id,
+      teamB_id,
+      match_date,
+      status,
+      //  group_id
+    } = data
     const requestBody = {
-      group_id,
+      group_id: GROUP_ID,
       teamA_id,
       teamB_id,
       match_date,
@@ -65,7 +72,7 @@ const AddGame = ({ visible, onClose, groupId }: any) => {
   }
 
   return (
-    <Modal visible={visible}>
+    <Modal visible={visible} style={{ height: '60%' }}>
       <div style={{ height: '70%' }}>
         <div className="addTournament-title-wrapper">
           <Title>Add Game</Title>
@@ -76,7 +83,7 @@ const AddGame = ({ visible, onClose, groupId }: any) => {
           />
         </div>
         <Hrline />
-        <div>
+        <Box mt={40}>
           <form onSubmit={onSubmitHandler}>
             <Box flexBox vertical columnGap={20}>
               <FormInput label="Team A" required>
@@ -108,7 +115,7 @@ const AddGame = ({ visible, onClose, groupId }: any) => {
               <Button title="Submit" type="submit" />
             </Box>
           </form>
-        </div>
+        </Box>
       </div>
     </Modal>
   )

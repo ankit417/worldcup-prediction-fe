@@ -13,11 +13,14 @@ import {
 } from '../../../../../../../common'
 
 const EditGroup = ({ visible, onClose, onSubmit, groupData }: any) => {
+  console.log('Group data', groupData)
   const [data, { onChange, setValue, clear }] = useFormInput({
     // tournament_id: '',
     group_name: '',
     is_final: '',
+    user_select: 0,
     match_point: '',
+    number_of_team: '',
   })
 
   //   //console.log('tournament data', tournamentData)
@@ -26,15 +29,20 @@ const EditGroup = ({ visible, onClose, onSubmit, groupData }: any) => {
     setValue('group_name', groupData?.group_name ?? '')
     setValue('is_final', groupData?.is_final ?? '')
     setValue('match_point', groupData?.match_point ?? '')
+    setValue('number_of_team', groupData?.number_of_team ?? '')
+    setValue('user_select', groupData?.user_select ?? 0)
   }, [groupData])
 
   const onSubmitHandler = (e: any) => {
     e.preventDefault()
-    const { group_name, match_point, is_final } = data
+    const { group_name, match_point, number_of_team, is_final, user_select } =
+      data
     const requestBody = {
       group_name,
       match_point,
       is_final,
+      number_of_team: parseInt(number_of_team),
+      user_select,
     }
     onSubmit(requestBody)
     clear()
@@ -75,6 +83,18 @@ const EditGroup = ({ visible, onClose, onSubmit, groupData }: any) => {
                   required
                 />
               </FormInput>
+              {groupData?.user_select === 1 && (
+                <FormInput label="Number of Team" required>
+                  <InputField
+                    placeholder="Number of Team"
+                    name="number_of_team"
+                    value={data.number_of_team}
+                    onChange={onChange}
+                    type="number"
+                    required
+                  />
+                </FormInput>
+              )}
               <Button title="Submit" type="submit" />
             </Box>
           </form>

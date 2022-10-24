@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation } from 'react-auth-navigation'
 
-import { AiFillEdit } from 'react-icons/ai'
+import { AiFillEdit, AiFillDelete } from 'react-icons/ai'
 import { BsPlusCircleFill } from 'react-icons/bs'
 
 import {
@@ -16,6 +16,7 @@ import { RootState, getAllGame } from '../../../../../../redux'
 import { Hrline, Title, Table } from '../../../../../common'
 
 const TeamList = ({ selectedGroup }: any) => {
+  console.log('Selected group', selectedGroup)
   const [editGroupVisible, setEditGroupVisible] = useState<boolean>(false)
   const [addGameModalVisible, setAddGameModalVisible] = useState<boolean>(false)
   const [editGameModalVisible, setEditGameModalVisible] =
@@ -41,6 +42,7 @@ const TeamList = ({ selectedGroup }: any) => {
     setEditGroupVisible((prev) => !prev)
   }
   const onEditGroup = (requestBody: any) => {
+    console.log('request body', requestBody)
     if (requestBody) {
       requestBody.tournament_id = tournamentId
       dispatch(
@@ -66,6 +68,14 @@ const TeamList = ({ selectedGroup }: any) => {
   }
 
   console.log('selected group', selectedGroup)
+
+  if (!selectedGroup) {
+    return (
+      <div>
+        <Title>Please Select / Create New Group</Title>
+      </div>
+    )
+  }
   return (
     <div className="group-team-wrapper">
       <div>
@@ -78,10 +88,21 @@ const TeamList = ({ selectedGroup }: any) => {
               onClick={handleEditGroupModal}
             />
           </div>
+          <div>
+            <AiFillDelete
+              size={24}
+              color={'#EF6F6C'}
+              className="delete-group"
+              // onClick={handleEditGroupModal}
+            />
+          </div>
         </div>
         <Hrline />
         <div className="group-header-team-info">
           <div>Match Point: {selectedGroup?.match_point}</div>
+          {selectedGroup?.user_select === 1 && (
+            <div>Number of Teams: {selectedGroup?.number_of_team}</div>
+          )}
         </div>
         <Hrline />
       </div>

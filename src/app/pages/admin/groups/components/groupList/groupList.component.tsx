@@ -81,10 +81,11 @@ const GroupList = ({ activeGroupIndex, onPress }: any) => {
           <div
             key={index}
             className="tournament-item"
+            style={{ backgroundColor: activeGroupIndex === index && '#CBEAA6' }}
             onClick={() => activeGroup(item, index)}
           >
             <div>{item.group_name}</div>
-            {groupList.length != index + 1 && <Hrline />}
+            {/* {groupList.length != index + 1 && <Hrline />} */}
           </div>
         )
       })}

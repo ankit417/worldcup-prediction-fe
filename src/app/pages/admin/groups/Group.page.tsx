@@ -27,7 +27,7 @@ const Group = () => {
   return (
     <CompWrapper>
       <div className="group-container">
-        <Card containerStyle={{ width: '30%' }}>
+        <Card containerStyle={{ width: '30%', marginRight: 20 }}>
           <div>
             <GroupList
               onPress={activeGroup}

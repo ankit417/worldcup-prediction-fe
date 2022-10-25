@@ -15,6 +15,7 @@ import {
 } from '../../../../../../../../redux'
 import Autocomplete from '@mui/material/Autocomplete'
 import { Button, Box, Table } from '../../../../../../../common'
+import toast from 'react-hot-toast'
 
 const SelectTeam = ({ groupId }: any) => {
   console.log('Select group group Id', groupId)
@@ -47,20 +48,24 @@ const SelectTeam = ({ groupId }: any) => {
   const onSubmitHandler = (e: any) => {
     e.preventDefault()
     const { teamId, groupId } = data
-    const requestBody = {
-      group_id: GROUP_ID,
-      predicted_team_id: teamId,
-    }
+    if (teamId !== '') {
+      const requestBody = {
+        group_id: GROUP_ID,
+        predicted_team_id: teamId,
+      }
 
-    console.log('group Id ', groupId)
-    dispatch(
-      addTieSheetPrediction(requestBody, () => {
-        dispatch(getUserTiesheet(GROUP_ID))
-      })
-    )
-    clear()
-    console.log('request body', requestBody, groupId)
-    // onClose()
+      console.log('group Id ', groupId)
+      dispatch(
+        addTieSheetPrediction(requestBody, () => {
+          dispatch(getUserTiesheet(GROUP_ID))
+        })
+      )
+      clear()
+      console.log('request body', requestBody, groupId)
+      // onClose()
+    } else {
+      toast.error('Please select a team')
+    }
   }
 
   return (
@@ -76,8 +81,9 @@ const SelectTeam = ({ groupId }: any) => {
               id="combo-box-demo"
               options={teamList}
               sx={{ width: 300 }}
+              value={null}
               getOptionLabel={(option: any) => option.team_name}
-              onChange={(_, value) => setValue('teamId', value.id)}
+              onChange={(_, value: any) => setValue('teamId', value.id)}
               renderInput={(params) => (
                 <TextField {...params} label="Select Team" />
               )}

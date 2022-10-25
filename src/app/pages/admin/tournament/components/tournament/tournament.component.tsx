@@ -12,7 +12,11 @@ import {
 } from '../../../../../../redux'
 import { Hrline, Title } from '../../../../../common'
 
-const TournamentList = ({ onPress, activeTournamentIndex }: any) => {
+const TournamentList = ({
+  onPress,
+  activeTournamentIndex,
+  disableAdd = false,
+}: any) => {
   const [addTournamentVisible, setAddTournamentModal] = useState<boolean>(false)
   // const {
   //   navigation: { navigate },
@@ -59,11 +63,13 @@ const TournamentList = ({ onPress, activeTournamentIndex }: any) => {
       <div>
         <div className="tournament-title-wrapper">
           <Title>Tournaments</Title>
-          <BsPlusCircleFill
-            size={24}
-            className="add-tournament"
-            onClick={handleAddTournamentModal}
-          />
+          {!disableAdd && (
+            <BsPlusCircleFill
+              size={24}
+              className="add-tournament"
+              onClick={handleAddTournamentModal}
+            />
+          )}
         </div>
         <Hrline />
       </div>

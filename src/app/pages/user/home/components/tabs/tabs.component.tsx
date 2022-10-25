@@ -14,13 +14,14 @@ import { TabPanel } from './component'
 //   value: number
 // }
 
-const TabsComponent = () => {
+const TabsComponent = ({ selectedTournament }: any) => {
   const [value, setValue] = React.useState(0)
 
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(getAllGroups(2))
-  }, [dispatch])
+    dispatch(getAllGroups(selectedTournament?.id))
+    setValue(0)
+  }, [dispatch, selectedTournament])
 
   const { groupLoading, groupList } = useSelector(
     (state: RootState) => state.group

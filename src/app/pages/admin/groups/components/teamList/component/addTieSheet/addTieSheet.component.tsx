@@ -68,7 +68,7 @@ const AddTiesheet = ({ visible, onClose, groupId }: any) => {
                 getOptionLabel={(option: any) => option.team_name}
                 onChange={(_, value) => setValue('teamId', value.id)}
                 renderInput={(params) => (
-                  <TextField {...params} label="Team A" />
+                  <TextField {...params} label="Select Team" />
                 )}
               />
 

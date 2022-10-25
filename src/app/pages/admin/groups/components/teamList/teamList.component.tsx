@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation } from 'react-auth-navigation'
-
+import moment from 'moment'
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai'
 import { BsPlusCircleFill } from 'react-icons/bs'
 
@@ -9,12 +9,14 @@ import {
   updateGroup,
   getAllGroups,
   getAllTieSheet,
+  deleteGroup,
+  deleteGameAction,
 } from '../../../../../../redux'
 import { EditGroup } from '../groupList/component'
 import { AddGame, AddTiesheet, EditGame, TieSheetTable } from './component'
 import { RootState, getAllGame } from '../../../../../../redux'
 import { Hrline, Title, Table } from '../../../../../common'
-
+import { DeleteGroup } from '../deleteGroup.component'
 const TeamList = ({ selectedGroup }: any) => {
   console.log('Selected group', selectedGroup)
   const [editGroupVisible, setEditGroupVisible] = useState<boolean>(false)
@@ -22,7 +24,7 @@ const TeamList = ({ selectedGroup }: any) => {
   const [editGameModalVisible, setEditGameModalVisible] =
     useState<boolean>(false)
   const [addTieSheetVisible, setAddTieSheetVisible] = useState<boolean>(false)
-
+  const [deleteGroupVisible, setDeleteGroupVisible] = useState<boolean>(false)
   const [editGameData, setEditGameData] = useState<any>()
   const { params }: any = useNavigation()
   const { tournamentId } = params
@@ -67,6 +69,29 @@ const TeamList = ({ selectedGroup }: any) => {
     dispatch(getAllTieSheet(selectedGroup?.id))
   }
 
+  const deleteGroupModal = () => {
+    dispatch(
+      deleteGroup(selectedGroup?.id, () => {
+        dispatch(getAllGroups(tournamentId))
+        setDeleteGroupVisible(false)
+        window.location.reload()
+      })
+    )
+  }
+
+  const formatWinner = (data: any) => {
+    switch (data) {
+      case 1:
+        return 'Team A'
+      case 2:
+        return 'Team B'
+      case 3:
+        return 'Draw'
+      default:
+        return 'Undecided'
+    }
+  }
+
   console.log('selected group', selectedGroup)
 
   if (!selectedGroup) {
@@ -93,6 +118,7 @@ const TeamList = ({ selectedGroup }: any) => {
               size={24}
               color={'#EF6F6C'}
               className="delete-group"
+              onClick={() => setDeleteGroupVisible(true)}
               // onClick={handleEditGroupModal}
             />
           </div>
@@ -106,6 +132,11 @@ const TeamList = ({ selectedGroup }: any) => {
         </div>
         <Hrline />
       </div>
+      <DeleteGroup
+        visible={deleteGroupVisible}
+        onClose={() => setDeleteGroupVisible(false)}
+        onSubmit={deleteGroupModal}
+      />
       <EditGroup
         visible={editGroupVisible}
         onClose={handleEditGroupModal}
@@ -156,18 +187,23 @@ const TeamList = ({ selectedGroup }: any) => {
             columns={[
               {
                 field: 'teama_name',
-                name: 'Team A Name',
+                name: 'Team A',
                 render: (rowData: any) => rowData,
               },
               {
                 field: 'teamb_name',
-                name: 'Team B Name',
+                name: 'Team B',
                 render: (rowData: any) => rowData,
               },
               {
                 field: 'match_date',
                 name: 'Match Date',
-                render: (rowData: any) => rowData,
+                render: (rowData: any) => moment(rowData).format('MM-DD-YYYY'),
+              },
+              {
+                field: 'status',
+                name: 'Winner',
+                render: (rowData: any) => formatWinner(rowData),
               },
             ]}
             data={gameList}
@@ -185,8 +221,13 @@ const TeamList = ({ selectedGroup }: any) => {
             }}
             onDeleteHandler={(data: any) => {
               //   toast.error(data?.id)
-              console.log('delete handler data', data)
+              // console.log('delete handler data', data)
               // deleteHandler(data?.id)
+              dispatch(
+                deleteGameAction(data?.id, () => {
+                  dispatch(getAllGame(selectedGroup?.id))
+                })
+              )
             }}
           />
         )}

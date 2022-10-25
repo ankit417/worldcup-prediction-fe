@@ -136,6 +136,7 @@ export const DELETE_TEAM = createActionSet('DELETE_TEAM')
 export const GAME = createActionSet('GAME')
 export const ADD_GAME = createActionSet('ADD_GAME')
 export const UPDATE_GAME = createActionSet('UPDATE_GAME')
+export const DELETE_GAME = createActionSet('DELETE_GAME')
 
 //TIESHEET
 export const TIESHEET = createActionSet('TIESHEET')

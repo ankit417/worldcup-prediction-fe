@@ -1,11 +1,13 @@
-import { TIESHEET } from '../actions'
+import { TIESHEET, DELETE_TIESHEET } from '../actions'
 
 const initialState: {
   tiesheetLoading: boolean
   tiesheetList: Array<object>
+  deleteTiesheetLoading: boolean
 } = {
   tiesheetLoading: false,
   tiesheetList: [],
+  deleteTiesheetLoading: false,
 }
 
 export function tieSheetReducer(state = initialState, action: any) {
@@ -21,6 +23,12 @@ export function tieSheetReducer(state = initialState, action: any) {
       }
     case TIESHEET.ERROR:
       return { ...state, tiesheetLoading: false }
+    case DELETE_TIESHEET.LOADING:
+      return { ...state, deleteTiesheetLoading: true }
+    case DELETE_TIESHEET.SUCCESS:
+      return { ...state, deleteTiesheetLoading: false }
+    case DELETE_TIESHEET.ERROR:
+      return { ...state, deleteTiesheetLoading: false }
     default:
       return state
   }

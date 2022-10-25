@@ -18,6 +18,7 @@ import {
   FormInput,
   Box,
   Button,
+  InputField,
 } from '../../../../../../../common'
 import toast from 'react-hot-toast'
 
@@ -35,12 +36,12 @@ const AddGame = ({ visible, onClose, groupId }: any) => {
     // setValue('group_id', groupId)
   }, [dispatch, groupId])
 
-  const [data, { setValue, clear }] = useFormInput({
+  const [data, { onChange, setValue, clear }] = useFormInput({
     // group_id: '',
     teamA_id: '',
     teamB_id: '',
-    match_date: '2022-12-11',
-    status: 3,
+    match_date: '',
+    status: 0,
   })
   const onSubmitHandler = (e: any) => {
     e.preventDefault()
@@ -58,6 +59,8 @@ const AddGame = ({ visible, onClose, groupId }: any) => {
       match_date,
       status,
     }
+
+    console.log('Request body', requestBody)
     if (teamA_id !== teamB_id) {
       dispatch(
         addGame(requestBody, () => {
@@ -112,6 +115,17 @@ const AddGame = ({ visible, onClose, groupId }: any) => {
                   )}
                 />
               </FormInput>
+              <FormInput label="Match Date" required>
+                <InputField
+                  placeholder="Match Date"
+                  name="match_date"
+                  value={data.match_date}
+                  onChange={onChange}
+                  type="date"
+                  required
+                />
+              </FormInput>
+
               <Button title="Submit" type="submit" />
             </Box>
           </form>

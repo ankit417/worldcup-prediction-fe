@@ -15,7 +15,7 @@ const TieSheetTable = ({ groupId }: any) => {
     dispatch(getAllTieSheet(groupId))
   }, [dispatch, groupId])
 
-  const { tiesheetList, tiesheetLoading } = useSelector(
+  const { tiesheetList, tiesheetLoading, deleteTiesheetLoading } = useSelector(
     (state: RootState) => state.tiesheet
   )
 
@@ -34,6 +34,7 @@ const TieSheetTable = ({ groupId }: any) => {
         dataLoader={tiesheetLoading}
         totalCount={tiesheetList.length}
         actions
+        deleteLoader={deleteTiesheetLoading}
         onDeleteHandler={(data: any) => {
           //   toast.error(data?.id)
           dispatch(

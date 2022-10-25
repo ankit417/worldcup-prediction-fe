@@ -155,3 +155,6 @@ export const GET_TIESHEET_PREDICTION = createActionSet(
 export const ADD_TIESHEET_PREDICTION = createActionSet(
   'ADD_TIESHEET_PREDICTION'
 )
+export const DELETE_TIESHEET_PREDICTION = createActionSet(
+  'DELETE_TIESHEET_PREDICTION'
+)

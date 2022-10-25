@@ -11,6 +11,7 @@ import {
   getUserTiesheet,
   addTieSheetPrediction,
   getGroupInfo,
+  deleteTieSheetPrediction,
 } from '../../../../../../../../redux'
 import Autocomplete from '@mui/material/Autocomplete'
 import { Button, Box, Table } from '../../../../../../../common'
@@ -63,26 +64,29 @@ const SelectTeam = ({ groupId }: any) => {
   }
 
   return (
-    <div>
-      <div>You can add upto {groupInfoList[0]?.number_of_team} Teams</div>
-      <form onSubmit={onSubmitHandler}>
-        <Box flexBox vertical columnGap={20}>
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={teamList}
-            sx={{ width: 300 }}
-            getOptionLabel={(option: any) => option.team_name}
-            onChange={(_, value) => setValue('teamId', value.id)}
-            renderInput={(params) => (
-              <TextField {...params} label="Select Team" />
-            )}
-          />
+    <div className="user-select-team-wrapper">
+      <div className="form-wrapper">
+        <div className="number-of-teams">
+          You can add upto {groupInfoList[0]?.number_of_team} Teams
+        </div>
+        <form onSubmit={onSubmitHandler}>
+          <Box flexBox columnGap={20}>
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={teamList}
+              sx={{ width: 300 }}
+              getOptionLabel={(option: any) => option.team_name}
+              onChange={(_, value) => setValue('teamId', value.id)}
+              renderInput={(params) => (
+                <TextField {...params} label="Select Team" />
+              )}
+            />
 
-          <Button title={'Submit'} type="submit" />
-        </Box>
-      </form>
-
+            <Button title={'Submit'} type="submit" />
+          </Box>
+        </form>
+      </div>
       <Table
         columns={[
           {
@@ -97,11 +101,11 @@ const SelectTeam = ({ groupId }: any) => {
         actions
         onDeleteHandler={(data: any) => {
           //   toast.error(data?.id)
-          // dispatch(
-          //   deleteTieSheet(data?.id, () => {
-          //     dispatch(getAllTieSheet(groupId))
-          //   })
-          // )
+          dispatch(
+            deleteTieSheetPrediction(data?.id, () => {
+              dispatch(getUserTiesheet(GROUP_ID))
+            })
+          )
           console.log('delete handler data', data)
           // deleteHandler(data?.id)
         }}

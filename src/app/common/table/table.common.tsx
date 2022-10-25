@@ -1,4 +1,4 @@
-import { useNavigation } from 'react-auth-navigation'
+// import { useNavigation } from 'react-auth-navigation'
 // import { useEffect } from 'react'
 import { MdEdit, MdDelete } from 'react-icons/md'
 import { GrUpdate } from 'react-icons/gr'
@@ -11,13 +11,13 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Pagination,
+  // Pagination,
   styled,
 } from '@mui/material'
 
 import { ToolTip, ActivityIndicator, Button } from '..'
 import {} from '../index'
-import { TABLE_LIMIT } from '../../../config'
+// import { TABLE_LIMIT } from '../../../config'
 import { ConfirmationModal } from '../confirmationModal/ConfirmationModal.common'
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -54,22 +54,22 @@ export const Table = ({
   onViewHandler,
 }: // onPageChange,
 CommonTableProps) => {
-  const { location, navigation } = useNavigation()
-  const { navigate } = navigation
+  // const { location, navigation } = useNavigation()
+  // const { navigate } = navigation
   // const [visible, setVisible] = useState(false);
   // const [activeRow, setActiveRow] = useState();
-  let query = useQuery()
+  // let query = useQuery()
 
-  const pageNumber = query.get('page') || 1
+  // const pageNumber = query.get('page') || 1
 
-  function useQuery() {
-    return new URLSearchParams(location?.search)
-  }
+  // function useQuery() {
+  //   return new URLSearchParams(location?.search)
+  // }
 
-  const page = async (event: any, newPage = 1) => {
-    event.preventDefault()
-    navigate(location.pathname + `?page=` + Number(newPage))
-  }
+  // const page = async (event: any, newPage = 1) => {
+  //   event.preventDefault()
+  //   navigate(location.pathname + `?page=` + Number(newPage))
+  // }
 
   // useEffect(() => {
   //   onPageChange?.({ pageNo })
@@ -225,7 +225,7 @@ CommonTableProps) => {
 
       {!dataLoader && data?.length && totalCount ? (
         <div style={{ width: '100%', display: 'flex' }}>
-          <Pagination
+          {/* <Pagination
             style={{
               marginLeft: 'auto',
               marginTop: 20,
@@ -237,7 +237,7 @@ CommonTableProps) => {
             variant="outlined"
             shape="rounded"
             onChange={page}
-          />
+          /> */}
         </div>
       ) : null}
     </div>

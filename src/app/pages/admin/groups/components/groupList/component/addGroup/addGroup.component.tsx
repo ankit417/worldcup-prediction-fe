@@ -137,7 +137,7 @@ const AddGroup = ({ visible, onClose, onSubmit }: any) => {
                     onChange={onChange}
                     type="number"
                     // step={1}
-                    min={2}
+                    min={1}
                     required
                   />
                 </FormInput>

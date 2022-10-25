@@ -91,6 +91,7 @@ const EditGroup = ({ visible, onClose, onSubmit, groupData }: any) => {
                     value={data.number_of_team}
                     onChange={onChange}
                     type="number"
+                    min={1}
                     required
                   />
                 </FormInput>

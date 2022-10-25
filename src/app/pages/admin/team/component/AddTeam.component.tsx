@@ -5,7 +5,11 @@ import IconButton from '@mui/material/IconButton'
 import { GoFileMedia } from 'react-icons/go'
 import Stack from '@mui/material/Stack'
 
-import { Card, Hrline, Title } from '../../../../common'
+import {
+  // Card,
+  Hrline,
+  Title,
+} from '../../../../common'
 import toast from 'react-hot-toast'
 
 export const AddTeam = ({ onSubmit }: any) => {
@@ -40,35 +44,35 @@ export const AddTeam = ({ onSubmit }: any) => {
     return 1
   }
   return (
-    <div style={{ width: '30%', marginBottom: 20 }}>
-      <Card>
-        <div>
-          <Title>Add Team</Title>
-          <Hrline gap={15} />
-        </div>
-        <Stack direction="row" alignItems="center" spacing={2}>
-          <TextField
-            id="outlined-basic"
-            label="Team Name"
-            variant="outlined"
-            onChange={onChange}
-            required
-            value={teamName}
-          />
-          <IconButton
-            color="primary"
-            aria-label="upload picture"
-            component="label"
-          >
-            <input hidden accept="image/*" type="file" onChange={handleFile} />
-            <GoFileMedia />
-          </IconButton>
-          <Button variant="contained" onClick={submitHandler}>
-            Submit
-          </Button>
-          {fileUri && <img src={fileUri} height={100} width={100} />}
-        </Stack>
-      </Card>
+    <div style={{ marginBottom: 20 }}>
+      {/* <Card> */}
+      <div>
+        <Title>Add Team</Title>
+        <Hrline gap={15} />
+      </div>
+      <Stack direction="column" alignItems="center" spacing={2}>
+        <TextField
+          id="outlined-basic"
+          label="Team Name"
+          variant="outlined"
+          onChange={onChange}
+          required
+          value={teamName}
+        />
+        <IconButton
+          color="primary"
+          aria-label="upload picture"
+          component="label"
+        >
+          <input hidden accept="image/*" type="file" onChange={handleFile} />
+          <GoFileMedia />
+        </IconButton>
+        <Button variant="contained" onClick={submitHandler}>
+          Submit
+        </Button>
+        {fileUri && <img src={fileUri} height={200} width={200} />}
+      </Stack>
+      {/* </Card> */}
     </div>
   )
 }

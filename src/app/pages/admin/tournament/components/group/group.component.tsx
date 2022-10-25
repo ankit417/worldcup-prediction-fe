@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation } from 'react-auth-navigation'
 // import { BsPlusCircleFill } from 'react-icons/bs'
-import { AiFillEdit, AiOutlineEye } from 'react-icons/ai'
+import { AiFillEdit, AiOutlineEye, AiFillDelete } from 'react-icons/ai'
 
 import {
   getAllGroups,
@@ -11,12 +11,17 @@ import {
   RootState,
   editTournament,
   getAllTournaments,
+  deleteTournament,
 } from '../../../../../../redux'
 import { Hrline, Table, Title } from '../../../../../common'
 import { EditTournament } from '../tournament/component'
+import { DeleteTournament } from '../deleteTournament.component'
 
 const GroupList = ({ selectedTournament }: any) => {
   const [editTournamentVisible, setEditTournamentVisible] =
+    useState<boolean>(false)
+
+  const [deleteTournamentVisible, setDeleteTournamentVisible] =
     useState<boolean>(false)
   const {
     // params,
@@ -44,6 +49,17 @@ const GroupList = ({ selectedTournament }: any) => {
     )
   }
 
+  const onDeleteTournament = () => {
+    dispatch(
+      deleteTournament(selectedTournament?.id, () => {
+        // console.log('any call back here')
+        dispatch(getAllTournaments())
+        setDeleteTournamentVisible(false)
+        window.location.reload()
+      })
+    )
+  }
+
   return (
     <div className="tournament-group-wrapper">
       {/* {selectedTournament} */}
@@ -59,12 +75,13 @@ const GroupList = ({ selectedTournament }: any) => {
                 onClick={handleEditTournamentModal}
               />
             </div>
-            <AiOutlineEye
+            <AiFillDelete
               size={24}
               color={'#EF6F6C'}
               className="add-tournament"
-              onClick={() =>
-                navigate(`tournament/view/${selectedTournament?.id}`)
+              onClick={
+                () => setDeleteTournamentVisible(true)
+                // navigate(`tournament/view/${selectedTournament?.id}`)
               }
             />
           </div>
@@ -88,9 +105,31 @@ const GroupList = ({ selectedTournament }: any) => {
         onSubmit={onEditTournament}
         tournamentData={selectedTournament}
       />
+      <DeleteTournament
+        visible={deleteTournamentVisible}
+        onClose={() => setDeleteTournamentVisible(false)}
+        onSubmit={() => {
+          onDeleteTournament()
+        }}
+      />
       <div>
-        <div style={{ marginTop: 10, marginBottom: 10 }}>
+        <div
+          style={{
+            marginTop: 10,
+            marginBottom: 10,
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}
+        >
           <Title>Groups</Title>
+          <AiOutlineEye
+            size={24}
+            color={'#EF6F6C'}
+            className="add-tournament"
+            onClick={() =>
+              navigate(`tournament/view/${selectedTournament?.id}`)
+            }
+          />
         </div>
         <Table
           columns={[

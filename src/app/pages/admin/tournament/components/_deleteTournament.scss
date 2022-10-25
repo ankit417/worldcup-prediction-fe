@@ -1,0 +1,24 @@
+.delete-tournament-wrapper {
+  .delete-warning {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+
+    &-text {
+      font-weight: bold;
+    }
+  }
+
+  .delete-action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    margin-top: 20px;
+
+    .cancel-button {
+    }
+    .delete-button {
+      background-color: #df3b57;
+    }
+  }
+}

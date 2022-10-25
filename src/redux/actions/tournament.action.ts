@@ -1,7 +1,12 @@
 import { toast } from 'react-hot-toast'
 import { api, APIS } from '../../config'
 
-import { TOURNAMENT, ADD_TOURNAMENT, EDIT_TOURNAMENT } from '.'
+import {
+  TOURNAMENT,
+  ADD_TOURNAMENT,
+  EDIT_TOURNAMENT,
+  DELETE_TOURNAMENT,
+} from '.'
 
 export function getAllTournaments() {
   return async function (dispatch: any) {
@@ -81,6 +86,35 @@ export function editTournament(id: number, body: any, callBack?: any) {
     } catch ({ message }) {
       dispatch({ type: EDIT_TOURNAMENT.ERROR })
       toast.error('Error Adding Tournament')
+      return 0
+    }
+  }
+}
+
+export function deleteTournament(id: number, callBack?: any) {
+  return async function (dispatch: any) {
+    let res
+    try {
+      dispatch({ type: DELETE_TOURNAMENT.LOADING })
+      res = await api(`${APIS.tournament}/${id}`, 'DELETE')
+      const { success } = res.data
+
+      if (success) {
+        dispatch({
+          type: DELETE_TOURNAMENT.SUCCESS,
+          // payload: { data: data },
+        })
+        callBack && callBack()
+        toast.success('Tournament Deleted')
+        return 1
+      } else {
+        dispatch({ type: DELETE_TOURNAMENT.ERROR })
+        toast.error('Error deleting tournaments')
+        return 0
+      }
+    } catch ({ message }) {
+      dispatch({ type: DELETE_TOURNAMENT.ERROR })
+      toast.error('Error deleting tournaments')
       return 0
     }
   }

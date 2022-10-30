@@ -158,3 +158,8 @@ export const ADD_TIESHEET_PREDICTION = createActionSet(
 export const DELETE_TIESHEET_PREDICTION = createActionSet(
   'DELETE_TIESHEET_PREDICTION'
 )
+
+//USER LIST
+export const GET_USER_LIST = createActionSet('GET_USER_LIST')
+export const CREATE_USER = createActionSet('CREATE_USER')
+export const DELETE_USER = createActionSet('DELETE_USER')

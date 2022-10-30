@@ -3,12 +3,12 @@ import { api, APIS } from '../../config'
 
 import { PREDICTION, USER_PREDICTION, CREATE_USER_PREDICTION } from '.'
 
-export function getAllPrediction() {
+export function getAllPrediction(id: number) {
   return async function (dispatch: any) {
     let res
     try {
       dispatch({ type: PREDICTION.LOADING })
-      res = await api(`${APIS.prediction}`)
+      res = await api(`${APIS.prediction}/${id}`)
       //console.log('tournament', res)
       const { success, data } = res.data
 

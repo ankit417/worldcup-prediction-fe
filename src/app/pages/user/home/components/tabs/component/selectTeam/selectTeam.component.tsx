@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 // import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
+import moment from 'moment'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { useFormInput } from 'use-form-input'
@@ -17,7 +18,10 @@ import Autocomplete from '@mui/material/Autocomplete'
 import { Button, Box, Table } from '../../../../../../../common'
 import toast from 'react-hot-toast'
 
-const SelectTeam = ({ groupId }: any) => {
+const CURRENT_DATE = moment().format('YYYY-MM-DD')
+
+const SelectTeam = ({ groupId, deadline }: any) => {
+  const [disableGame, setDisableGame] = useState(true)
   console.log('Select group group Id', groupId)
   const GROUP_ID = groupId
   const dispatch = useDispatch()
@@ -35,6 +39,14 @@ const SelectTeam = ({ groupId }: any) => {
   useEffect(() => {
     dispatch(getUserTiesheet(groupId))
   }, [dispatch, groupId])
+
+  useEffect(() => {
+    if (moment(deadline).format('YYYY-MM-DD') <= CURRENT_DATE) {
+      setDisableGame(true)
+    } else {
+      setDisableGame(false)
+    }
+  }, [groupId, deadline])
 
   useEffect(() => {
     dispatch(getGroupInfo(groupId))
@@ -89,7 +101,7 @@ const SelectTeam = ({ groupId }: any) => {
               )}
             />
 
-            <Button title={'Submit'} type="submit" />
+            <Button title={'Submit'} type="submit" disabled={disableGame} />
           </Box>
         </form>
       </div>
@@ -105,6 +117,7 @@ const SelectTeam = ({ groupId }: any) => {
         dataLoader={tiesheetPredictionLoading}
         totalCount={tiesheetPredictionList.length}
         actions
+        disableActions={disableGame}
         onDeleteHandler={(data: any) => {
           //   toast.error(data?.id)
           dispatch(

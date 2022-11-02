@@ -4,10 +4,11 @@ interface TabPanelProps {
   index: number
   value: number
   group: any
+  deadline: any
 }
 
 export const TabPanel = (props: TabPanelProps) => {
-  const { children, value, index, group, ...other } = props
+  const { children, value, index, group, deadline, ...other } = props
   // console.l
   return (
     <div
@@ -19,9 +20,9 @@ export const TabPanel = (props: TabPanelProps) => {
     >
       {value === index &&
         (group.user_select === 0 ? (
-          <SelectGame groupId={group.id} />
+          <SelectGame groupId={group.id} deadline={deadline} />
         ) : (
-          <SelectTeam groupId={group.id} />
+          <SelectTeam groupId={group.id} deadline={deadline} />
         ))}
     </div>
   )

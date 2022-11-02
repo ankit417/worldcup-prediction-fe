@@ -16,6 +16,7 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   type?: string
   style?: any
   loading?: boolean
+  disabled?: boolean
 }
 
 export const Button = ({
@@ -25,6 +26,7 @@ export const Button = ({
   className,
   type = 'button',
   loading,
+  disabled,
   ...rest
 }: ButtonProps) => {
   const _className = ['button']
@@ -32,7 +34,7 @@ export const Button = ({
   if (className) _className.push(className)
 
   return (
-    <button className={_className.join(' ')} {...rest}>
+    <button className={_className.join(' ')} {...rest} disabled={disabled}>
       {loading && (
         <Text button style={{ marginRight: 4 }}>
           <LoaderIcon />
@@ -59,17 +61,18 @@ interface IconProps {
   className?: string
   onClick?: (arg?: any) => void
   style?: any
+  disabled?: boolean
 }
 
 const IconButton = (props: IconProps) => {
-  const { icon, className, ...rest } = props
+  const { icon, className, disabled, ...rest } = props
 
   const _className = ['button']
   _className.push('icon')
   if (className) _className.push(className)
 
   return (
-    <button className={_className.join(' ')} {...rest}>
+    <button className={_className.join(' ')} {...rest} disabled={disabled}>
       {icon && <Text button>{icon}</Text>}
     </button>
   )

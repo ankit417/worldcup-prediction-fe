@@ -28,7 +28,7 @@ export function loginAction(body: any, callback: any) {
         dispatch({ type: USER.SUCCESS, payload: data })
         callback && callback(data.accessToken, data.role)
 
-        toast.success(data.message)
+        // toast.success(data.message)
         // } else {
         //   toast.error('Only Admin login is allowed')
         // }
@@ -83,9 +83,9 @@ export function passwordAction(body: any, modalCloseHandler: any) {
     let res
     try {
       dispatch({ type: PASSWORD.LOADING })
-      res = await api(APIS.change, 'PATCH', body)
+      res = await api(APIS.changepassword, 'PATCH', body)
 
-      const { success, data } = res.data
+      const { success, message } = res.data
 
       if (success) {
         dispatch({ type: PASSWORD.SUCCESS })
@@ -94,7 +94,7 @@ export function passwordAction(body: any, modalCloseHandler: any) {
         return 1
       } else {
         dispatch({ type: PASSWORD.ERROR })
-        toast.error(data.message)
+        toast.error(message)
         return 0
       }
     } catch ({ message }) {

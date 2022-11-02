@@ -27,9 +27,10 @@ interface MatchProps {
 
 interface MatchComponentProps {
   data: Array<MatchProps>
+  disable: boolean
 }
-const MatchComponent = ({ data }: MatchComponentProps) => {
-  console.log('Match component data', data)
+const MatchComponent = ({ data, disable }: MatchComponentProps) => {
+  console.log('Match component data', data, disable)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getUserPrediction())
@@ -102,49 +103,11 @@ const MatchComponent = ({ data }: MatchComponentProps) => {
               </div>
               <div className="prediction_button_wrapper">
                 <RadioGroupComponent
-                  {...item}
+                  item={item}
+                  disable={disable}
                   // item={item}
                   // value={checkedValue(item?.id)}
                 />
-                {/* <RadioGroup
-                  row
-                  aria-labelledby="demo-radio-buttons-group-label"
-                  // defaultValue={'argentina'}
-                  // defaultValue={predictionDefault(item)}
-                  name="radio-buttons-group"
-                  // onChange={(e) => handleChange(e, item.id)}
-                >
-                  <FormControlLabel
-                    value={item.teama_name}
-                    control={
-                      <Radio
-                      // checked={autoFillPrediction(item?.id, 1)}
-                      />
-                    }
-                    label={item.teama_name}
-                    onChange={() => updatePrediction(1)}
-                  />
-                  <FormControlLabel
-                    value="Draw"
-                    control={
-                      <Radio
-                      //  checked={autoFillPrediction(item?.id, 3)}
-                      />
-                    }
-                    label="Draw"
-                    onChange={() => updatePrediction(3)}
-                  />
-                  <FormControlLabel
-                    value={item.teamb_name}
-                    control={
-                      <Radio
-                      // checked={autoFillPrediction(item?.id, 2)}
-                      />
-                    }
-                    label={item.teamb_name}
-                    onChange={() => updatePrediction(2)}
-                  />
-                </RadioGroup> */}
               </div>
               <div>
                 <img
@@ -163,8 +126,8 @@ const MatchComponent = ({ data }: MatchComponentProps) => {
   )
 }
 
-const RadioGroupComponent = (item: any) => {
-  console.log('radio group item', item)
+const RadioGroupComponent = ({ item, disable }: any) => {
+  console.log('radio group item', item, disable)
   // const [radioNumber, setValue] = useState<number>(value)
   // console.log('Value', value)
   const [radioValue, setRadioValue] = useState<any>(null)
@@ -250,6 +213,7 @@ const RadioGroupComponent = (item: any) => {
         }
         label={item.teama_name}
         onChange={() => updatePrediction(1)}
+        disabled={disable}
       />
       <FormControlLabel
         value="Draw"
@@ -260,6 +224,7 @@ const RadioGroupComponent = (item: any) => {
         }
         label="Draw"
         onChange={() => updatePrediction(3)}
+        disabled={disable}
       />
       <FormControlLabel
         value={item.teamb_name}
@@ -270,6 +235,7 @@ const RadioGroupComponent = (item: any) => {
         }
         label={item.teamb_name}
         onChange={() => updatePrediction(2)}
+        disabled={disable}
       />
     </RadioGroup>
   )

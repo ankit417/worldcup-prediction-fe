@@ -39,6 +39,7 @@ interface CommonTableProps {
   onDeleteHandler?: any
   onEditHandler?: any
   onViewHandler?: any
+  disableActions?: boolean
   // viewBug?: any;
   // onPageChange
 }
@@ -52,6 +53,7 @@ export const Table = ({
   onDeleteHandler,
   onEditHandler,
   onViewHandler,
+  disableActions,
 }: // onPageChange,
 CommonTableProps) => {
   // const { location, navigation } = useNavigation()
@@ -74,7 +76,7 @@ CommonTableProps) => {
   // useEffect(() => {
   //   onPageChange?.({ pageNo })
   // }, [pageNo])
-
+  console.log('disabled actions', disableActions)
   return (
     <div className="custom-table">
       <TableContainer
@@ -149,6 +151,7 @@ CommonTableProps) => {
                           )}
                           {onEditHandler && (
                             <Button.Icon
+                              disabled={disableActions}
                               style={{ marginLeft: 10, marginRight: 10 }}
                               icon={
                                 <ToolTip text="Edit" down>
@@ -164,6 +167,7 @@ CommonTableProps) => {
                             <ConfirmationModal
                               displayElement={
                                 <Button.Icon
+                                  disabled={disableActions}
                                   icon={
                                     <ToolTip
                                       text={
@@ -184,16 +188,22 @@ CommonTableProps) => {
                                   }
                                 />
                               }
-                              label={`Are you sure you want to ${
-                                item.menu_items
-                                  ? item.menu_items?.is_deleted
-                                    ? 'activate'
-                                    : 'deactivate'
-                                  : 'delete'
-                              } ?`}
+                              label={
+                                disableActions
+                                  ? `Cannot Add or Delete game after deadline`
+                                  : `Are you sure you want to ${
+                                      item.menu_items
+                                        ? item.menu_items?.is_deleted
+                                          ? 'activate'
+                                          : 'deactivate'
+                                        : 'delete'
+                                    } ?`
+                              }
                               onConfirmClick={(e, callback) => {
-                                e.preventDefault()
-                                onDeleteHandler(item, callback)
+                                if (!disableActions) {
+                                  e.preventDefault()
+                                  onDeleteHandler(item, callback)
+                                }
                               }}
                               confirmLabel={
                                 item.menu_items

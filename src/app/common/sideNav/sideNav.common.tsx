@@ -3,8 +3,8 @@ import { useNavigation, useAuth } from 'react-auth-navigation'
 import { AnimatedBlock, bInterpolate, useAnimatedValue } from 'react-ui-animate'
 import { NavGroup } from './components'
 
-import Logo1 from '../../../assets/images/logo_small.png'
-import Logo2 from '../../../assets/images/logo_large.png'
+import Logo1 from '../../../assets/images/logo.png'
+import Logo2 from '../../../assets/images/logo.png'
 
 // import Logo1 from '../../../assets/icons/logo1.png'
 // import Logo2 from '../../../assets/icons/logo2.png'

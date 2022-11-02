@@ -6,6 +6,7 @@ import { MdMenu, MdKeyboardArrowDown } from 'react-icons/md'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 
 import { ImUser } from 'react-icons/im'
+import { AiFillCloseCircle } from 'react-icons/ai'
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -13,6 +14,7 @@ import { ActivityIndicator, Breadcrumb, Button, InputField } from '..'
 import { logoutAction, passwordAction } from '../../../redux'
 import { useInput } from '../../../hooks'
 import { isValid, validator } from '../../../utils'
+import toast from 'react-hot-toast'
 
 export const Header = () => {
   const { handleLogout, setSideMenuStable, sideNavExpanded } = useAuth()
@@ -39,10 +41,12 @@ export const Header = () => {
 
     validate('oldPassword', oldPassword.length === 0, () => {
       console.log({ message: 'Enter Old Password!', type: 'error' })
+      toast.error('Enter old password')
     })
 
     validate('newPassword', newPassword.length === 0, () => {
       console.log({ message: 'Enter New Password!', type: 'error' })
+      toast.error('Enter new password')
     })
 
     validate('newPassword', newPassword.length < 7, () => {
@@ -50,15 +54,18 @@ export const Header = () => {
         message: 'New Password length should be greater than 7!',
         type: 'error',
       })
+      toast.error('New Password length should be greater than 7 character!')
     })
 
     validate('confirmPassword', confirmPassword.length === 0, () => {
       console.log({ message: 'Re enter New Password!', type: 'error' })
+      toast.error('Re-enter new password')
     })
 
     if (!!confirmPassword && !!newPassword) {
       validate('confirmPassword', confirmPassword !== newPassword, () => {
         console.log({ message: 'Passwords do not match!', type: 'error' })
+        toast.error('Passwords do not match!')
       })
     }
 
@@ -77,23 +84,29 @@ export const Header = () => {
   const modalCloseHandler = () => {
     setVisible(false)
   }
+
+  console.log('user', user)
   return (
     <div className="header-container">
       <div className="header">
         <div className="header-left">
-          <div
-            className="header-menu"
-            onClick={() => setSideMenuStable((prev: boolean) => !prev)}
-          >
-            {sideNavExpanded ? (
-              <BsThreeDotsVertical size={18} />
-            ) : (
-              <MdMenu size={22} />
-            )}
-          </div>
-          <div className="header-breadcrumb">
-            <Breadcrumb />
-          </div>
+          {user?.role == 'admin' && (
+            <>
+              <div
+                className="header-menu"
+                onClick={() => setSideMenuStable((prev: boolean) => !prev)}
+              >
+                {sideNavExpanded ? (
+                  <BsThreeDotsVertical size={18} />
+                ) : (
+                  <MdMenu size={22} />
+                )}
+              </div>
+              <div className="header-breadcrumb">
+                <Breadcrumb />
+              </div>
+            </>
+          )}
         </div>
 
         <div className="header-right">
@@ -120,7 +133,7 @@ export const Header = () => {
                     <ImUser size={18} />
                   </span>
 
-                  <span className="logged-user-name">{user?.role}</span>
+                  <span className="logged-user-name">{user?.name}</span>
 
                   <span className="logged-user-arrow-down">
                     <MdKeyboardArrowDown size={24} />
@@ -146,7 +159,16 @@ export const Header = () => {
               </Menu.Container>
             </Dropdown>
             <Modal visible={visible}>
-              <h3 style={{ marginBottom: 20 }}>Change Password</h3>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <h3 style={{ marginBottom: 20 }}>Change Password</h3>
+                <AiFillCloseCircle
+                  size={24}
+                  color="red"
+                  onClick={() => {
+                    setVisible(false)
+                  }}
+                />
+              </div>
               <form
                 style={{
                   display: 'grid',

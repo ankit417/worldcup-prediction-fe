@@ -16,11 +16,12 @@ import { TabPanel } from './component'
 
 const TabsComponent = ({ selectedTournament }: any) => {
   const [value, setValue] = React.useState(0)
-
+  const [predictionDeadline, setPredictionDeadline] = React.useState(null)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getAllGroups(selectedTournament?.id))
     setValue(0)
+    setPredictionDeadline(selectedTournament?.prediction_deadline)
   }, [dispatch, selectedTournament])
 
   const { groupLoading, groupList } = useSelector(
@@ -56,7 +57,14 @@ const TabsComponent = ({ selectedTournament }: any) => {
       </Box>
 
       {groupList.map((_item: any, index: number) => {
-        return <TabPanel value={value} index={index} group={_item} />
+        return (
+          <TabPanel
+            value={value}
+            index={index}
+            group={_item}
+            deadline={predictionDeadline}
+          />
+        )
       })}
     </Box>
   )

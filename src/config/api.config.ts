@@ -38,7 +38,7 @@ export const APIS = {
   team: '/teams',
   game: '/game',
   tiesheet: '/tiesheet',
-  prediction: '/prediction',
+  prediction: '/prediction/p',
   userPrediction: '/prediction/predicted',
   user: '/auth/user',
   predictGame: 'prediction/predict',
@@ -47,4 +47,5 @@ export const APIS = {
   userlist: '/auth/userlist',
   createUser: '/auth/createuser',
   deleteuser: '/auth/deleteuser',
+  changepassword: '/auth/changepassword',
 }

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
+import moment from 'moment'
 import { getAllGroups, RootState, getAllTournaments } from '../../../../redux'
 import { TabsComponent } from './components'
-import { Title, Hrline, Card } from '../../../common'
+import { Title, Hrline, Card, Header } from '../../../common'
 import { TournamentList } from '../../admin/tournament/components'
 
 // import { MatchComponent } from './components/match'
@@ -23,8 +23,10 @@ export const UserHome = ({}) => {
   }, [dispatch])
 
   useEffect(() => {
-    dispatch(getAllGroups(2))
-  }, [dispatch])
+    if (initialTournament) {
+      dispatch(getAllGroups(initialTournament?.id))
+    }
+  }, [dispatch, initialTournament])
 
   const { groupLoading, groupList } = useSelector(
     (state: RootState) => state.group
@@ -36,10 +38,13 @@ export const UserHome = ({}) => {
   }
 
   console.log('Group list', groupLoading, groupList)
+  console.log('Initial tournament', initialTournament)
 
   return (
-    <div>
+    // <CompWrapper>
+    <div style={{ marginLeft: 20, marginRight: 20 }}>
       {/* <Nav /> */}
+      <Header />
       <div className="home-wrapper">
         <Card
           containerStyle={{
@@ -61,6 +66,12 @@ export const UserHome = ({}) => {
         <Card containerStyle={{ width: '60%', marginTop: 30 }}>
           <div className="home-card-title">
             <Title>{initialTournament?.tournament_name}</Title>
+            <Title>
+              Prediction Deadline :{' '}
+              {moment(initialTournament?.prediction_deadline).format(
+                'YYYY-MM-DD'
+              )}
+            </Title>
           </div>
           <Hrline gap={12} />
           <TabsComponent
@@ -70,5 +81,6 @@ export const UserHome = ({}) => {
         </Card>
       </div>
     </div>
+    // </CompWrapper>
   )
 }

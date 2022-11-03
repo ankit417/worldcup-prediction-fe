@@ -72,12 +72,12 @@ const Team = () => {
             dataLoader={teamLoading}
             totalCount={teamList.length}
             actions
-            onEditHandler={(data: any) => {
-              console.log(data)
-              // if (data?.orders?.is_paid) {
-              //   toast.error('Order already paid out!')
-              // } else navigate(`/order/${data?.orders?.id}/edit`)
-            }}
+            // onEditHandler={(data: any) => {
+            //   console.log(data)
+            // if (data?.orders?.is_paid) {
+            //   toast.error('Order already paid out!')
+            // } else navigate(`/order/${data?.orders?.id}/edit`)
+            // }}
             onDeleteHandler={(data: any) => {
               deleteHandler(data?.id)
             }}

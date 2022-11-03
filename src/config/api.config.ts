@@ -46,6 +46,7 @@ export const APIS = {
   userTiesheetPredictionsById: '/tiesheetprediction',
   groupInfo: '/groups/group',
   userlist: '/auth/userlist',
+  userinfo: '/auth/userinfo',
   createUser: '/auth/createuser',
   deleteuser: '/auth/deleteuser',
   changepassword: '/auth/changepassword',

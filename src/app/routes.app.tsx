@@ -3,8 +3,11 @@ import {
   // MdFastfood,
   // MdHotel,
   // MdRestaurantMenu,
+  MdLeaderboard,
   MdDashboard,
 } from 'react-icons/md'
+import { RiTeamFill } from 'react-icons/ri'
+import { FaUserEdit } from 'react-icons/fa'
 
 import {
   // HistoryComponent,
@@ -91,7 +94,7 @@ export const privatePaths = [
     path: '/team',
     component: Team,
     props: {
-      icon: <MdDashboard />,
+      icon: <RiTeamFill />,
     },
   },
   {
@@ -99,7 +102,7 @@ export const privatePaths = [
     path: '/prediction-result',
     component: Predictions,
     props: {
-      icon: <MdDashboard />,
+      icon: <MdLeaderboard />,
     },
   },
   {
@@ -115,7 +118,7 @@ export const privatePaths = [
     path: '/users',
     component: UserList,
     props: {
-      icon: <MdDashboard />,
+      icon: <FaUserEdit />,
     },
   },
 ]

@@ -108,9 +108,9 @@ export const LoginPage = () => {
                   type="password"
                 />
               </div>
-              <div className="login-forgot" onClick={() => setVisible(true)}>
+              {/* <div className="login-forgot" onClick={() => setVisible(true)}>
                 Forgot Password ?
-              </div>
+              </div> */}
 
               <div className="login-action">
                 <ActivityIndicator animating={loading}>

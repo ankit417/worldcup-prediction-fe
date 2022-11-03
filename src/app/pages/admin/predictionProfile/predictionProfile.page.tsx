@@ -10,9 +10,7 @@ export const PredictionProfile = () => {
   return (
     <CompWrapper>
       <div>
-        <div>This is profile</div>
-
-        <UserProfile tournamentId={tournamentId} userId={userId} />
+        <UserProfile />
       </div>
     </CompWrapper>
   )

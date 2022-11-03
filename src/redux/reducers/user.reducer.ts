@@ -1,4 +1,4 @@
-import { USER, GET_USER_LIST } from '../actions'
+import { USER, GET_USER_LIST, GET_USER_INFO } from '../actions'
 
 const initalState: any = {
   loading: false,
@@ -6,6 +6,8 @@ const initalState: any = {
   verificationSuccess: false,
   userListLoading: false,
   userlist: [],
+  userInfo: null,
+  userInfoLoading: false,
 }
 
 export function userReducer(state = initalState, action: any) {
@@ -30,6 +32,12 @@ export function userReducer(state = initalState, action: any) {
       return { ...state, userListLoading: false, userlist: payload.data }
     case GET_USER_LIST.ERROR:
       return { ...state, userListLoading: false }
+    case GET_USER_INFO.LOADING:
+      return { ...state, userInfoLoading: true }
+    case GET_USER_INFO.SUCCESS:
+      return { ...state, userInfoLoading: false, userInfo: payload.data }
+    case GET_USER_INFO.ERROR:
+      return { ...state, userInfoLoading: false }
     default:
       return state
   }

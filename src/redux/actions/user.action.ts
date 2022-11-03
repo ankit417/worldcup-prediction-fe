@@ -1,5 +1,5 @@
 import { toast } from 'react-hot-toast'
-import { USER, GET_USER_LIST, CREATE_USER, DELETE_USER } from '.'
+import { USER, GET_USER_LIST, CREATE_USER, DELETE_USER, GET_USER_INFO } from '.'
 import { api, APIS } from '../../config'
 import { getCookie } from '../../helpers'
 
@@ -85,6 +85,32 @@ export function getUserListAction() {
     } catch ({ message }) {
       dispatch({ type: GET_USER_LIST.ERROR })
       toast.error('Error getting tournaments')
+      return 0
+    }
+  }
+}
+
+export function getUserInfoAction(id: number) {
+  return async function (dispatch: any) {
+    let res
+    try {
+      dispatch({ type: GET_USER_INFO.LOADING })
+      res = await api(`${APIS.userinfo}/${id}`)
+      const { success, data } = res.data
+      if (success) {
+        dispatch({
+          type: GET_USER_INFO.SUCCESS,
+          payload: { data: data },
+        })
+        return 1
+      } else {
+        dispatch({ type: GET_USER_INFO.ERROR })
+        toast.error('Error getting user information')
+        return 0
+      }
+    } catch ({ message }) {
+      dispatch({ type: GET_USER_INFO.ERROR })
+      toast.error('Error getting user information')
       return 0
     }
   }

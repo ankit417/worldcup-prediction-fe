@@ -1,0 +1,14 @@
+.user-select-team-wrapper {
+  .form-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+
+    .number-of-teams {
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+  }
+}

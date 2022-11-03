@@ -152,12 +152,12 @@ const GroupList = ({ selectedTournament }: any) => {
           data={groupList}
           dataLoader={groupLoading}
           totalCount={groupList.length}
-          actions
-          onDeleteHandler={(data: any) => {
-            //   toast.error(data?.id)
-            console.log('delete handler data', data)
-            // deleteHandler(data?.id)
-          }}
+          // actions
+          // onDeleteHandler={(data: any) => {
+          //   //   toast.error(data?.id)
+          //   console.log('delete handler data', data)
+          //   // deleteHandler(data?.id)
+          // }}
         />
       </div>
     </div>

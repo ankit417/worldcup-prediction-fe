@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigation } from 'react-auth-navigation'
 
 import { getAllPrediction, RootState } from '../../../../redux'
 import { Card, CompWrapper, Table } from '../../../common'
@@ -16,6 +17,10 @@ const Predictions = () => {
   const { predictionLoading, predictionList } = useSelector(
     (state: RootState) => state.prediction
   )
+  const {
+    // params,
+    navigation: { navigate },
+  }: any = useNavigation()
 
   useEffect(() => {
     if (initialTournament?.id) {
@@ -65,6 +70,12 @@ const Predictions = () => {
               data={predictionList}
               dataLoader={predictionLoading}
               totalCount={predictionList.length}
+              onViewHandler={(data: any) => {
+                // console.log(data?.userId)
+                navigate(
+                  `user-profile/${initialTournament?.id}/${data?.userId}`
+                )
+              }}
               actions
             />
           </Card>

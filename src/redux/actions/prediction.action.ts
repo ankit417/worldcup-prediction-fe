@@ -59,6 +59,35 @@ export function getUserPrediction() {
   }
 }
 
+//GET USER PREDICTION [PROFILE]
+export function getUserPredictionById(id: number) {
+  return async function (dispatch: any) {
+    let res
+    try {
+      dispatch({ type: USER_PREDICTION.LOADING })
+      res = await api(`${APIS.predictionProfile}/${id}`)
+      //console.log('tournament', res)
+      const { success, data } = res.data
+
+      if (success) {
+        dispatch({
+          type: USER_PREDICTION.SUCCESS,
+          payload: { data: data },
+        })
+        return 1
+      } else {
+        dispatch({ type: USER_PREDICTION.ERROR })
+        toast.error('Error getting predictions')
+        return 0
+      }
+    } catch ({ message }) {
+      dispatch({ type: USER_PREDICTION.ERROR })
+      toast.error('Error getting predictions')
+      return 0
+    }
+  }
+}
+
 export function createUserPrediction(body: any) {
   return async function (dispatch: any) {
     let res

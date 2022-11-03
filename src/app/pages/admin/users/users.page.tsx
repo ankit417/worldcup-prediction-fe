@@ -44,12 +44,13 @@ export const UserList = () => {
     email: '',
     password: '',
     role: 'user',
+    phone: '',
   })
 
   const onSubmitHandler = (e: any) => {
     console.log('On submit')
     e.preventDefault()
-    const { full_name, email, password } = data
+    const { full_name, email, phone, password } = data
     const catchedErros = {}
     const validate = validator(catchedErros)
 
@@ -57,8 +58,11 @@ export const UserList = () => {
       toast.error('Enter a valid name')
       console.log('invalid full name')
     })
-    validate('full_name', email.length < 3, () => {
+    validate('email', email.length < 3, () => {
       toast.error('Enter a valid email')
+    })
+    validate('phone', phone.length < 3, () => {
+      toast.error('Enter a valid phone number')
     })
     validate('password', password.length < 8, () => {
       toast.error('password must of atleast 8 characters ')
@@ -75,6 +79,7 @@ export const UserList = () => {
       full_name,
       email,
       password,
+      phone,
       role: 'user',
     }
     console.log('request body', requestBody)
@@ -116,6 +121,16 @@ export const UserList = () => {
                 required
               />
             </FormInput>
+            <FormInput label="Phone" required>
+              <InputField
+                placeholder="Phone"
+                name="phone"
+                value={data.phone}
+                onChange={onChange}
+                type="number"
+                required
+              />
+            </FormInput>
             <FormInput label="Password" required>
               <InputField
                 placeholder="password"
@@ -144,6 +159,11 @@ export const UserList = () => {
               {
                 field: 'email',
                 name: 'Email',
+                render: (rowData: any) => rowData,
+              },
+              {
+                field: 'phone',
+                name: 'Phone Number',
                 render: (rowData: any) => rowData,
               },
               {

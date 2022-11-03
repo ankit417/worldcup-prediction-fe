@@ -1,4 +1,5 @@
 import React, { ReactNode, useState } from 'react'
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 // import { BiSearch } from "react-icons/all";
 
 import { Title, Box } from '../index'
@@ -6,7 +7,7 @@ import { Title, Box } from '../index'
 interface InputFieldProps {
   name: string
   value?: string | number
-  defaultValue?: string
+  defaultValue?: string | number
   placeholder: string
   style?: any
   boxStyle?: any
@@ -24,10 +25,17 @@ interface InputFieldProps {
   absolute?: boolean
   onBlurHandler?: any
   onFocusHandler?: any
+  isPasswordInputField?: boolean
 }
 export const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
   (props, ref) => {
     const [isFocused, setIsFocused] = useState<boolean>(false)
+    const [showPassword, setShowPassword] = useState(false)
+    const [inputPasswordType, setInputPasswordType] = useState('password')
+    const toggleVisiblePassword = (show: boolean, type: string) => {
+      setShowPassword(show)
+      setInputPasswordType(type)
+    }
     const {
       // value,
       name,
@@ -46,64 +54,102 @@ export const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
       onBlurHandler,
       onFocusHandler,
       absolute,
+      isPasswordInputField,
       ...rest
     } = props
     return (
-      <Box
-        className={` inputfield ${className} ${isFocused && 'isFocused'} ${
-          disabled && `disabled`
-        }  ${!!error && 'error'}`}
-        style={boxStyle}
-        flexBox
-        row
-        alCenter
-        jSpace
-        pl={6}
-        pr={6}
-        columnGap={5}
-        onFocus={() => {
-          setIsFocused(true)
-        }}
-        onBlur={() => {
-          setIsFocused(false)
-        }}
-      >
-        {lefticon}
-        <input
-          name={name}
-          ref={ref}
-          defaultValue={defaultValue}
-          onChange={onChange}
-          style={style}
-          placeholder={placeholder}
-          type={type}
-          disabled={disabled}
-          onBlur={onBlurHandler}
-          maxLength={maxLength}
-          onFocus={onFocusHandler}
-          onInput={
-            type === 'number' &&
-            ((e: any) => {
-              if (maxLength) {
-                if (e.target.value.length > e.target.maxLength) {
-                  e.target.value = e.target.value.slice(0, e.target.maxLength)
-                }
-              }
-              if (absolute) {
-                e.target.value = Math.abs(e.target.value)
-              }
-              if (e.target.value < 0) {
-                e.target.value = 0
-              }
+      <>
+        <Box
+          className={` inputfield ${className} ${isFocused && 'isFocused'} ${
+            disabled && `disabled`
+          }  ${!!error && 'error'}`}
+          style={{
+            position: 'relative',
+            ...boxStyle,
+          }}
+          flexBox
+          row
+          alCenter
+          jSpace
+          pl={6}
+          pr={6}
+          columnGap={5}
+          onFocus={() => {
+            setIsFocused(true)
+          }}
+          onBlur={() => {
+            setIsFocused(false)
+          }}
+        >
+          {lefticon}
+          <input
+            name={name}
+            ref={ref}
+            defaultValue={defaultValue}
+            onChange={onChange}
+            style={style}
+            placeholder={placeholder}
+            type={isPasswordInputField ? inputPasswordType : type}
+            disabled={disabled}
+            onBlur={onBlurHandler}
+            maxLength={maxLength}
+            onFocus={onFocusHandler}
+            onInput={
+              type === 'number'
+                ? (e: any) => {
+                    if (maxLength) {
+                      if (e.target.value.length > e.target.maxLength) {
+                        e.target.value = e.target.value.slice(
+                          0,
+                          e.target.maxLength
+                        )
+                      }
+                    }
+                    if (absolute) {
+                      e.target.value = Math.abs(e.target.value)
+                    }
+                    if (e.target.value < 0) {
+                      e.target.value = 0
+                    }
 
-              // return e.target.value
-            })
-          }
-          // value={value}
-          {...rest}
-        />
-        {righticon}
-      </Box>
+                    // return e.target.value
+                  }
+                : (e: any) => e.target.value ?? e.currentTarget.value
+            }
+            // value={value}
+            {...rest}
+          />
+          {/* {righticon} */}
+          {isPasswordInputField && (
+            <Box
+              style={{
+                background: 'transparent',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginRight: 10,
+                position: 'absolute',
+                right: 0,
+              }}
+            >
+              {!showPassword ? (
+                <AiOutlineEyeInvisible
+                  fontSize={18}
+                  cursor="pointer"
+                  onClick={() => toggleVisiblePassword(true, 'text')}
+                />
+              ) : (
+                <AiOutlineEye
+                  fontSize={18}
+                  cursor="pointer"
+                  onClick={() => toggleVisiblePassword(false, 'password')}
+                />
+              )}
+            </Box>
+          )}
+        </Box>
+        {error}
+      </>
     )
   }
 )

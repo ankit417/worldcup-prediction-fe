@@ -34,6 +34,34 @@ export function getUserTiesheet(groupId: number) {
   }
 }
 
+//GET TIESHEET OF A USER BY GROUP ID AND USER ID
+export function getUserTiesheetById(id: number, groupId: number) {
+  return async function (dispatch: any) {
+    let res
+    try {
+      dispatch({ type: GET_TIESHEET_PREDICTION.LOADING })
+      res = await api(
+        `${APIS.userTiesheetPredictionsById}/${groupId}/user/${id}`
+      )
+      const { success, data } = res.data
+      if (success) {
+        dispatch({
+          type: GET_TIESHEET_PREDICTION.SUCCESS,
+          payload: { data: data },
+        })
+        return 1
+      } else {
+        dispatch({ type: GET_TIESHEET_PREDICTION.ERROR })
+        toast.error('Error getting tiesheets')
+        return 0
+      }
+    } catch ({ message }) {
+      dispatch({ type: GET_TIESHEET_PREDICTION.ERROR })
+      toast.error('Error getting predictions')
+      return 0
+    }
+  }
+}
 //ADD TIESHEET PREDICTION BY A USER
 export function addTieSheetPrediction(body: any, callBack?: any) {
   return async function (dispatch: any) {

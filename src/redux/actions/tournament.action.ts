@@ -131,7 +131,7 @@ export function toggleLeaderboardAction(
     try {
       dispatch({ type: SHOW_TOURNAMENT_LEADERBOARD.LOADING })
       res = await api(`${APIS.leaderboardsetting}/${id}/${status}`)
-      const { success } = res.data
+      const { success, message } = res.data
 
       if (success) {
         dispatch({
@@ -139,16 +139,16 @@ export function toggleLeaderboardAction(
           // payload: { data: data },
         })
         callBack && callBack()
-        toast.success('Tournament Deleted')
+        toast.success(message)
         return 1
       } else {
         dispatch({ type: SHOW_TOURNAMENT_LEADERBOARD.ERROR })
-        toast.error('Error deleting tournaments')
+        toast.error('Error updating leaderboard status')
         return 0
       }
     } catch ({ message }) {
       dispatch({ type: SHOW_TOURNAMENT_LEADERBOARD.ERROR })
-      toast.error('Error deleting tournaments')
+      toast.error('Error updating leaderboard status')
       return 0
     }
   }

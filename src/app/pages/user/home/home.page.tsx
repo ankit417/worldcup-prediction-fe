@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
 import { getAllGroups, RootState, getAllTournaments } from '../../../../redux'
 import { TabsComponent } from './components'
-import { Title, Hrline, Card, Header } from '../../../common'
+import { Title, Hrline, Card, Header, Box } from '../../../common'
 import { TournamentList } from '../../admin/tournament/components'
 
 // import { MatchComponent } from './components/match'
@@ -65,10 +65,12 @@ export const UserHome = ({}) => {
         </Card>
         <Card containerStyle={{ width: '60%', marginTop: 30 }}>
           <div className="home-card-title">
-            <Title>{initialTournament?.tournament_name}</Title>
-            <Title>
-              {initialTournament?.show_leaderboard == 1 && 'View Leaderboard'}
-            </Title>
+            <Title>{initialTournament?.tournament_name?.toUpperCase()}</Title>
+            <Box style={{ cursor: 'pointer' }}>
+              <Title>
+                {initialTournament?.show_leaderboard == 1 && 'View Leaderboard'}
+              </Title>
+            </Box>
             <Title>
               Prediction Deadline :{' '}
               {moment(initialTournament?.prediction_deadline).format(

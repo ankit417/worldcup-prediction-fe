@@ -228,7 +228,12 @@ export const UserList = () => {
               label="Email"
               newElement={
                 !!searchEmail && (
-                  <div onClick={() => setSearchEmail('')}>clear</div>
+                  <div
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => setSearchEmail('')}
+                  >
+                    clear
+                  </div>
                 )
               }
             >
@@ -247,7 +252,12 @@ export const UserList = () => {
               label="Phone Number"
               newElement={
                 searchPhone && (
-                  <div onClick={() => setSearchPhone('')}>clear</div>
+                  <div
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => setSearchPhone('')}
+                  >
+                    clear
+                  </div>
                 )
               }
             >

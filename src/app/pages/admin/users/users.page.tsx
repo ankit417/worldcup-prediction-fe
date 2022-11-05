@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useFormInput } from 'use-form-input'
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,6 +7,7 @@ import {
   RootState,
   createUser,
   deleteUser,
+  editUserAction,
 } from '../../../../redux'
 import {
   Card,
@@ -19,9 +20,12 @@ import {
   Button,
   Table,
 } from '../../../common'
+import { EditUser } from './component'
 import { isValid, validator } from '../../../../utils'
 import toast from 'react-hot-toast'
 export const UserList = () => {
+  const [editUserVisible, setEditUserVisible] = useState<boolean>(false)
+  const [selectedUser, setSelectedUser] = useState<any>(null)
   const dispatch = useDispatch()
   useEffect(() => {
     // getUserListAction
@@ -94,8 +98,27 @@ export const UserList = () => {
     // clear()
   }
 
+  const onEditUser = (data: any) => {
+    if (data?.id) {
+      dispatch(
+        editUserAction(data?.id, data, () => {
+          dispatch(getUserListAction())
+        })
+      )
+    }
+    console.log('request data on edit user', data)
+  }
+
   return (
     <CompWrapper>
+      <EditUser
+        visible={editUserVisible}
+        onClose={() => {
+          setEditUserVisible(false)
+        }}
+        onSubmit={onEditUser}
+        userData={selectedUser}
+      />
       <Card containerStyle={{ marginBottom: 30 }}>
         <Title>Create User</Title>
         <Hrline />
@@ -176,6 +199,11 @@ export const UserList = () => {
             dataLoader={userListLoading}
             totalCount={userlist.length}
             actions
+            onEditHandler={(data: any) => {
+              // console.log('Edit user', data)
+              setSelectedUser(data)
+              setEditUserVisible(true)
+            }}
             onDeleteHandler={(data: any) => {
               //   toast.error(data?.id)
               // console.log('delete handler data', data)

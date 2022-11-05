@@ -1,5 +1,12 @@
 import { toast } from 'react-hot-toast'
-import { USER, GET_USER_LIST, CREATE_USER, DELETE_USER, GET_USER_INFO } from '.'
+import {
+  USER,
+  GET_USER_LIST,
+  CREATE_USER,
+  DELETE_USER,
+  GET_USER_INFO,
+  EDIT_USER,
+} from '.'
 import { api, APIS } from '../../config'
 import { getCookie } from '../../helpers'
 
@@ -140,6 +147,36 @@ export function createUser(body: any, callBack?: any) {
     } catch ({ message }) {
       dispatch({ type: CREATE_USER.ERROR })
       toast.error('Error Creating User')
+      return 0
+    }
+  }
+}
+
+//EDIT USER [TODO]
+export function editUserAction(id: number, body: any, callBack?: any) {
+  return async function (dispatch: any) {
+    let res
+    try {
+      dispatch({ type: EDIT_USER.LOADING })
+      res = await api(`${APIS.edituser}/${id}`, 'PATCH', body)
+      //console.log('tournament add group', res)
+      const { success, message } = res.data
+      //console.log('res data add group', message)
+      if (success) {
+        dispatch({
+          type: EDIT_USER.SUCCESS,
+        })
+        toast.success('User updated')
+        callBack && callBack()
+        return 1
+      } else {
+        dispatch({ type: EDIT_USER.ERROR })
+        toast.error(message)
+        return 0
+      }
+    } catch ({ message }) {
+      dispatch({ type: EDIT_USER.ERROR })
+      toast.error('Error updating User')
       return 0
     }
   }

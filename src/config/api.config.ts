@@ -49,6 +49,7 @@ export const APIS = {
   userinfo: '/auth/userinfo',
   createUser: '/auth/createuser',
   deleteuser: '/auth/deleteuser',
+  edituser: '/auth/edituser',
   changepassword: '/auth/changepassword',
   predictionProfile: '/prediction/predictedbyuser',
 }

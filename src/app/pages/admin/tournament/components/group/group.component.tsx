@@ -13,9 +13,10 @@ import {
   getAllTournaments,
   deleteTournament,
 } from '../../../../../../redux'
-import { Hrline, Table, Title } from '../../../../../common'
+import { Box, Hrline, Table, Title } from '../../../../../common'
 import { EditTournament } from '../tournament/component'
 import { DeleteTournament } from '../deleteTournament.component'
+import { FormControlLabel, FormGroup, Switch } from '@mui/material'
 
 const GroupList = ({ selectedTournament }: any) => {
   const [editTournamentVisible, setEditTournamentVisible] =
@@ -75,15 +76,23 @@ const GroupList = ({ selectedTournament }: any) => {
                 onClick={handleEditTournamentModal}
               />
             </div>
-            <AiFillDelete
-              size={24}
-              color={'#EF6F6C'}
-              className="add-tournament"
-              onClick={
-                () => setDeleteTournamentVisible(true)
-                // navigate(`tournament/view/${selectedTournament?.id}`)
-              }
-            />
+            <Box flexBox>
+              <FormGroup>
+                <FormControlLabel
+                  control={<Switch defaultChecked />}
+                  label="Show to Users"
+                />
+              </FormGroup>
+              <AiFillDelete
+                size={24}
+                color={'#EF6F6C'}
+                className="add-tournament"
+                onClick={
+                  () => setDeleteTournamentVisible(true)
+                  // navigate(`tournament/view/${selectedTournament?.id}`)
+                }
+              />
+            </Box>
           </div>
           <Hrline />
           <div className="group-header-tournament-info">

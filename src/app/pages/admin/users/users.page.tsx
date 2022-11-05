@@ -26,13 +26,14 @@ import { EditUser, ResetPassword } from './component'
 import { isValid, validator } from '../../../../utils'
 import toast from 'react-hot-toast'
 import { useComponentDidUpdate, useDebounceValue } from '../../../../hooks'
+import { useQuery } from 'react-auth-navigation'
 export const UserList = () => {
   const [editUserVisible, setEditUserVisible] = useState<boolean>(false)
   const [resetPasswordVisible, setResetPasswordVisible] =
     useState<boolean>(false)
   const [selectedUser, setSelectedUser] = useState<any>(null)
   const dispatch = useDispatch()
-  const { userListLoading, userlist } = useSelector(
+  const { userListLoading, userlist, userlistTotalCount } = useSelector(
     (state: RootState) => state.user
   )
   const [
@@ -50,6 +51,12 @@ export const UserList = () => {
     phone: '',
   })
 
+  const query: any = useQuery()
+
+  const pageNumber = query?.page || 1
+
+  console.log('pageNumber', pageNumber)
+
   const [searchEmail, setSearchEmail] = useState('')
   const [searchPhone, setSearchPhone] = useState('')
   const emailDebounce = useDebounceValue(searchEmail)
@@ -57,8 +64,8 @@ export const UserList = () => {
 
   useEffect(() => {
     // getUserListAction
-    dispatch(getUserListAction())
-  }, [dispatch])
+    dispatch(getUserListAction(pageNumber))
+  }, [dispatch, pageNumber])
 
   useComponentDidUpdate(() => {
     if (!!emailDebounce || !!phoneDebounce) {
@@ -143,6 +150,8 @@ export const UserList = () => {
       )
     }
   }
+
+  console.log('userlistTotalCount', userlistTotalCount)
 
   return (
     <CompWrapper>
@@ -279,7 +288,7 @@ export const UserList = () => {
             ]}
             data={userlist}
             dataLoader={userListLoading}
-            totalCount={userlist.length}
+            totalCount={userlistTotalCount}
             actions
             onEditHandler={(data: any) => {
               // console.log('Edit user', data)

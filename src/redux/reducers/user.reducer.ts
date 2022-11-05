@@ -6,6 +6,7 @@ const initalState: any = {
   verificationSuccess: false,
   userListLoading: false,
   userlist: [],
+  userlistTotalCount: 0,
   userInfo: null,
   userInfoLoading: false,
 }
@@ -29,7 +30,12 @@ export function userReducer(state = initalState, action: any) {
     case GET_USER_LIST.LOADING:
       return { ...state, userListLoading: true }
     case GET_USER_LIST.SUCCESS:
-      return { ...state, userListLoading: false, userlist: payload.data }
+      return {
+        ...state,
+        userListLoading: false,
+        userlist: payload.data,
+        userlistTotalCount: payload.totalCount,
+      }
     case GET_USER_LIST.ERROR:
       return { ...state, userListLoading: false }
     case GET_USER_INFO.LOADING:

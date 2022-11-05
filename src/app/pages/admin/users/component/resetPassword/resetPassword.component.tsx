@@ -13,7 +13,7 @@ import { isValid, validator } from '../../../../../../utils'
 import toast from 'react-hot-toast'
 
 export const ResetPassword = ({ visible, onClose, onSubmit }: any) => {
-  const [data, { onChange, clear }] = useFormInput({
+  const [data, { onChange }] = useFormInput({
     password: '',
     confirmPassword: '',
   })
@@ -50,10 +50,6 @@ export const ResetPassword = ({ visible, onClose, onSubmit }: any) => {
       password: password,
     }
     onSubmit(requestBody)
-    console.log('????')
-    // onClose()
-    return
-    clear()
   }
 
   return (

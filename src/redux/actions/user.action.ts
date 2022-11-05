@@ -7,7 +7,7 @@ import {
   GET_USER_INFO,
   EDIT_USER,
 } from '.'
-import { api, APIS } from '../../config'
+import { api, APIS, TABLE_LIMIT } from '../../config'
 import { getCookie } from '../../helpers'
 
 export function userAuthAction(
@@ -71,17 +71,17 @@ export function userAuthLogoutAction(callback: () => void) {
   }
 }
 
-export function getUserListAction() {
+export function getUserListAction(page = 1) {
   return async function (dispatch: any) {
     let res
     try {
       dispatch({ type: GET_USER_LIST.LOADING })
-      res = await api(`${APIS.userlist}`)
-      const { success, data } = res.data
+      res = await api(`${APIS.userlist}?page=${page}&limit=${TABLE_LIMIT}`)
+      const { success, data, totalCount } = res.data
       if (success) {
         dispatch({
           type: GET_USER_LIST.SUCCESS,
-          payload: { data: data },
+          payload: { data: data, totalCount: totalCount },
         })
         return 1
       } else {

@@ -37,7 +37,6 @@ const Predictions = () => {
   return (
     <CompWrapper>
       <div>
-        <div>Predictions</div>
         <div style={{ display: 'flex' }}>
           <Card containerStyle={{ width: '20%', marginRight: 30 }}>
             <div>

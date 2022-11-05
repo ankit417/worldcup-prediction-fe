@@ -155,6 +155,7 @@ const GroupList = ({ selectedTournament }: any) => {
             size={24}
             color={'#EF6F6C'}
             className="add-tournament"
+            style={{ cursor: 'pointer' }}
             onClick={() =>
               navigate(`tournament/view/${selectedTournament?.id}`)
             }

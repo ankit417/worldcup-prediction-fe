@@ -15,6 +15,7 @@ import { logoutAction, passwordAction } from '../../../redux'
 import { useInput } from '../../../hooks'
 import { isValid, validator } from '../../../utils'
 import toast from 'react-hot-toast'
+import { Tiesheet } from '../Tiesheet/tiesheet.common'
 
 export const Header = () => {
   const { handleLogout, setSideMenuStable, sideNavExpanded } = useAuth()
@@ -119,6 +120,7 @@ export const Header = () => {
               <MdAddToPhotos />
             </button>
           </div> */}
+          <Tiesheet />
 
           <div className="logged-user">
             <Dropdown

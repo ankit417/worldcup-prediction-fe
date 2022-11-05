@@ -56,4 +56,5 @@ export const APIS = {
   changepassword: '/auth/changepassword',
   predictionProfile: '/prediction/predictedbyuser',
   resetpassword: '/auth/resetpassword',
+  leaderboardsetting: '/tournament/leaderboardsetting',
 }

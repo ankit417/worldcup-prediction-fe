@@ -12,6 +12,7 @@ import {
   editTournament,
   getAllTournaments,
   deleteTournament,
+  toggleLeaderboardAction,
 } from '../../../../../../redux'
 import { Box, Hrline, Table, Title } from '../../../../../common'
 import { EditTournament } from '../tournament/component'
@@ -24,6 +25,14 @@ const GroupList = ({ selectedTournament }: any) => {
 
   const [deleteTournamentVisible, setDeleteTournamentVisible] =
     useState<boolean>(false)
+
+  const [showLeaderboard, setShowLeaderboard] = useState<boolean>(
+    Boolean(selectedTournament?.show_leaderboard)
+  )
+  useEffect(() => {
+    setShowLeaderboard(Boolean(selectedTournament?.show_leaderboard))
+  }, [selectedTournament?.show_leaderboard])
+
   const {
     // params,
     navigation: { navigate },
@@ -53,7 +62,6 @@ const GroupList = ({ selectedTournament }: any) => {
   const onDeleteTournament = () => {
     dispatch(
       deleteTournament(selectedTournament?.id, () => {
-        // console.log('any call back here')
         dispatch(getAllTournaments())
         setDeleteTournamentVisible(false)
         window.location.reload()
@@ -61,6 +69,11 @@ const GroupList = ({ selectedTournament }: any) => {
     )
   }
 
+  const onChangeShowStatus = (status: boolean) => {
+    // /leaderboardsetting/:id/:value
+    setShowLeaderboard(status)
+    dispatch(toggleLeaderboardAction(selectedTournament.id, Number(status)))
+  }
   return (
     <div className="tournament-group-wrapper">
       {/* {selectedTournament} */}
@@ -68,7 +81,9 @@ const GroupList = ({ selectedTournament }: any) => {
         <div>
           <div className="group-tournament-header">
             <div className="title-wrapper">
-              <Title>{selectedTournament?.tournament_name}</Title>
+              <Title>
+                {selectedTournament?.tournament_name?.toUpperCase()}
+              </Title>
               <AiFillEdit
                 size={24}
                 color={'#465775'}
@@ -79,7 +94,12 @@ const GroupList = ({ selectedTournament }: any) => {
             <Box flexBox>
               <FormGroup>
                 <FormControlLabel
-                  control={<Switch defaultChecked />}
+                  control={
+                    <Switch
+                      checked={showLeaderboard}
+                      onChange={(e) => onChangeShowStatus(e.target.checked)}
+                    />
+                  }
                   label="Show to Users"
                 />
               </FormGroup>

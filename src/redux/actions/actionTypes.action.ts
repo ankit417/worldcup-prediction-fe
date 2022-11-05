@@ -118,6 +118,9 @@ export const TOURNAMENT = createActionSet('TOURNAMENT')
 export const ADD_TOURNAMENT = createActionSet('ADD_TOURNAMENT')
 export const EDIT_TOURNAMENT = createActionSet('EDIT_TOURNAMENT')
 export const DELETE_TOURNAMENT = createActionSet('DELETE_TOURNAMENT')
+export const SHOW_TOURNAMENT_LEADERBOARD = createActionSet(
+  'SHOW_TOURNAMENT_LEADERBOARD'
+)
 
 //GROUP
 export const GROUP = createActionSet('GROUP')

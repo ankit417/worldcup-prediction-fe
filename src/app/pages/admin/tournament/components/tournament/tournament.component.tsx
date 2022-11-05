@@ -88,7 +88,9 @@ const TournamentList = ({
             }}
             onClick={() => activeTournament(item, index)}
           >
-            <div className="tournament-item-text">{item.tournament_name}</div>
+            <div className="tournament-item-text">
+              {item?.tournament_name?.toUpperCase()}
+            </div>
             {/* {tournamentList.length != index + 1 && <Hrline />} */}
           </div>
         )

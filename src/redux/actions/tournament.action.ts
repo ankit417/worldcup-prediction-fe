@@ -6,6 +6,7 @@ import {
   ADD_TOURNAMENT,
   EDIT_TOURNAMENT,
   DELETE_TOURNAMENT,
+  SHOW_TOURNAMENT_LEADERBOARD,
 } from '.'
 
 export function getAllTournaments() {
@@ -114,6 +115,39 @@ export function deleteTournament(id: number, callBack?: any) {
       }
     } catch ({ message }) {
       dispatch({ type: DELETE_TOURNAMENT.ERROR })
+      toast.error('Error deleting tournaments')
+      return 0
+    }
+  }
+}
+
+export function toggleLeaderboardAction(
+  id: number,
+  status: number,
+  callBack?: any
+) {
+  return async function (dispatch: any) {
+    let res
+    try {
+      dispatch({ type: SHOW_TOURNAMENT_LEADERBOARD.LOADING })
+      res = await api(`${APIS.leaderboardsetting}/${id}/${status}`)
+      const { success } = res.data
+
+      if (success) {
+        dispatch({
+          type: SHOW_TOURNAMENT_LEADERBOARD.SUCCESS,
+          // payload: { data: data },
+        })
+        callBack && callBack()
+        toast.success('Tournament Deleted')
+        return 1
+      } else {
+        dispatch({ type: SHOW_TOURNAMENT_LEADERBOARD.ERROR })
+        toast.error('Error deleting tournaments')
+        return 0
+      }
+    } catch ({ message }) {
+      dispatch({ type: SHOW_TOURNAMENT_LEADERBOARD.ERROR })
       toast.error('Error deleting tournaments')
       return 0
     }

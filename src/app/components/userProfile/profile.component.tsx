@@ -42,15 +42,15 @@ export const UserProfile = () => {
     }
   }, [dispatch, tournamentId])
 
-  const { groupLoading, groupList } = useSelector(
-    (state: RootState) => state.group
-  )
+  // const { groupLoading, groupList } = useSelector(
+  //   (state: RootState) => state.group
+  // )
   const { userInfoLoading, userInfo } = useSelector(
     (state: RootState) => state.user
   )
 
-  console.log('Group list', groupLoading, groupList, userId)
-  console.log('user info', userInfoLoading, userInfo)
+  // console.log('Group list', groupLoading, groupList, userId)
+  // console.log('user info', userInfoLoading, userInfo)
   // console.log('Initial tournament', initialTournament)
 
   return (

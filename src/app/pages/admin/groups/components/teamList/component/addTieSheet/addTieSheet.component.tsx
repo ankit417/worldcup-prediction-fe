@@ -33,7 +33,10 @@ const AddTiesheet = ({ visible, onClose, groupId }: any) => {
   })
   const onSubmitHandler = (e: any) => {
     e.preventDefault()
-    const { teamId, groupId } = data
+    const {
+      teamId,
+      // groupId
+    } = data
     const requestBody = {
       // group_id: groupId,
       group_id: GROUP_ID,
@@ -41,7 +44,7 @@ const AddTiesheet = ({ visible, onClose, groupId }: any) => {
     }
     dispatch(addTieSheet(requestBody))
     clear()
-    console.log('request body', requestBody, groupId)
+    // console.log('request body', requestBody, groupId)
     onClose()
   }
 

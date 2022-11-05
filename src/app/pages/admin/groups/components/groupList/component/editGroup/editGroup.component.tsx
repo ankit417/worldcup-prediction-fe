@@ -13,7 +13,7 @@ import {
 } from '../../../../../../../common'
 
 const EditGroup = ({ visible, onClose, onSubmit, groupData }: any) => {
-  console.log('Group data', groupData)
+  // console.log('Group data', groupData)
   const [data, { onChange, setValue, clear }] = useFormInput({
     // tournament_id: '',
     group_name: '',

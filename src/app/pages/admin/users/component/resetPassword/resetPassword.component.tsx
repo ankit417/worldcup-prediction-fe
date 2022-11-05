@@ -19,7 +19,7 @@ export const ResetPassword = ({ visible, onClose, onSubmit }: any) => {
   })
 
   const onSubmitHandler = (e: any) => {
-    console.log('On submit')
+    // console.log('On submit')
     e.preventDefault()
     const { password, confirmPassword } = data
     const catchedErros = {}
@@ -39,7 +39,7 @@ export const ResetPassword = ({ visible, onClose, onSubmit }: any) => {
         toast.error('Passwords do not match')
       })
 
-    console.log('Here')
+    // console.log('Here')
 
     if (!isValid(catchedErros)) {
       console.error(catchedErros)

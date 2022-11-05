@@ -39,7 +39,7 @@ import {
 //   return null;
 // };
 
-console.log('user home', UserHome)
+// console.log('user home', UserHome)
 export const publicPaths = [
   {
     name: 'Root',

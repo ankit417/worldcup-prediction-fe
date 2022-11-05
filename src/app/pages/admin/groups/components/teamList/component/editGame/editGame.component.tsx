@@ -43,15 +43,16 @@ const WINNER_TYPES = [
 ]
 
 const EditGame = ({ visible, onClose, groupId, gameData }: any) => {
-  console.log('group id', groupId)
-  console.log('game data', gameData)
+  // console.log('group id', groupId)
+  // console.log('game data', gameData)
   const dispatch = useDispatch()
 
-  const { teamLoading, teamList } = useSelector(
-    (state: RootState) => state.team
-  )
+  const {
+    // teamLoading,
+    teamList,
+  } = useSelector((state: RootState) => state.team)
 
-  console.log(teamLoading)
+  // console.log(teamLoading)
   useEffect(() => {
     dispatch(getAllTeam())
     setValue('group_id', groupId)
@@ -92,7 +93,7 @@ const EditGame = ({ visible, onClose, groupId, gameData }: any) => {
       status,
     }
 
-    console.log('Request body', requestBody)
+    // console.log('Request body', requestBody)
 
     if (teamA_id !== teamB_id) {
       dispatch(

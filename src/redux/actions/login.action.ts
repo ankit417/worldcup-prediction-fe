@@ -14,15 +14,15 @@ export function loginAction(body: any, callback: any) {
   return async function (dispatch: any) {
     let res
     try {
-      console.log('Here')
+      // console.log('Here')
       dispatch({ type: LOGIN.LOADING })
       res = await api(APIS.login, 'POST', body)
-      console.log('Login action', res)
+      // console.log('Login action', res)
 
       const { success, data, message } = res.data
-      console.log('login action', res)
+      // console.log('login action', res)
       if (success) {
-        console.log('user login success', data)
+        // console.log('user login success', data)
         // if (data.role === 'ADMIN') {
         dispatch({ type: LOGIN.SUCCESS })
         dispatch({ type: USER.SUCCESS, payload: data })
@@ -184,7 +184,7 @@ export function resetPasswordAction(
 
       if (success) {
         dispatch({ type: RESET_PASSWORD.SUCCESS })
-        console.log('res.data')
+        // console.log('res.data')
 
         toast.success(message)
         successCallback && successCallback()

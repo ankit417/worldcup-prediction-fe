@@ -30,7 +30,7 @@ import {
 
 const SelectTeam = ({ groupId }: any) => {
   // const [disableGame, setDisableGame] = useState(true)
-  console.log('Select group group Id', groupId)
+  // console.log('Select group group Id', groupId)
   const { params }: any = useNavigation()
   const { userId } = params
 
@@ -42,7 +42,7 @@ const SelectTeam = ({ groupId }: any) => {
   )
 
   const { groupInfoList } = useSelector((state: RootState) => state.group)
-  console.log('Tie sheet prediction list', tiesheetPredictionList)
+  // console.log('Tie sheet prediction list', tiesheetPredictionList)
   // useEffect(() => {
   //   dispatch(getAllTeam())
   // }, [dispatch])

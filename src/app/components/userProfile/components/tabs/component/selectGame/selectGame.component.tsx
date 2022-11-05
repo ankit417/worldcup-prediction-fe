@@ -12,10 +12,11 @@ import { MatchComponent } from '../../../.'
 const SelectGame = ({ groupId }: any) => {
   const dispatch = useDispatch()
   // const [disableGame, setDisableGame] = useState(true)
-  const { gameLoading, gameList } = useSelector(
-    (state: RootState) => state.game
-  )
-  console.log('Game list ', gameList, gameLoading)
+  const {
+    // gameLoading,
+    gameList,
+  } = useSelector((state: RootState) => state.game)
+  // console.log('Game list ', gameList, gameLoading)
 
   useEffect(() => {
     dispatch(getAllGame(groupId))

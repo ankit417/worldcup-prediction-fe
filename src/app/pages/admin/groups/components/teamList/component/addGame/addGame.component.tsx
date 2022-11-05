@@ -60,7 +60,7 @@ const AddGame = ({ visible, onClose, groupId }: any) => {
       status,
     }
 
-    console.log('Request body', requestBody)
+    // console.log('Request body', requestBody)
     if (teamA_id !== teamB_id) {
       dispatch(
         addGame(requestBody, () => {

@@ -30,17 +30,18 @@ interface MatchComponentProps {
   disable: boolean
 }
 const MatchComponent = ({ data, disable }: MatchComponentProps) => {
-  console.log('Match component data', data, disable)
+  // console.log('Match component data', data, disable)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getUserPrediction())
   }, [data])
 
-  const { userPredictionLoading, userPredictionList } = useSelector(
-    (state: RootState) => state.prediction
-  )
+  const {
+    // userPredictionLoading,
+    // userPredictionList,
+  } = useSelector((state: RootState) => state.prediction)
 
-  console.log('user prediction data', userPredictionList, userPredictionLoading)
+  // console.log('user prediction data', userPredictionList, userPredictionLoading)
 
   // const updatePrediction = (prediction: number) => {
   //   console.log('This predicted', prediction)
@@ -80,18 +81,18 @@ const MatchComponent = ({ data, disable }: MatchComponentProps) => {
   //   } else return 'null'
   // }
 
-  const checkedValue = (id: number) => {
-    console.log('Checked value', id)
-    const game = userPredictionList.filter((list: any) => list.game_id == id)
-    if (game.length > 0) {
-      return game[0].prediction
-    }
-    return null
-  }
+  // const checkedValue = (id: number) => {
+  //   // console.log('Checked value', id)
+  //   const game = userPredictionList.filter((list: any) => list.game_id == id)
+  //   if (game.length > 0) {
+  //     return game[0].prediction
+  //   }
+  //   return null
+  // }
   return (
     <>
       {data.map((item, index) => {
-        console.log('prediction test auto fill', checkedValue(item.id))
+        // console.log('prediction test auto fill', checkedValue(item.id))
         return (
           <div key={index.toString()} className="matchCard_wrapper">
             <Title>
@@ -127,11 +128,11 @@ const MatchComponent = ({ data, disable }: MatchComponentProps) => {
 }
 
 const RadioGroupComponent = ({ item, disable }: any) => {
-  console.log('radio group item', item, disable)
+  // console.log('radio group item', item, disable)
   // const [radioNumber, setValue] = useState<number>(value)
   // console.log('Value', value)
   const [radioValue, setRadioValue] = useState<any>(null)
-  console.log('Valueeeeeee', radioValue)
+  // console.log('Valueeeeeee', radioValue)
 
   // useEffect(() => {
   //   if (value) {
@@ -159,10 +160,10 @@ const RadioGroupComponent = ({ item, disable }: any) => {
   }, [item])
 
   const checkedValue = (id: number) => {
-    console.log('Checked Valueeeeeee', id)
+    // console.log('Checked Valueeeeeee', id)
     const game = userPredictionList.filter((list: any) => list.game_id == id)
     if (game.length > 0) {
-      console.log('pred Checked Valueeeeeee', game[0].prediction)
+      // console.log('pred Checked Valueeeeeee', game[0].prediction)
       //  setRadioValue(game[0].prediction)
       const value = game[0].prediction
       switch (value) {
@@ -184,7 +185,7 @@ const RadioGroupComponent = ({ item, disable }: any) => {
   }
 
   const updatePrediction = (id: number) => {
-    console.log('Update prediction test', id)
+    // console.log('Update prediction test', id)
     let body = {
       game_id: item?.id,
       prediction: id,

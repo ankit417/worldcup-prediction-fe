@@ -24,9 +24,10 @@ const TabsComponent = ({ selectedTournament }: any) => {
     setPredictionDeadline(selectedTournament?.prediction_deadline)
   }, [dispatch, selectedTournament])
 
-  const { groupLoading, groupList } = useSelector(
-    (state: RootState) => state.group
-  )
+  const {
+    //  groupLoading,
+    groupList,
+  } = useSelector((state: RootState) => state.group)
 
   function a11yProps(index: number) {
     return {
@@ -37,10 +38,10 @@ const TabsComponent = ({ selectedTournament }: any) => {
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue)
-    console.log('new value', newValue)
+    // console.log('new value', newValue)
   }
 
-  console.log('Group list', groupLoading, groupList)
+  // console.log('Group list', groupLoading, groupList)
 
   return (
     <Box sx={{ width: '100%' }}>

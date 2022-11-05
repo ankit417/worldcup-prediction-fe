@@ -19,7 +19,7 @@ const TieSheetTable = ({ groupId }: any) => {
     (state: RootState) => state.tiesheet
   )
 
-  console.log('group id', groupId, tiesheetList)
+  // console.log('group id', groupId, tiesheetList)
   return (
     <div>
       <Table
@@ -42,7 +42,7 @@ const TieSheetTable = ({ groupId }: any) => {
               dispatch(getAllTieSheet(groupId))
             })
           )
-          console.log('delete handler data', data)
+          // console.log('delete handler data', data)
           // deleteHandler(data?.id)
         }}
       />

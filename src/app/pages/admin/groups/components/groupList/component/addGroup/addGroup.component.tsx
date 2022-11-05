@@ -48,7 +48,7 @@ const AddGroup = ({ visible, onClose, onSubmit }: any) => {
   //   }
   // }, [data?.user_select])
 
-  console.log('user select', data?.user_select, showTeamInput)
+  // console.log('user select', data?.user_select, showTeamInput)
 
   return (
     <Modal visible={visible}>

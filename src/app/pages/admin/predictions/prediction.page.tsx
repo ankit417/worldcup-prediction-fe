@@ -33,7 +33,7 @@ const Predictions = () => {
     setActiveTournamentIndex(index)
   }
 
-  console.log('initial tournament prediction', initialTournament)
+  // console.log('initial tournament prediction', initialTournament)
   return (
     <CompWrapper>
       <div>

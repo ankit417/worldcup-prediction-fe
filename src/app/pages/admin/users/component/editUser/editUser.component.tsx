@@ -30,7 +30,7 @@ export const EditUser = ({ visible, onClose, onSubmit, userData }: any) => {
   }, [userData])
 
   const onSubmitHandler = (e: any) => {
-    console.log('On submit')
+    // console.log('On submit')
     e.preventDefault()
     const { full_name, email, phone } = data
     const catchedErros = {}
@@ -38,7 +38,7 @@ export const EditUser = ({ visible, onClose, onSubmit, userData }: any) => {
 
     validate('full_name', full_name.length < 3, () => {
       toast.error('Enter a valid name')
-      console.log('invalid full name')
+      // console.log('invalid full name')
     })
     validate('email', email.length < 3, () => {
       toast.error('Enter a valid email')
@@ -47,7 +47,7 @@ export const EditUser = ({ visible, onClose, onSubmit, userData }: any) => {
       toast.error('Enter a valid phone number')
     })
 
-    console.log('Here')
+    // console.log('Here')
 
     if (!isValid(catchedErros)) {
       console.error(catchedErros)
@@ -61,7 +61,7 @@ export const EditUser = ({ visible, onClose, onSubmit, userData }: any) => {
       phone,
       role: 'user',
     }
-    console.log('request body', requestBody)
+    // console.log('request body', requestBody)
     onSubmit(requestBody)
     clear()
   }

@@ -78,7 +78,7 @@ const MemoChild = ({ children, getRole }: { children: any; getRole: any }) => {
 
 const App = () => {
   const [userRole, setRole] = useState<string | null>(null)
-  console.log('User role app', userRole)
+  // console.log('User role app', userRole)
   return (
     <MemoChild getRole={setRole}>
       {

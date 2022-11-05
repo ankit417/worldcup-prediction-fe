@@ -1,7 +1,14 @@
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import {
+  useDispatch,
+  //  useSelector
+} from 'react-redux'
 import moment from 'moment'
-import { getAllGroups, RootState, getAllTournaments } from '../../../../redux'
+import {
+  getAllGroups,
+  // RootState,
+  getAllTournaments,
+} from '../../../../redux'
 import { TabsComponent } from './components'
 import { Title, Hrline, Card, Header } from '../../../common'
 import { TournamentList } from '../../admin/tournament/components'
@@ -15,7 +22,7 @@ export const UserHome = ({}) => {
 
   const [activeTournamentIndex, setActiveTournamentIndex] = useState<number>(0)
 
-  console.log('Initial tournament', initialTournament)
+  // console.log('Initial tournament', initialTournament)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -28,17 +35,17 @@ export const UserHome = ({}) => {
     }
   }, [dispatch, initialTournament])
 
-  const { groupLoading, groupList } = useSelector(
-    (state: RootState) => state.group
-  )
+  // const { groupLoading, groupList } = useSelector(
+  //   (state: RootState) => state.group
+  // )
 
   const activeTournament = (tournament: any, index: number) => {
     setInitialTournament(tournament)
     setActiveTournamentIndex(index)
   }
 
-  console.log('Group list', groupLoading, groupList)
-  console.log('Initial tournament', initialTournament)
+  // console.log('Group list', groupLoading, groupList)
+  // console.log('Initial tournament', initialTournament)
 
   return (
     // <CompWrapper>

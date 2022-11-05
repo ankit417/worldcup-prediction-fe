@@ -9,16 +9,17 @@ const CURRENT_DATE = moment().format('YYYY-MM-DD')
 const SelectGame = ({ groupId, deadline }: any) => {
   const dispatch = useDispatch()
   const [disableGame, setDisableGame] = useState(true)
-  const { gameLoading, gameList } = useSelector(
-    (state: RootState) => state.game
-  )
-  console.log('Game list ', gameList, gameLoading)
-  console.log(
-    'current date , deadline',
-    CURRENT_DATE,
-    deadline,
-    moment(deadline).format('YYYY-MM-DD') >= CURRENT_DATE
-  )
+  const {
+    //  gameLoading,
+    gameList,
+  } = useSelector((state: RootState) => state.game)
+  // console.log('Game list ', gameList, gameLoading)
+  // console.log(
+  //   'current date , deadline',
+  //   CURRENT_DATE,
+  //   deadline,
+  //   moment(deadline).format('YYYY-MM-DD') >= CURRENT_DATE
+  // )
   useEffect(() => {
     dispatch(getAllGame(groupId))
   }, [dispatch, groupId])

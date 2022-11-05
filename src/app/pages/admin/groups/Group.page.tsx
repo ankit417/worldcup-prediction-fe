@@ -23,7 +23,7 @@ const Group = () => {
     setActiveGroupIndex(index)
   }
 
-  console.log('Initial group', initialGroup)
+  // console.log('Initial group', initialGroup)
   return (
     <CompWrapper>
       <div className="group-container">

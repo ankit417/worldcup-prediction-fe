@@ -19,15 +19,15 @@ export function userAuthAction(
     let res
     try {
       if (!getCookie('token')) {
-        console.log('No cookie')
+        // console.log('No cookie')
         return loading(false)
       }
-      console.log(' cookie here', getCookie('token'))
+      // console.log(' cookie here', getCookie('token'))
       dispatch({ type: USER.LOADING })
-      console.log('Hitting user api')
+      // console.log('Hitting user api')
       res = await api(APIS.user)
       const { success, data } = res.data
-      console.log('Token success', data, success)
+      // console.log('Token success', data, success)
       if (success) {
         dispatch({ type: USER.SUCCESS, payload: data })
         if (success) {
@@ -38,7 +38,7 @@ export function userAuthAction(
         loading(false)
         return 1
       } else {
-        console.log('Login failure called')
+        // console.log('Login failure called')
         loginFailure()
         dispatch({ type: USER.ERROR })
         loading(false)
@@ -214,9 +214,9 @@ export function deleteUser(id: number, callBack?: any) {
     try {
       dispatch({ type: DELETE_USER.LOADING })
       res = await api(`${APIS.deleteuser}/${id}`, 'DELETE')
-      console.log('delete user', res)
+      // console.log('delete user', res)
       const { success, message } = res.data
-      console.log('success message', success, message)
+      // console.log('success message', success, message)
       //console.log('res data add group', message)
       if (success) {
         dispatch({

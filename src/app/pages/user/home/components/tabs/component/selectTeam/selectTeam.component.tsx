@@ -22,7 +22,7 @@ const CURRENT_DATE = moment().format('YYYY-MM-DD')
 
 const SelectTeam = ({ groupId, deadline }: any) => {
   const [disableGame, setDisableGame] = useState(true)
-  console.log('Select group group Id', groupId)
+  // console.log('Select group group Id', groupId)
   const GROUP_ID = groupId
   const dispatch = useDispatch()
   const { teamList } = useSelector((state: RootState) => state.team)
@@ -31,7 +31,7 @@ const SelectTeam = ({ groupId, deadline }: any) => {
   )
 
   const { groupInfoList } = useSelector((state: RootState) => state.group)
-  console.log('Tie sheet prediction list', tiesheetPredictionList)
+  // console.log('Tie sheet prediction list', tiesheetPredictionList)
   useEffect(() => {
     dispatch(getAllTeam())
   }, [dispatch])
@@ -59,21 +59,24 @@ const SelectTeam = ({ groupId, deadline }: any) => {
 
   const onSubmitHandler = (e: any) => {
     e.preventDefault()
-    const { teamId, groupId } = data
+    const {
+      teamId,
+      //  groupId
+    } = data
     if (teamId !== '') {
       const requestBody = {
         group_id: GROUP_ID,
         predicted_team_id: teamId,
       }
 
-      console.log('group Id ', groupId)
+      // console.log('group Id ', groupId)
       dispatch(
         addTieSheetPrediction(requestBody, () => {
           dispatch(getUserTiesheet(GROUP_ID))
         })
       )
       clear()
-      console.log('request body', requestBody, groupId)
+      // console.log('request body', requestBody, groupId)
       // onClose()
     } else {
       toast.error('Please select a team')
@@ -125,7 +128,7 @@ const SelectTeam = ({ groupId, deadline }: any) => {
               dispatch(getUserTiesheet(GROUP_ID))
             })
           )
-          console.log('delete handler data', data)
+          // console.log('delete handler data', data)
           // deleteHandler(data?.id)
         }}
       />

@@ -40,37 +40,37 @@ export const Header = () => {
     const validate = validator(catchedErros)
 
     validate('oldPassword', oldPassword.length === 0, () => {
-      console.log({ message: 'Enter Old Password!', type: 'error' })
+      // console.log({ message: 'Enter Old Password!', type: 'error' })
       toast.error('Enter old password')
     })
 
     validate('newPassword', newPassword.length === 0, () => {
-      console.log({ message: 'Enter New Password!', type: 'error' })
+      // console.log({ message: 'Enter New Password!', type: 'error' })
       toast.error('Enter new password')
     })
 
     validate('newPassword', newPassword.length < 7, () => {
-      console.log({
-        message: 'New Password length should be greater than 7!',
-        type: 'error',
-      })
+      // console.log({
+      //   message: 'New Password length should be greater than 7!',
+      //   type: 'error',
+      // })
       toast.error('New Password length should be greater than 7 character!')
     })
 
     validate('confirmPassword', confirmPassword.length === 0, () => {
-      console.log({ message: 'Re enter New Password!', type: 'error' })
+      // console.log({ message: 'Re enter New Password!', type: 'error' })
       toast.error('Re-enter new password')
     })
 
     if (!!confirmPassword && !!newPassword) {
       validate('confirmPassword', confirmPassword !== newPassword, () => {
-        console.log({ message: 'Passwords do not match!', type: 'error' })
+        // console.log({ message: 'Passwords do not match!', type: 'error' })
         toast.error('Passwords do not match!')
       })
     }
 
     if (!isValid(catchedErros)) {
-      console.error(catchedErros)
+      // console.error(catchedErros)
       return
     }
 

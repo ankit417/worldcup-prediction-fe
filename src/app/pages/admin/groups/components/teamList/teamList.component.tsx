@@ -18,7 +18,7 @@ import { RootState, getAllGame } from '../../../../../../redux'
 import { Hrline, Title, Table } from '../../../../../common'
 import { DeleteGroup } from '../deleteGroup.component'
 const TeamList = ({ selectedGroup }: any) => {
-  console.log('Selected group', selectedGroup)
+  // console.log('Selected group', selectedGroup)
   const [editGroupVisible, setEditGroupVisible] = useState<boolean>(false)
   const [addGameModalVisible, setAddGameModalVisible] = useState<boolean>(false)
   const [editGameModalVisible, setEditGameModalVisible] =
@@ -44,7 +44,7 @@ const TeamList = ({ selectedGroup }: any) => {
     setEditGroupVisible((prev) => !prev)
   }
   const onEditGroup = (requestBody: any) => {
-    console.log('request body', requestBody)
+    // console.log('request body', requestBody)
     if (requestBody) {
       requestBody.tournament_id = tournamentId
       dispatch(
@@ -92,7 +92,7 @@ const TeamList = ({ selectedGroup }: any) => {
     }
   }
 
-  console.log('selected group', selectedGroup)
+  // console.log('selected group', selectedGroup)
 
   if (!selectedGroup) {
     return (
@@ -211,7 +211,7 @@ const TeamList = ({ selectedGroup }: any) => {
             totalCount={gameList.length}
             actions
             onEditHandler={(data: any) => {
-              console.log('game data start', data)
+              // console.log('game data start', data)
               setEditGameData(data)
               handleEditGameModal()
               //console.log('data edit handler', data)

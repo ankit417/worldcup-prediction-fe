@@ -55,7 +55,7 @@ export const UserList = () => {
 
   const pageNumber = query?.page || 1
 
-  console.log('pageNumber', pageNumber)
+  // console.log('pageNumber', pageNumber)
 
   const [searchEmail, setSearchEmail] = useState('')
   const [searchPhone, setSearchPhone] = useState('')
@@ -82,7 +82,7 @@ export const UserList = () => {
     }
   }, [dispatch, emailDebounce, phoneDebounce])
   const onSubmitHandler = (e: any) => {
-    console.log('On submit')
+    // console.log('On submit')
     e.preventDefault()
     const { full_name, email, phone, password } = data
     const catchedErros = {}
@@ -90,7 +90,7 @@ export const UserList = () => {
 
     validate('full_name', full_name.length < 3, () => {
       toast.error('Enter a valid name')
-      console.log('Invalid full name')
+      // console.log('Invalid full name')
     })
     validate('email', email.length < 3, () => {
       toast.error('Enter a valid email')
@@ -102,7 +102,7 @@ export const UserList = () => {
       toast.error('Password must of atleast 8 characters ')
     })
 
-    console.log('Here')
+    // console.log('Here')
 
     if (!isValid(catchedErros)) {
       console.error(catchedErros)
@@ -116,12 +116,12 @@ export const UserList = () => {
       phone,
       role: 'user',
     }
-    console.log('request body', requestBody)
+    // console.log('request body', requestBody)
     dispatch(
       createUser(requestBody, () => {
         clear()
         dispatch(getUserListAction())
-        console.log('user created')
+        // console.log('user created')
       })
     )
     // onSubmit(requestBody)
@@ -137,7 +137,7 @@ export const UserList = () => {
         })
       )
     }
-    console.log('request data on edit user', data)
+    // console.log('request data on edit user', data)
   }
 
   const onResetHandler = (data: any) => {
@@ -151,7 +151,7 @@ export const UserList = () => {
     }
   }
 
-  console.log('userlistTotalCount', userlistTotalCount)
+  // console.log('userlistTotalCount', userlistTotalCount)
 
   return (
     <CompWrapper>

@@ -67,6 +67,9 @@ export const UserHome = ({}) => {
           <div className="home-card-title">
             <Title>{initialTournament?.tournament_name}</Title>
             <Title>
+              {initialTournament?.show_leaderboard == 1 && 'View Leaderboard'}
+            </Title>
+            <Title>
               Prediction Deadline :{' '}
               {moment(initialTournament?.prediction_deadline).format(
                 'YYYY-MM-DD'

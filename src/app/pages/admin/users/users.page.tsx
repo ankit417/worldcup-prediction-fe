@@ -8,6 +8,8 @@ import {
   createUser,
   deleteUser,
   editUserAction,
+  searchUserListAction,
+  resetPasswordAction,
 } from '../../../../redux'
 import {
   Card,
@@ -20,22 +22,19 @@ import {
   Button,
   Table,
 } from '../../../common'
-import { EditUser } from './component'
+import { EditUser, ResetPassword } from './component'
 import { isValid, validator } from '../../../../utils'
 import toast from 'react-hot-toast'
+import { useComponentDidUpdate, useDebounceValue } from '../../../../hooks'
 export const UserList = () => {
   const [editUserVisible, setEditUserVisible] = useState<boolean>(false)
+  const [resetPasswordVisible, setResetPasswordVisible] =
+    useState<boolean>(false)
   const [selectedUser, setSelectedUser] = useState<any>(null)
   const dispatch = useDispatch()
-  useEffect(() => {
-    // getUserListAction
-    dispatch(getUserListAction())
-  }, [])
-
   const { userListLoading, userlist } = useSelector(
     (state: RootState) => state.user
   )
-
   const [
     data,
     {
@@ -51,6 +50,30 @@ export const UserList = () => {
     phone: '',
   })
 
+  const [searchEmail, setSearchEmail] = useState('')
+  const [searchPhone, setSearchPhone] = useState('')
+  const emailDebounce = useDebounceValue(searchEmail)
+  const phoneDebounce = useDebounceValue(searchPhone)
+
+  useEffect(() => {
+    // getUserListAction
+    dispatch(getUserListAction())
+  }, [dispatch])
+
+  useComponentDidUpdate(() => {
+    if (!!emailDebounce || !!phoneDebounce) {
+      const body = {} as any
+      if (!!emailDebounce) {
+        body.email = emailDebounce
+      }
+      if (!!phoneDebounce) {
+        body.phone = phoneDebounce
+      }
+      dispatch(searchUserListAction(body))
+    } else {
+      dispatch(getUserListAction())
+    }
+  }, [dispatch, emailDebounce, phoneDebounce])
   const onSubmitHandler = (e: any) => {
     console.log('On submit')
     e.preventDefault()
@@ -60,7 +83,7 @@ export const UserList = () => {
 
     validate('full_name', full_name.length < 3, () => {
       toast.error('Enter a valid name')
-      console.log('invalid full name')
+      console.log('Invalid full name')
     })
     validate('email', email.length < 3, () => {
       toast.error('Enter a valid email')
@@ -69,7 +92,7 @@ export const UserList = () => {
       toast.error('Enter a valid phone number')
     })
     validate('password', password.length < 8, () => {
-      toast.error('password must of atleast 8 characters ')
+      toast.error('Password must of atleast 8 characters ')
     })
 
     console.log('Here')
@@ -102,11 +125,23 @@ export const UserList = () => {
     if (data?.id) {
       dispatch(
         editUserAction(data?.id, data, () => {
+          setEditUserVisible(false)
           dispatch(getUserListAction())
         })
       )
     }
     console.log('request data on edit user', data)
+  }
+
+  const onResetHandler = (data: any) => {
+    if (selectedUser?.id) {
+      dispatch(
+        resetPasswordAction(selectedUser?.id, data, toast, () => {
+          setResetPasswordVisible(false)
+          setSelectedUser(null)
+        })
+      )
+    }
   }
 
   return (
@@ -118,6 +153,14 @@ export const UserList = () => {
         }}
         onSubmit={onEditUser}
         userData={selectedUser}
+      />
+
+      <ResetPassword
+        visible={resetPasswordVisible}
+        onClose={() => {
+          setResetPasswordVisible(false)
+        }}
+        onSubmit={onResetHandler}
       />
       <Card containerStyle={{ marginBottom: 30 }}>
         <Title>Create User</Title>
@@ -170,6 +213,45 @@ export const UserList = () => {
       </Card>
       <Card>
         <Title>Users list</Title>
+        <Box flexBox jEnd>
+          <Box>
+            <FormInput
+              label="Email"
+              newElement={
+                !!searchEmail && (
+                  <div onClick={() => setSearchEmail('')}>clear</div>
+                )
+              }
+            >
+              <InputField
+                placeholder="Email"
+                name="email"
+                value={searchEmail}
+                onChange={(e) => setSearchEmail(e.target.value)}
+                type="text"
+              />
+            </FormInput>
+          </Box>
+
+          <Box>
+            <FormInput
+              label="Phone Number"
+              newElement={
+                searchPhone && (
+                  <div onClick={() => setSearchPhone('')}>clear</div>
+                )
+              }
+            >
+              <InputField
+                placeholder="Phone Number"
+                name="phone"
+                value={searchPhone}
+                onChange={(e) => setSearchPhone(e.target.value)}
+                type="number"
+              />
+            </FormInput>
+          </Box>
+        </Box>
         <Hrline />
         <div>
           <Table
@@ -203,6 +285,10 @@ export const UserList = () => {
               // console.log('Edit user', data)
               setSelectedUser(data)
               setEditUserVisible(true)
+            }}
+            onResetHandler={(data: any) => {
+              setSelectedUser(data)
+              setResetPasswordVisible(true)
             }}
             onDeleteHandler={(data: any) => {
               //   toast.error(data?.id)

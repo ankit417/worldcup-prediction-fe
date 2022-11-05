@@ -85,7 +85,6 @@ export const Header = () => {
     setVisible(false)
   }
 
-  console.log('user', user)
   return (
     <div className="header-container">
       <div className="header">

@@ -63,7 +63,7 @@ export const EditUser = ({ visible, onClose, onSubmit, userData }: any) => {
     }
     console.log('request body', requestBody)
     onSubmit(requestBody)
-    onClose()
+    // onClose()
     clear()
   }
 

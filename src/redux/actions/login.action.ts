@@ -167,30 +167,36 @@ export function forgetPassword(body: any, successCallback: any) {
   }
 }
 
-export function resetPassword(body: any, toast: any, successCallback: any) {
+export function resetPasswordAction(
+  id: any,
+  body: any,
+  toast: any,
+  successCallback: any
+) {
   return async function (dispatch: any) {
     let res
     try {
       dispatch({ type: RESET_PASSWORD.LOADING })
 
-      res = await api(`${APIS.forgot}`, 'PATCH', body)
+      res = await api(`${APIS.resetpassword}/${id}`, 'PATCH', body)
 
-      const { success, data } = res.data
+      const { success, message } = res.data
 
       if (success) {
         dispatch({ type: RESET_PASSWORD.SUCCESS })
+        console.log('res.data')
 
-        toast.success(data.message)
+        toast.success(message)
         successCallback && successCallback()
         return 1
       } else {
         dispatch({ type: RESET_PASSWORD.ERROR })
-        toast.error(res.data.message)
+        toast.error(message)
         return 0
       }
     } catch ({ message }) {
       dispatch({ type: RESET_PASSWORD.ERROR })
-      toast.error(res.data.message)
+      toast.error(message)
       console.error(message)
       return 0
     }

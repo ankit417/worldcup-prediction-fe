@@ -1,8 +1,11 @@
 import { apiGenerator } from '../helpers'
 
 // // export const LOCAL_SERVER_URL = 'http://localhost:8848/api'
-export const BASE_URL = 'http://localhost:8081/api/v1' // Dev Server API -
-export const FILE_URL = 'http://localhost:8081/files/' // Dev Server API -
+// export const BASE_URL = 'http://localhost:8081/api/v1' // Dev Server API -
+// export const FILE_URL = 'http://localhost:8081/files/' // Dev Server API -
+
+export const BASE_URL = 'http://192.168.1.68:8081/api/v1' // Dev Server API -
+export const FILE_URL = 'http://192.168.1.68:8081/files/' // Dev Server API -
 
 export const TABLE_LIMIT = 5
 
@@ -52,4 +55,5 @@ export const APIS = {
   edituser: '/auth/edituser',
   changepassword: '/auth/changepassword',
   predictionProfile: '/prediction/predictedbyuser',
+  resetpassword: '/auth/resetpassword',
 }

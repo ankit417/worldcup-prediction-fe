@@ -97,6 +97,32 @@ export function getUserListAction() {
   }
 }
 
+export function searchUserListAction(body: { phone?: string; email?: string }) {
+  return async function (dispatch: any) {
+    let res
+    try {
+      dispatch({ type: GET_USER_LIST.LOADING })
+      res = await api(`${APIS.userlist}`, 'POST', body)
+      const { success, data } = res.data
+      if (success) {
+        dispatch({
+          type: GET_USER_LIST.SUCCESS,
+          payload: { data: data },
+        })
+        return 1
+      } else {
+        dispatch({ type: GET_USER_LIST.ERROR })
+        toast.error('Error getting tournaments')
+        return 0
+      }
+    } catch ({ message }) {
+      dispatch({ type: GET_USER_LIST.ERROR })
+      toast.error('Error getting tournaments')
+      return 0
+    }
+  }
+}
+
 export function getUserInfoAction(id: number) {
   return async function (dispatch: any) {
     let res

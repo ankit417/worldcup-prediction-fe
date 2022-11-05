@@ -1,7 +1,5 @@
-// import { useNavigation } from 'react-auth-navigation'
-// import { useEffect } from 'react'
+import { useNavigation } from 'react-auth-navigation'
 import { MdEdit, MdDelete } from 'react-icons/md'
-import { GrUpdate } from 'react-icons/gr'
 import { FaClipboardList } from 'react-icons/fa'
 import {
   Table as MaterialTable,
@@ -11,14 +9,17 @@ import {
   TableHead,
   TableRow,
   Paper,
-  // Pagination,
+  Pagination,
   styled,
 } from '@mui/material'
 
 import { ToolTip, ActivityIndicator, Button } from '..'
 import {} from '../index'
-// import { TABLE_LIMIT } from '../../../config'
+import { TABLE_LIMIT } from '../../../config'
 import { ConfirmationModal } from '../confirmationModal/ConfirmationModal.common'
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
+import { BiReset } from 'react-icons/bi'
+// import { NotificationModal } from "../../components";
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
@@ -39,9 +40,9 @@ interface CommonTableProps {
   onDeleteHandler?: any
   onEditHandler?: any
   onViewHandler?: any
+  onUpdateHandler?: any
   disableActions?: boolean
-  // viewBug?: any;
-  // onPageChange
+  onResetHandler?: any
 }
 export const Table = ({
   columns,
@@ -53,30 +54,27 @@ export const Table = ({
   onDeleteHandler,
   onEditHandler,
   onViewHandler,
+  onUpdateHandler,
+  onResetHandler,
   disableActions,
-}: // onPageChange,
-CommonTableProps) => {
-  // const { location, navigation } = useNavigation()
-  // const { navigate } = navigation
+}: CommonTableProps) => {
+  const { location, navigation } = useNavigation()
+  const { navigate } = navigation
   // const [visible, setVisible] = useState(false);
   // const [activeRow, setActiveRow] = useState();
-  // let query = useQuery()
+  let query = useQuery()
 
-  // const pageNumber = query.get('page') || 1
+  const pageNumber = query.get('page') || 1
 
-  // function useQuery() {
-  //   return new URLSearchParams(location?.search)
-  // }
+  function useQuery() {
+    return new URLSearchParams(location?.search)
+  }
 
-  // const page = async (event: any, newPage = 1) => {
-  //   event.preventDefault()
-  //   navigate(location.pathname + `?page=` + Number(newPage))
-  // }
+  const page = async (event: any, newPage = 1) => {
+    event.preventDefault()
+    navigate(location.pathname + `?page=` + Number(newPage))
+  }
 
-  // useEffect(() => {
-  //   onPageChange?.({ pageNo })
-  // }, [pageNo])
-  console.log('disabled actions', disableActions)
   return (
     <div className="custom-table">
       <TableContainer
@@ -109,6 +107,7 @@ CommonTableProps) => {
           {data?.length ? (
             <TableBody>
               {data.map((item: any, index: number) => {
+                // console.log('item', item)
                 return (
                   <StyledTableRow key={index}>
                     {columns.map((col: any, i: number) => {
@@ -118,9 +117,7 @@ CommonTableProps) => {
                             key={i}
                             align={`${i === 0 ? 'left' : 'center'}`}
                           >
-                            <div style={col.cellStyle}>
-                              {col.render(item[col.field], item)}
-                            </div>
+                            <p>{col.render(item[col.field], item.id)}</p>
                           </TableCell>
                         )
                       } else {
@@ -129,7 +126,7 @@ CommonTableProps) => {
                             key={i}
                             align={`${i === 0 ? 'left' : 'center'}`}
                           >
-                            <p style={col.cellStyle}>{item[col.field]}</p>
+                            <p>{item[col.field]}</p>
                           </TableCell>
                         )
                       }
@@ -137,6 +134,33 @@ CommonTableProps) => {
                     {actions ? (
                       <TableCell align="center" width={50}>
                         <div style={{ display: 'flex' }}>
+                          {onUpdateHandler && (
+                            <ConfirmationModal
+                              displayElement={
+                                <Button.Icon
+                                  icon={
+                                    <ToolTip text="Top Product" down>
+                                      {item?.product_details?.is_top ? (
+                                        <AiFillStar size={20} color="orange" />
+                                      ) : (
+                                        <AiOutlineStar
+                                          size={20}
+                                          color="orange"
+                                        />
+                                      )}
+                                    </ToolTip>
+                                  }
+                                />
+                              }
+                              label="Are you sure you Update the product ?"
+                              onConfirmClick={(callback) => {
+                                onUpdateHandler(item, callback)
+                              }}
+                              confirmLabel="Update"
+                              loading={deleteLoader}
+                            />
+                          )}
+
                           {onViewHandler && (
                             <Button.Icon
                               icon={
@@ -151,11 +175,11 @@ CommonTableProps) => {
                           )}
                           {onEditHandler && (
                             <Button.Icon
-                              disabled={disableActions}
                               style={{ marginLeft: 10, marginRight: 10 }}
+                              disabled={disableActions}
                               icon={
                                 <ToolTip text="Edit" down>
-                                  <MdEdit size={20} />
+                                  <MdEdit size={20} color="blue" />
                                 </ToolTip>
                               }
                               onClick={() => {
@@ -163,27 +187,30 @@ CommonTableProps) => {
                               }}
                             />
                           )}
+
+                          {onResetHandler && (
+                            <Button.Icon
+                              style={{ marginLeft: 10, marginRight: 10 }}
+                              disabled={disableActions}
+                              icon={
+                                <ToolTip text="Reset Password" down>
+                                  <BiReset size={20} />
+                                </ToolTip>
+                              }
+                              onClick={() => {
+                                onResetHandler(item)
+                              }}
+                            />
+                          )}
+
                           {onDeleteHandler && (
                             <ConfirmationModal
                               displayElement={
                                 <Button.Icon
                                   disabled={disableActions}
                                   icon={
-                                    <ToolTip
-                                      text={
-                                        item.menu_items
-                                          ? item.menu_items?.is_deleted
-                                            ? 'Activate'
-                                            : 'Deactivate'
-                                          : 'Delete'
-                                      }
-                                      down
-                                    >
-                                      {item.menu_items ? (
-                                        <GrUpdate size={18} />
-                                      ) : (
-                                        <MdDelete size={18} />
-                                      )}
+                                    <ToolTip text="Delete" down>
+                                      <MdDelete size={18} color="red" />
                                     </ToolTip>
                                   }
                                 />
@@ -235,7 +262,7 @@ CommonTableProps) => {
 
       {!dataLoader && data?.length && totalCount ? (
         <div style={{ width: '100%', display: 'flex' }}>
-          {/* <Pagination
+          <Pagination
             style={{
               marginLeft: 'auto',
               marginTop: 20,
@@ -247,7 +274,7 @@ CommonTableProps) => {
             variant="outlined"
             shape="rounded"
             onChange={page}
-          /> */}
+          />
         </div>
       ) : null}
     </div>

@@ -86,7 +86,7 @@ export function editTournament(id: number, body: any, callBack?: any) {
       }
     } catch ({ message }) {
       dispatch({ type: EDIT_TOURNAMENT.ERROR })
-      toast.error('Error Adding Tournament')
+      toast.error('Error Updating Tournament')
       return 0
     }
   }
@@ -139,16 +139,16 @@ export function toggleLeaderboardAction(
           // payload: { data: data },
         })
         callBack && callBack()
-        toast.success('Tournament Deleted')
+        toast.success('Leaderboard setting updated')
         return 1
       } else {
         dispatch({ type: SHOW_TOURNAMENT_LEADERBOARD.ERROR })
-        toast.error('Error deleting tournaments')
+        toast.error('Error updating leaderboard setting')
         return 0
       }
     } catch ({ message }) {
       dispatch({ type: SHOW_TOURNAMENT_LEADERBOARD.ERROR })
-      toast.error('Error deleting tournaments')
+      toast.error('Error updating leaderboard setting')
       return 0
     }
   }

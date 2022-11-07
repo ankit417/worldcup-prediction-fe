@@ -4,10 +4,10 @@ import { apiGenerator } from '../helpers'
 // export const BASE_URL = 'http://localhost:8081/api/v1' // Dev Server API -
 // export const FILE_URL = 'http://localhost:8081/files/' // Dev Server API -
 
-// export const BASE_URL = 'http://167.172.84.100:8081/api/v1' // Dev Server API -
-// export const FILE_URL = 'http://167.172.84.100:8081/files/' // Dev Server API -
-export const BASE_URL = 'http://localhost:8081/api/v1' // Dev Server API -
-export const FILE_URL = 'http://localhost:8081/files/' // Dev Server API -
+export const BASE_URL = 'http://167.172.84.100:8081/api/v1' // Dev Server API -
+export const FILE_URL = 'http://167.172.84.100:8081/files/' // Dev Server API -
+// export const BASE_URL = 'http://localhost:8081/api/v1' // Dev Server API -
+// export const FILE_URL = 'http://localhost:8081/files/' // Dev Server API -
 
 export const TABLE_LIMIT = 5
 
@@ -20,7 +20,6 @@ export const APIS = {
   logout: '/auth/logout',
   forget: 'auth/forget',
   register: 'auth/register',
-
   stock: '/stock',
   verify: '/auth/verify',
   forgot: '/auth/forget',

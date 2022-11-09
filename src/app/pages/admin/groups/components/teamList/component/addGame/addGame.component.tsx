@@ -49,7 +49,7 @@ const AddGame = ({ visible, onClose, groupId }: any) => {
       teamA_id,
       teamB_id,
       match_date,
-      status,
+      // status,
       //  group_id
     } = data
     const requestBody = {
@@ -57,7 +57,7 @@ const AddGame = ({ visible, onClose, groupId }: any) => {
       teamA_id,
       teamB_id,
       match_date,
-      status,
+      status: 0,
     }
 
     // console.log('Request body', requestBody)

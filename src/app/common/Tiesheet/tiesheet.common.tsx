@@ -2,15 +2,17 @@ import { useState } from 'react'
 import { Modal } from 'react-uicomp'
 import { Box } from '../box/box.common'
 import TIESHEET from '../../../assets/images/tiesheet.jpg'
-import { Text } from '../text/text.common'
+// import { Text } from '../text/text.common'
 import { AiFillCloseCircle } from 'react-icons/ai'
+import { Button } from '@mui/material'
 
 export const Tiesheet = () => {
   const [modalvisible, setModalVisible] = useState(false)
   return (
     <Box>
       <div onClick={() => setModalVisible(true)} style={{ cursor: 'pointer' }}>
-        <Text>Tie Sheet</Text>
+        {/* <Text displaymedium>Tie Sheet</Text> */}
+        <Button>Tie Sheet</Button>
       </div>
       <Modal visible={modalvisible}>
         <Box style={{ width: '80vw', position: 'relative' }}>

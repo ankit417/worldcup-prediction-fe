@@ -16,6 +16,7 @@ import { useInput } from '../../../hooks'
 import { isValid, validator } from '../../../utils'
 import toast from 'react-hot-toast'
 import { Tiesheet } from '../Tiesheet/tiesheet.common'
+import YetiLogo from '../../../assets/images/yeti_football_club_logo.png'
 
 export const Header = () => {
   const { handleLogout, setSideMenuStable, sideNavExpanded } = useAuth()
@@ -90,7 +91,7 @@ export const Header = () => {
     <div className="header-container">
       <div className="header">
         <div className="header-left">
-          {user?.role == 'admin' && (
+          {user?.role == 'admin' ? (
             <>
               <div
                 className="header-menu"
@@ -106,6 +107,18 @@ export const Header = () => {
                 <Breadcrumb />
               </div>
             </>
+          ) : (
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                cursor: 'pointer',
+              }}
+            >
+              <img src={YetiLogo} alt="Logo" height={50} width={50} />
+              <div style={{ fontSize: 18, fontWeight: 'bold' }}>Yeti FC</div>
+            </div>
           )}
         </div>
 

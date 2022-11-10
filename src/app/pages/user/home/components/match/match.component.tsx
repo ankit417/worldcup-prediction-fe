@@ -220,7 +220,7 @@ const RadioGroupComponent = ({
       <Box alEnd flexBox>
         <Box>
           <Title>{teamA}</Title>
-          <div>
+          <div style={{ marginTop: 10 }}>
             <img src={leftImage} alt={'teama_logo'} />
           </div>
           <FormControlLabel
@@ -253,7 +253,7 @@ const RadioGroupComponent = ({
         </Box>
         <Box>
           <Title>{teamB}</Title>
-          <div>
+          <div style={{ marginTop: 10 }}>
             <img src={rightImage} alt={'teamb_logo'} />
           </div>
           <FormControlLabel

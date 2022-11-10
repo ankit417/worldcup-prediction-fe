@@ -66,6 +66,8 @@ export const Table = ({
 
   const pageNumber = query.get('page') || 1
 
+  const disablePagination = true
+
   function useQuery() {
     return new URLSearchParams(location?.search)
   }
@@ -260,7 +262,7 @@ export const Table = ({
         {dataLoader ? <ActivityIndicator animating={true} /> : null}
       </TableContainer>
 
-      {!dataLoader && data?.length && totalCount ? (
+      {!disablePagination && !dataLoader && data?.length && totalCount ? (
         <div style={{ width: '100%', display: 'flex' }}>
           <Pagination
             style={{

@@ -90,7 +90,7 @@ const SelectTeam = ({ groupId, deadline }: any) => {
           You can add upto {groupInfoList[0]?.number_of_team} Teams
         </div>
         <form onSubmit={onSubmitHandler}>
-          <Box flexBox columnGap={20}>
+          <Box flexBox columnGap={20} className="team-selection-container">
             <Autocomplete
               disablePortal
               id="combo-box-demo"

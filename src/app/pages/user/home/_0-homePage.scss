@@ -3,12 +3,22 @@
 .tournamentlist {
   //   background-color: red;
   //   display: none;
+  @include responsive-for(md) {
+    width: 90vw;
+  }
 }
 .middle {
   //   //   width: 60%;
-  //   @include responsive-for(md) {
-  //     width: 60%;
-  //   }
+  @include responsive-for(md) {
+    width: 90vw;
+  }
+
+  .home-card-title {
+    @include responsive-for(md) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 }
 
 .right {

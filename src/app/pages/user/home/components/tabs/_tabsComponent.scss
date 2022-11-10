@@ -1,6 +1,6 @@
 @import './component/selectTeam/selectTeam';
 .tabpanel {
   @include responsive-for(md) {
-    width: 200px;
+    width: 80vw;
   }
 }

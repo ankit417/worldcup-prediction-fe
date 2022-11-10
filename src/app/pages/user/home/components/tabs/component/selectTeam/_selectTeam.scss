@@ -10,5 +10,11 @@
       margin-bottom: 20px;
       font-weight: bold;
     }
+
+    .team-selection-container {
+      @include responsive-for(md) {
+        flex-direction: column;
+      }
+    }
   }
 }

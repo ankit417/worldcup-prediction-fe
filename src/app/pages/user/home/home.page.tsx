@@ -64,7 +64,7 @@ export const UserHome = () => {
           </div>
         </Card>
         {/* </div> */}
-        <Card containerClass="leftside">
+        <Card containerClass="middle">
           <div className="home-card-title">
             <Title>{initialTournament?.tournament_name?.toUpperCase()}</Title>
             <Box style={{ cursor: 'pointer' }}>
@@ -85,6 +85,7 @@ export const UserHome = () => {
             activeTournamentIndex={activeTournamentIndex}
           />
         </Card>
+        <div className="right" />
       </div>
     </div>
     // </CompWrapper>

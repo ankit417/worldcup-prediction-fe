@@ -39,9 +39,9 @@ const EditTournament = ({
       data
     const requestBody = {
       tournament_name,
-      starting_from,
-      ending_at,
-      prediction_deadline,
+      starting_from: moment(starting_from).format('YYYY-MM-DD'),
+      ending_at: moment(ending_at).format('YYYY-MM-DD'),
+      prediction_deadline: moment(prediction_deadline).format('YYYY-MM-DD'),
     }
     onSubmit(requestBody)
     clear()

@@ -111,7 +111,12 @@ export const LoginPage = () => {
               {/* <div className="login-forgot" onClick={() => setVisible(true)}>
                 Forgot Password ?
               </div> */}
-
+              <div className="login-fields">
+                Registration Link{' '}
+                <a href="https://forms.gle/sULF8YsPdQ8Mhfyi9" target="_blank">
+                  Click Here
+                </a>
+              </div>
               <div className="login-action">
                 <ActivityIndicator animating={loading}>
                   <Button

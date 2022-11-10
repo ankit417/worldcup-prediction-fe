@@ -9,7 +9,7 @@ import { useInput } from '../../../hooks'
 import { forgetPassword, loginAction } from '../../../redux'
 import { isValid, validator } from '../../../utils'
 import { ActivityIndicator, Button, Card, InputField } from '../../common'
-
+import CLUB_PHOTO from '../../../assets/images/YETI-FC-LOGO.png'
 export const LoginPage = () => {
   const { handleLogin } = useAuth()
   const dispatch = useDispatch()
@@ -83,91 +83,115 @@ export const LoginPage = () => {
 
   return (
     <div className="login-container">
-      <div className="login">
-        <Card>
-          <form onSubmit={onLogin}>
-            <div className="login-contents">
-              <h1 className="login-head">LOGIN</h1>
-              <div className="login-fields">
-                <p className="login-fields-title">Email</p>
-                <InputField
-                  placeholder="Email"
-                  name="email"
-                  value={data?.email}
-                  onChange={onChangeHandler('email')}
-                  type="text"
-                />
-              </div>
-              <div className="login-fields">
-                <h1 className="login-fields-title">Password</h1>
-                <InputField
-                  placeholder="Password"
-                  name="password"
-                  value={data.password}
-                  onChange={onChangeHandler('password')}
-                  type="password"
-                />
-              </div>
-              {/* <div className="login-forgot" onClick={() => setVisible(true)}>
+      <div className="inner-card">
+        <Card
+          containerStyle={{
+            width: '70vw',
+          }}
+        >
+          <div className="card-wrapper">
+            <div className="inner-card-left-section">
+              <img
+                src={CLUB_PHOTO}
+                alt="Club photo"
+                width={'100%'}
+                height={'100%'}
+                className="club-image"
+              />
+            </div>
+            <div className="inner-card-right-section">
+              <div className="login">
+                {/* <Card> */}
+                <form onSubmit={onLogin}>
+                  <div className="login-contents">
+                    <h1 className="login-head">LOGIN</h1>
+                    <div className="login-fields">
+                      <p className="login-fields-title">Email</p>
+                      <InputField
+                        placeholder="Email"
+                        name="email"
+                        value={data?.email}
+                        onChange={onChangeHandler('email')}
+                        type="text"
+                      />
+                    </div>
+                    <div className="login-fields">
+                      <h1 className="login-fields-title">Password</h1>
+                      <InputField
+                        placeholder="Password"
+                        name="password"
+                        value={data.password}
+                        onChange={onChangeHandler('password')}
+                        type="password"
+                      />
+                    </div>
+                    {/* <div className="login-forgot" onClick={() => setVisible(true)}>
                 Forgot Password ?
               </div> */}
-              <div className="login-fields">
-                Registration Link{' '}
-                <a href="https://forms.gle/sULF8YsPdQ8Mhfyi9" target="_blank">
-                  Click Here
-                </a>
-              </div>
-              <div className="login-action">
-                <ActivityIndicator animating={loading}>
-                  <Button
-                    type="submit"
-                    title="login"
-                    className=" fit-content"
-                  />
-                </ActivityIndicator>
+                    <div className="login-fields">
+                      Registration Link{' '}
+                      <a
+                        href="https://forms.gle/sULF8YsPdQ8Mhfyi9"
+                        target="_blank"
+                      >
+                        Click Here
+                      </a>
+                    </div>
+                    <div className="login-action">
+                      <ActivityIndicator animating={loading}>
+                        <Button
+                          type="submit"
+                          title="login"
+                          className=" fit-content"
+                        />
+                      </ActivityIndicator>
+                    </div>
+                  </div>
+                </form>
+                {/* </Card> */}
+
+                {/* FORGOT PASSWORD MODAL */}
+                <Modal visible={visible}>
+                  <h1 className="login-head">Forgot password</h1>
+                  <p
+                    style={{
+                      paddingBottom: 10,
+                    }}
+                  >
+                    We will send you a link to reset your password
+                  </p>
+
+                  <form
+                    className="login-fields"
+                    //  onSubmit={onResetPasswordSubmit}
+                  >
+                    <p className="login-fields-title">Email</p>
+                    <InputField
+                      placeholder="Email"
+                      name="forgetEmail"
+                      value={data?.forgetEmail}
+                      onChange={onChangeHandler('forgetEmail')}
+                      type="forgetEmail"
+                    />
+
+                    <div style={{ height: 20 }} />
+
+                    <div className="login-action">
+                      <ActivityIndicator animating={forgetPasswordLoader}>
+                        <Button
+                          type="submit"
+                          title="Reset Password"
+                          className="fit-content"
+                          onClick={onResetPasswordSubmit}
+                        />
+                      </ActivityIndicator>
+                    </div>
+                  </form>
+                </Modal>
               </div>
             </div>
-          </form>
+          </div>
         </Card>
-
-        {/* FORGOT PASSWORD MODAL */}
-        <Modal visible={visible}>
-          <h1 className="login-head">Forgot password</h1>
-          <p
-            style={{
-              paddingBottom: 10,
-            }}
-          >
-            We will send you a link to reset your password
-          </p>
-
-          <form
-            className="login-fields"
-            //  onSubmit={onResetPasswordSubmit}
-          >
-            <p className="login-fields-title">Email</p>
-            <InputField
-              placeholder="Email"
-              name="forgetEmail"
-              value={data?.forgetEmail}
-              onChange={onChangeHandler('forgetEmail')}
-              type="forgetEmail"
-            />
-
-            <div style={{ height: 20 }} />
-
-            <div className="login-action">
-              <ActivityIndicator animating={forgetPasswordLoader}>
-                <Button
-                  type="submit"
-                  title="Reset Password"
-                  className="fit-content"
-                  onClick={onResetPasswordSubmit}
-                />
-              </ActivityIndicator>
-            </div>
-          </form>
-        </Modal>
       </div>
     </div>
   )

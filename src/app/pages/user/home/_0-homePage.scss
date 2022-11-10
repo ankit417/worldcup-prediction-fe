@@ -1,10 +1,13 @@
 @import './components/homeComponent';
 
 .tournamentlist {
-  //   background-color: red;
+  // background-color: red;
   //   display: none;
+  height: 50vh;
+  width: 20vw;
   @include responsive-for(md) {
     width: 90vw;
+    height: auto;
   }
 }
 .middle {

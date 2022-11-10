@@ -1,15 +1,16 @@
-import React from "react";
-import { Box, Title /* Button */ } from "../../common";
-import { Button } from "../button/button.common";
+import React from 'react'
+import { Box, Title /* Button */ } from '../../common'
+import { Button } from '../button/button.common'
 
 interface CardProps {
-  children: React.ReactNode;
-  containerStyle?: any;
-  title?: string | React.ReactNode;
-  buttonLabel?: string;
-  noPadding?: any;
-  onActionPress?: () => void;
-  buttonStyle?: any;
+  children: React.ReactNode
+  containerStyle?: any
+  title?: string | React.ReactNode
+  buttonLabel?: string
+  noPadding?: any
+  onActionPress?: () => void
+  buttonStyle?: any
+  containerClass?: string
 }
 export const Card = (props: CardProps) => {
   const {
@@ -20,9 +21,10 @@ export const Card = (props: CardProps) => {
     noPadding,
     onActionPress,
     buttonStyle,
-  } = props;
+    containerClass = '',
+  } = props
   return (
-    <Box className="card-container" style={containerStyle}>
+    <Box className={`card-container ${containerClass}`} style={containerStyle}>
       {(buttonLabel || title) && (
         <Box
           className="header"
@@ -53,5 +55,5 @@ export const Card = (props: CardProps) => {
         {children ? children : null}
       </Box>
     </Box>
-  );
-};
+  )
+}

@@ -1,7 +1,16 @@
 .home-wrapper {
-  display: flex;
-  justify-content: center;
-  flex: 1;
+  // display: flex;
+  // justify-content: center;
+  // flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 8fr 1fr;
+  gap: 30px;
+  margin-top: 30px;
+  @include responsive-for(md) {
+    // flex-direction: column;
+    grid-template-columns: 1fr;
+  }
+
   .home-card-title {
     display: flex;
     justify-content: space-between;

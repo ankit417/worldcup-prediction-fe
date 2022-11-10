@@ -15,7 +15,7 @@ import { TournamentList } from '../../admin/tournament/components'
 
 // import { MatchComponent } from './components/match'
 
-export const UserHome = ({}) => {
+export const UserHome = () => {
   const [initialTournament, setInitialTournament] = useState<
     number | null | any
   >(null)
@@ -53,15 +53,8 @@ export const UserHome = ({}) => {
       {/* <Nav /> */}
       <Header />
       <div className="home-wrapper">
-        <Card
-          containerStyle={{
-            width: '20%',
-            marginTop: 30,
-            height: 500,
-            marginRight: 30,
-          }}
-        >
-          {/* <div>List of current tournaments</div> */}
+        {/* <div className="tournamentlist"> */}
+        <Card containerClass="tournamentlist">
           <div>
             <TournamentList
               disableAdd={true}
@@ -70,7 +63,8 @@ export const UserHome = ({}) => {
             />
           </div>
         </Card>
-        <Card containerStyle={{ width: '60%', marginTop: 30 }}>
+        {/* </div> */}
+        <Card containerClass="leftside">
           <div className="home-card-title">
             <Title>{initialTournament?.tournament_name?.toUpperCase()}</Title>
             <Box style={{ cursor: 'pointer' }}>

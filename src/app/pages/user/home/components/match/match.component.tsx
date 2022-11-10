@@ -9,7 +9,7 @@ import {
   RootState,
   createUserPrediction,
 } from '../../../../../../redux'
-import { Hrline, Title } from '../../../../../common'
+import { Box, Hrline, Title } from '../../../../../common'
 import { FILE_URL } from '../../../../../../config'
 
 interface MatchProps {
@@ -99,25 +99,29 @@ const MatchComponent = ({ data, disable }: MatchComponentProps) => {
               {item.teama_name} Vs. {item.teamb_name}
             </Title>
             <div className="match_wrapper">
-              <div>
+              {/* <div>
                 <img src={FILE_URL + item.teama_logo} alt={item.teama_logo} />
-              </div>
+              </div> */}
               <div className="prediction_button_wrapper">
                 <RadioGroupComponent
+                  leftImage={FILE_URL + item.teama_logo}
+                  rightImage={FILE_URL + item.teamb_logo}
+                  teamA={item.teama_name}
+                  teamB={item.teamb_name}
                   item={item}
                   disable={disable}
                   // item={item}
                   // value={checkedValue(item?.id)}
                 />
               </div>
-              <div>
+              {/* <div>
                 <img
                   src={FILE_URL + item.teamb_logo}
                   height={100}
                   width={100}
                   alt={item.teamb_logo}
                 />
-              </div>
+              </div> */}
             </div>
             <Hrline gap={10} />
           </div>
@@ -127,7 +131,15 @@ const MatchComponent = ({ data, disable }: MatchComponentProps) => {
   )
 }
 
-const RadioGroupComponent = ({ item, disable }: any) => {
+const RadioGroupComponent = ({
+  item,
+  disable,
+
+  leftImage,
+  rightImage,
+  teamA,
+  teamB,
+}: any) => {
   // console.log('radio group item', item, disable)
   // const [radioNumber, setValue] = useState<number>(value)
   // console.log('Value', value)
@@ -205,39 +217,60 @@ const RadioGroupComponent = ({ item, disable }: any) => {
       // onChange={(e) => handleChange(e, item.id)}
       onChange={handleChange}
     >
-      <FormControlLabel
-        value={item.teama_name}
-        control={
-          <Radio
-          // checked={autoFillPrediction(item?.id, 1)}
+      <Box alEnd flexBox>
+        <Box>
+          <Title>{teamA}</Title>
+          <div>
+            <img src={leftImage} alt={'teama_logo'} />
+          </div>
+          <FormControlLabel
+            value={item.teama_name}
+            control={
+              <Radio
+              // checked={autoFillPrediction(item?.id, 1)}
+              />
+            }
+            label={item.teama_name}
+            onChange={() => updatePrediction(1)}
+            disabled={disable}
           />
-        }
-        label={item.teama_name}
-        onChange={() => updatePrediction(1)}
-        disabled={disable}
-      />
-      <FormControlLabel
-        value="Draw"
-        control={
-          <Radio
-          //  checked={autoFillPrediction(item?.id, 3)}
+        </Box>
+        <Box flexBox vertical>
+          <div>
+            <Title>VS</Title>
+          </div>
+          <FormControlLabel
+            value="Draw"
+            control={
+              <Radio
+              //  checked={autoFillPrediction(item?.id, 3)}
+              />
+            }
+            label="Draw"
+            onChange={() => updatePrediction(3)}
+            disabled={disable}
           />
-        }
-        label="Draw"
-        onChange={() => updatePrediction(3)}
-        disabled={disable}
-      />
-      <FormControlLabel
-        value={item.teamb_name}
-        control={
-          <Radio
-          // checked={autoFillPrediction(item?.id, 2)}
+        </Box>
+        <Box vertical>
+          <Title>{teamB}</Title>
+          <div>
+            <img src={rightImage} alt={'teamb_logo'} />
+          </div>
+          <FormControlLabel
+            value={item.teamb_name}
+            control={
+              <div>
+                <Radio
+                // checked={autoFillPrediction(item?.id, 2)}
+                />
+              </div>
+            }
+            label={item.teamb_name}
+            onChange={() => updatePrediction(2)}
+            disabled={disable}
           />
-        }
-        label={item.teamb_name}
-        onChange={() => updatePrediction(2)}
-        disabled={disable}
-      />
+        </Box>
+      </Box>
     </RadioGroup>
   )
 }

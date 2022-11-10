@@ -4,9 +4,15 @@
   //   background-color: red;
   //   display: none;
 }
-.leftside {
-  //   width: 60%;
+.middle {
+  //   //   width: 60%;
+  //   @include responsive-for(md) {
+  //     width: 60%;
+  //   }
+}
+
+.right {
   @include responsive-for(md) {
-    width: 100%;
+    display: none;
   }
 }

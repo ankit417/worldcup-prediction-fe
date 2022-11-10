@@ -17,6 +17,7 @@ export const TabPanel = (props: TabPanelProps) => {
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
       {...other}
+      className="tabpanel"
     >
       {value === index &&
         (group.user_select === 0 ? (

@@ -251,7 +251,7 @@ const RadioGroupComponent = ({
             disabled={disable}
           />
         </Box>
-        <Box vertical>
+        <Box>
           <Title>{teamB}</Title>
           <div>
             <img src={rightImage} alt={'teamb_logo'} />
@@ -259,11 +259,9 @@ const RadioGroupComponent = ({
           <FormControlLabel
             value={item.teamb_name}
             control={
-              <div>
-                <Radio
-                // checked={autoFillPrediction(item?.id, 2)}
-                />
-              </div>
+              <Radio
+              // checked={autoFillPrediction(item?.id, 2)}
+              />
             }
             label={item.teamb_name}
             onChange={() => updatePrediction(2)}

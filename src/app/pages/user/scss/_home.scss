@@ -11,8 +11,37 @@
     grid-template-columns: 1fr;
   }
 
+  @include responsive-for(sm) {
+    // flex-direction: column;
+    grid-template-columns: 1fr;
+  }
+
   .home-card-title {
     display: flex;
     justify-content: space-between;
   }
 }
+
+.css-heg063-MuiTabs-flexContainer {
+  // background-color: red;
+  @include responsive-for(sm) {
+    width: 100px;
+    // overflow: hidden;
+  }
+}
+
+// .MuiTabs-scroller
+//   .MuiTabs-hideScrollbar
+//   .MuiTabs-scrollableX
+//   .css-69z67c-MuiTabs-scroller {
+//   background-color: red;
+// }
+// .css-1ujnqem-MuiTabs-root {
+//   background-color: blue;
+//   width: 100px;
+// }
+
+// .css-1gsv261 {
+//   background-color: green;
+//   width: 100px;
+// }

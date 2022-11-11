@@ -4,18 +4,23 @@ import { useAuth } from 'react-auth-navigation'
 import { useDispatch, useSelector } from 'react-redux'
 import { Modal } from 'react-uicomp'
 import { toast } from 'react-hot-toast'
+import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { useInput } from '../../../hooks'
 
-import { forgetPassword, loginAction } from '../../../redux'
+import {
+  // forgetPassword,
+  loginAction,
+} from '../../../redux'
 import { isValid, validator } from '../../../utils'
 import { ActivityIndicator, Button, Card, InputField } from '../../common'
 import CLUB_PHOTO from '../../../assets/images/YETI-FC-LOGO.png'
 export const LoginPage = () => {
   const { handleLogin } = useAuth()
   const dispatch = useDispatch()
-  const { loading, forgetPasswordLoader } = useSelector(
-    (state: any) => state.login
-  )
+  const {
+    loading,
+    //  forgetPasswordLoader
+  } = useSelector((state: any) => state.login)
   const { data, onChangeHandler } = useInput({
     email: '',
     password: '',
@@ -52,34 +57,34 @@ export const LoginPage = () => {
     dispatch(loginAction(body, handleLogin))
   }
 
-  const onResetPasswordSubmit = (e: any) => {
-    e.preventDefault()
-    const catchedErros = {}
-    const validate = validator(catchedErros)
+  // const onResetPasswordSubmit = (e: any) => {
+  //   e.preventDefault()
+  //   const catchedErros = {}
+  //   const validate = validator(catchedErros)
 
-    const { forgetEmail } = data
+  //   const { forgetEmail } = data
 
-    validate('forgetEmail', forgetEmail.length === 0, () => {
-      toast.error("Email musn't be empty!")
-    })
+  //   validate('forgetEmail', forgetEmail.length === 0, () => {
+  //     toast.error("Email musn't be empty!")
+  //   })
 
-    if (!isValid(catchedErros)) {
-      console.error(catchedErros)
-      return
-    }
+  //   if (!isValid(catchedErros)) {
+  //     console.error(catchedErros)
+  //     return
+  //   }
 
-    // forgot password action dispatch
-    dispatch(
-      forgetPassword(
-        {
-          email: forgetEmail,
-        },
-        () => {
-          setVisible(false)
-        }
-      )
-    )
-  }
+  //   // forgot password action dispatch
+  //   dispatch(
+  //     forgetPassword(
+  //       {
+  //         email: forgetEmail,
+  //       },
+  //       () => {
+  //         setVisible(false)
+  //       }
+  //     )
+  //   )
+  // }
 
   return (
     <div className="login-container">
@@ -125,9 +130,12 @@ export const LoginPage = () => {
                         type="password"
                       />
                     </div>
-                    {/* <div className="login-forgot" onClick={() => setVisible(true)}>
-                Forgot Password ?
-              </div> */}
+                    <div
+                      className="login-forgot"
+                      onClick={() => setVisible(true)}
+                    >
+                      Game Rules
+                    </div>
                     <div className="login-fields">
                       Registration Link{' '}
                       <a
@@ -151,42 +159,97 @@ export const LoginPage = () => {
                 {/* </Card> */}
 
                 {/* FORGOT PASSWORD MODAL */}
-                <Modal visible={visible}>
-                  <h1 className="login-head">Forgot password</h1>
+                <Modal visible={visible} style={{ width: '90vw' }}>
+                  <div
+                    style={{ display: 'flex', justifyContent: 'space-between' }}
+                  >
+                    <h2 className="login-head">YETI FC Worldcup Fun 2022</h2>
+                    <AiOutlineCloseCircle
+                      size={24}
+                      color={'#FF0000'}
+                      onClick={() => {
+                        setVisible(false)
+                      }}
+                      style={{ cursor: 'pointer' }}
+                    />
+                  </div>
                   <p
                     style={{
                       paddingBottom: 10,
                     }}
                   >
-                    We will send you a link to reset your password
-                  </p>
-
-                  <form
-                    className="login-fields"
-                    //  onSubmit={onResetPasswordSubmit}
-                  >
-                    <p className="login-fields-title">Email</p>
-                    <InputField
-                      placeholder="Email"
-                      name="forgetEmail"
-                      value={data?.forgetEmail}
-                      onChange={onChangeHandler('forgetEmail')}
-                      type="forgetEmail"
-                    />
-
-                    <div style={{ height: 20 }} />
-
-                    <div className="login-action">
-                      <ActivityIndicator animating={forgetPasswordLoader}>
-                        <Button
-                          type="submit"
-                          title="Reset Password"
-                          className="fit-content"
-                          onClick={onResetPasswordSubmit}
-                        />
-                      </ActivityIndicator>
+                    <h3> Playing conditions: </h3>
+                    <br />
+                    <div style={{ marginTop: 5 }}>
+                      1) Participation fee : Aud $100 <br />
                     </div>
-                  </form>
+                    <div style={{ marginTop: 5 }}>
+                      2) Entries can be made by submitting the EOI and payment
+                      at : Yeti FC BSB :063111 Account: 11066537 <br />
+                    </div>
+                    <div style={{ marginTop: 5 }}>
+                      3) Last date of entry 19 Nov 2022 <br />
+                    </div>
+                    <div style={{ marginTop: 5 }}>
+                      4) Points calculations: <br />
+                    </div>
+                    <div style={{ marginTop: 5, marginLeft: 15 }}>
+                      League - 48 matches * 0.5 = 24 P <br />
+                      Pre Quarter - 16 teams * 1 = 16 P <br />
+                      Quarter- 8 * 2 = 16 P <br />
+                      Semis - 4 * 4 = 16 P <br />
+                      Finals- 2 * 8 = 16 P <br />
+                      Champion team - 1 * 12 = 12 P <br />
+                      Total = 100 points <br />
+                    </div>
+                    <div style={{ marginTop: 5 }}>
+                      5) Prize Money will be distributed as follows to the
+                      participants scoring most points:
+                      <div style={{ marginTop: 5, marginLeft: 15 }}>
+                        1st Prize 50% of the total amount collected
+                      </div>
+                      <div style={{ marginTop: 5, marginLeft: 15 }}>
+                        2nd Prize 20% of the total amount collected
+                      </div>
+                      <div style={{ marginTop: 5, marginLeft: 15 }}>
+                        3rd Prize 15% of the total amount collected
+                      </div>
+                      <div style={{ marginTop: 5, marginLeft: 15 }}>
+                        4th Prize 10% of the total amount collected
+                      </div>
+                      <div style={{ marginTop: 5, marginLeft: 15 }}>
+                        5th Prize 5 % of the total amount collected.
+                      </div>
+                      <div style={{ marginTop: 5, marginLeft: 15 }}>
+                        Only top 5 entries / scores are eligible for the prize
+                        money distribution. Should there be more than 5 entries/
+                        scores claiming the prize money, the same shall be
+                        equally distributed For example. say 3 entries are in
+                        1st position, then prize money allotted for first three
+                        positions shall be equally distributed amongst the three
+                        and and 2nd highest scorer shall get 4th prize money
+                        allotted and so on. <br />
+                      </div>
+                    </div>
+                    <div style={{ marginTop: 5 }}>
+                      6) Should there be any issues / disputes not resolved by
+                      the rules mentioned above, then the decision of the
+                      organizing committee shall be final and binding.
+                    </div>
+                    <div style={{ marginTop: 5 }}>
+                      If any queries please contact :
+                    </div>
+                    <div style={{ marginTop: 5, marginLeft: 15 }}>
+                      Sajjan sharma 0416787586
+                    </div>
+                    <div style={{ marginTop: 5, marginLeft: 15 }}>
+                      Arun Shrestha 0450570756
+                    </div>
+                    <div style={{ marginTop: 5 }}>
+                      30% of the totals raised money shall go towards the Yeti
+                      FC fund .
+                    </div>
+                  </p>
                 </Modal>
               </div>
             </div>

@@ -57,7 +57,8 @@ export const UserProfile = () => {
     // <CompWrapper>
     <div style={{ marginLeft: 20, marginRight: 20 }}>
       {/* <Nav /> */}
-      <div className="home-wrapper">
+      {/* <div className="home-wrapper"> */}
+      <div>
         <Card containerStyle={{ width: '90%', marginTop: 30 }}>
           <div className="home-card-title">
             <Title>

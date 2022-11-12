@@ -185,7 +185,14 @@ export const LoginPage = () => {
                     </div>
                     <div style={{ marginTop: 5 }}>
                       2) Entries can be made by submitting the EOI and payment
-                      at : Yeti FC BSB :063111 Account: 11066537 <br />
+                      at :
+                      <div style={{ marginLeft: 15 }}>
+                        <br />
+                        <b>Yeti FC BSB :063111</b>
+                        <br />
+                        <b>Account: 11066537</b>
+                      </div>
+                      <br />
                     </div>
                     <div style={{ marginTop: 5 }}>
                       3) Last date of entry 19 Nov 2022 <br />
@@ -203,22 +210,29 @@ export const LoginPage = () => {
                       Total = 100 points <br />
                     </div>
                     <div style={{ marginTop: 5 }}>
-                      5) Prize Money will be distributed as follows to the
+                      5) 30% of the totals raised money shall go towards
+                      expenses and the Yeti FC fund.
+                    </div>
+                    <div style={{ marginTop: 5 }}>
+                      6)The prize amount will be 70% of total collected amount.
+                    </div>
+                    <div style={{ marginTop: 5 }}>
+                      7) Prize Money will be distributed as follows to the
                       participants scoring most points:
                       <div style={{ marginTop: 5, marginLeft: 15 }}>
-                        1st Prize 50% of the total amount collected
+                        1st Prize 50% of the Prize amount
                       </div>
                       <div style={{ marginTop: 5, marginLeft: 15 }}>
-                        2nd Prize 20% of the total amount collected
+                        2nd Prize 20% of the Prize amount
                       </div>
                       <div style={{ marginTop: 5, marginLeft: 15 }}>
-                        3rd Prize 15% of the total amount collected
+                        3rd Prize 15% of the Prize amount
                       </div>
                       <div style={{ marginTop: 5, marginLeft: 15 }}>
-                        4th Prize 10% of the total amount collected
+                        4th Prize 10% of the Prize amount
                       </div>
                       <div style={{ marginTop: 5, marginLeft: 15 }}>
-                        5th Prize 5 % of the total amount collected.
+                        5th Prize 5 % of the Prize amount
                       </div>
                       <div style={{ marginTop: 5, marginLeft: 15 }}>
                         Only top 5 entries / scores are eligible for the prize
@@ -232,22 +246,13 @@ export const LoginPage = () => {
                       </div>
                     </div>
                     <div style={{ marginTop: 5 }}>
-                      6) Should there be any issues / disputes not resolved by
-                      the rules mentioned above, then the decision of the
-                      organizing committee shall be final and binding.
-                    </div>
-                    <div style={{ marginTop: 5 }}>
                       If any queries please contact :
                     </div>
                     <div style={{ marginTop: 5, marginLeft: 15 }}>
-                      Sajjan sharma 0416787586
+                      <b>Sajjan sharma 0416787586</b>
                     </div>
                     <div style={{ marginTop: 5, marginLeft: 15 }}>
-                      Arun Shrestha 0450570756
-                    </div>
-                    <div style={{ marginTop: 5 }}>
-                      30% of the totals raised money shall go towards the Yeti
-                      FC fund .
+                      <b>Arun Shrestha 0450570756</b>
                     </div>
                   </p>
                 </Modal>

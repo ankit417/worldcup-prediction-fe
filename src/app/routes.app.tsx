@@ -14,6 +14,8 @@ import {
   // ListStock,
   LoginPage,
   UserHome,
+  LeaderBoard,
+  UserDetail,
 } from './pages'
 
 import {
@@ -68,6 +70,16 @@ export const privatePaths = [
     name: 'Predict',
     path: '/predict',
     component: UserHome,
+  },
+  {
+    name: 'Leaderboard',
+    path: '/leaderboard',
+    component: LeaderBoard,
+  },
+  {
+    name: 'LeaderboardProfile',
+    path: '/leaderboard-profile/:tournamentId/:userId',
+    component: UserDetail,
   },
   {
     name: 'Tournament',

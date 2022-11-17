@@ -21,6 +21,12 @@ export const userRoles = {
     ],
   },
   [userType.USER]: {
-    access: ['/', '/login', '/predict'],
+    access: [
+      '/',
+      '/login',
+      '/predict',
+      '/leaderboard',
+      '/leaderboard-profile/*',
+    ],
   },
 }

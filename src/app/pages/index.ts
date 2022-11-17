@@ -1,2 +1,2 @@
 export * from './login'
-export * from './user/home'
+export * from './user'

@@ -17,9 +17,12 @@
   }
 
   .home-card-title {
+    display: flex;
+    align-items: center;
     @include responsive-for(md) {
       display: flex;
       flex-direction: column;
+      gap: 10px;
     }
   }
 }

@@ -3,5 +3,6 @@
 
   @include responsive-for(md) {
     flex-direction: column;
+    // flex-direction: row;
   }
 }

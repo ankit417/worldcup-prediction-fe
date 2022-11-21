@@ -82,7 +82,7 @@ export const LeaderBoard = () => {
             <Title>{initialTournament?.tournament_name?.toUpperCase()}</Title>
             <Box style={{ cursor: 'pointer' }}>
               <Title>
-                {initialTournament?.show_leaderboard == 1 && 'View Leaderboard'}
+                {initialTournament?.show_leaderboard == 1 && ' Leaderboard'}
               </Title>
             </Box>
             <Title>

@@ -1,0 +1,7 @@
+.match-component-radio-labels {
+  display: flex;
+
+  @include responsive-for(md) {
+    flex-direction: column;
+  }
+}

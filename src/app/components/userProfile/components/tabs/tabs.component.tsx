@@ -29,7 +29,6 @@ const TabsComponent = ({ selectedTournament }: any) => {
     groupList,
   } = useSelector((state: RootState) => state.group)
 
-  console.log('Group list', groupList)
   function a11yProps(index: number) {
     return {
       id: `simple-tab-${index}`,

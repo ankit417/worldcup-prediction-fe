@@ -210,39 +210,41 @@ const RadioGroupComponent = ({ item }: any) => {
       // onChange={(e) => handleChange(e, item.id)}
       onChange={handleChange}
     >
-      <FormControlLabel
-        value={item.teama_name}
-        control={
-          <Radio
-          // checked={autoFillPrediction(item?.id, 1)}
-          />
-        }
-        label={item.teama_name}
-        // onChange={() => updatePrediction(1)}
-        disabled
-      />
-      <FormControlLabel
-        value="Draw"
-        control={
-          <Radio
-          //  checked={autoFillPrediction(item?.id, 3)}
-          />
-        }
-        label="Draw"
-        // onChange={() => updatePrediction(3)}
-        disabled
-      />
-      <FormControlLabel
-        value={item.teamb_name}
-        control={
-          <Radio
-          // checked={autoFillPrediction(item?.id, 2)}
-          />
-        }
-        label={item.teamb_name}
-        // onChange={() => updatePrediction(2)}
-        disabled
-      />
+      <div className="match-component-radio-labels">
+        <FormControlLabel
+          value={item.teama_name}
+          control={
+            <Radio
+            // checked={autoFillPrediction(item?.id, 1)}
+            />
+          }
+          label={item.teama_name}
+          // onChange={() => updatePrediction(1)}
+          disabled
+        />
+        <FormControlLabel
+          value="Draw"
+          control={
+            <Radio
+            //  checked={autoFillPrediction(item?.id, 3)}
+            />
+          }
+          label="Draw"
+          // onChange={() => updatePrediction(3)}
+          disabled
+        />
+        <FormControlLabel
+          value={item.teamb_name}
+          control={
+            <Radio
+            // checked={autoFillPrediction(item?.id, 2)}
+            />
+          }
+          label={item.teamb_name}
+          // onChange={() => updatePrediction(2)}
+          disabled
+        />
+      </div>
     </RadioGroup>
   )
 }

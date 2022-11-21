@@ -17,18 +17,7 @@ import { Title, Hrline, Card } from '../../common'
 export const UserProfile = () => {
   const { params }: any = useNavigation()
   const { tournamentId, userId } = params
-  // const [initialTournament, setInitialTournament] = useState<
-  //   number | null | any
-  // >(null)
-
-  // const [activeTournamentIndex, setActiveTournamentIndex] = useState<number>(0)
-
-  // console.log('Initial tournament', initialTournament)
   const dispatch = useDispatch()
-
-  // useEffect(() => {
-  //   dispatch(getAllTournaments())
-  // }, [dispatch])
 
   useEffect(() => {
     if (userId) {
@@ -42,16 +31,9 @@ export const UserProfile = () => {
     }
   }, [dispatch, tournamentId])
 
-  // const { groupLoading, groupList } = useSelector(
-  //   (state: RootState) => state.group
-  // )
   const { userInfoLoading, userInfo } = useSelector(
     (state: RootState) => state.user
   )
-
-  // console.log('Group list', groupLoading, groupList, userId)
-  // console.log('user info', userInfoLoading, userInfo)
-  // console.log('Initial tournament', initialTournament)
 
   return (
     // <CompWrapper>
@@ -60,7 +42,13 @@ export const UserProfile = () => {
       {/* <div className="home-wrapper"> */}
       <div>
         <Card containerStyle={{ width: '90%', marginTop: 30 }}>
-          <div className="home-card-title">
+          <div
+            className="home-card-title"
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
+          >
             <Title>
               {!userInfoLoading && userInfo && userInfo[0]?.full_name}
             </Title>

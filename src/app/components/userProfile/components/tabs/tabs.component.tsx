@@ -29,6 +29,7 @@ const TabsComponent = ({ selectedTournament }: any) => {
     groupList,
   } = useSelector((state: RootState) => state.group)
 
+  console.log('Group list', groupList)
   function a11yProps(index: number) {
     return {
       id: `simple-tab-${index}`,
@@ -44,12 +45,13 @@ const TabsComponent = ({ selectedTournament }: any) => {
   // console.log('Group list', groupLoading, groupList)
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
+          variant="scrollable"
         >
           {groupList.map((item: any, index: number) => {
             return <Tab label={item.group_name} {...a11yProps(index)} />

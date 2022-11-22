@@ -6,12 +6,14 @@ export const UserDetail = () => {
       {/* <div>User Detail page</div> */}
       <Header />
       <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          flex: 1,
-          width: '100%',
-        }}
+        style={
+          {
+            // display: 'flex',
+            // justifyContent: 'center',
+            // flex: 1,
+            // width: '100%',
+          }
+        }
       >
         <UserProfile />
       </div>

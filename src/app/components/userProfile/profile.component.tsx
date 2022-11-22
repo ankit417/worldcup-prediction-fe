@@ -37,11 +37,11 @@ export const UserProfile = () => {
 
   return (
     // <CompWrapper>
-    <div style={{ marginLeft: 20, marginRight: 20 }}>
+    <div style={{ marginLeft: 10, marginRight: 10 }}>
       {/* <Nav /> */}
       {/* <div className="home-wrapper"> */}
       <div>
-        <Card containerStyle={{ width: '90%', marginTop: 30 }}>
+        <Card containerStyle={{ width: '100%', marginTop: 30 }}>
           <div
             className="home-card-title"
             style={{
@@ -52,7 +52,7 @@ export const UserProfile = () => {
             <Title>
               {!userInfoLoading && userInfo && userInfo[0]?.full_name}
             </Title>
-            <Title>{!userInfoLoading && userInfo && userInfo[0]?.email}</Title>
+            {/* <Title>{!userInfoLoading && userInfo && userInfo[0]?.email}</Title> */}
           </div>
           <Hrline gap={12} />
           <TabsComponent selectedTournament={tournamentId} />

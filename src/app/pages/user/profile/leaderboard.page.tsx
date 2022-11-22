@@ -101,11 +101,11 @@ export const LeaderBoard = () => {
                 name: 'Full Name',
                 render: (rowData: any) => rowData,
               },
-              {
-                field: 'email',
-                name: 'Email',
-                render: (rowData: any) => rowData,
-              },
+              // {
+              //   field: 'email',
+              //   name: 'Email',
+              //   render: (rowData: any) => rowData,
+              // },
               {
                 field: 'finalPoint',
                 name: 'Point',

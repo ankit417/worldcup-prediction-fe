@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
-
+import { MdOutlineDoneAll } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   getUserPrediction,
@@ -28,9 +28,10 @@ interface MatchProps {
 interface MatchComponentProps {
   data: Array<MatchProps>
   disable: boolean
+  point?: number | any
 }
-const MatchComponent = ({ data, disable }: MatchComponentProps) => {
-  // console.log('Match component data', data, disable)
+const MatchComponent = ({ data, disable, point }: MatchComponentProps) => {
+  console.log('Match component data', data, point)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getUserPrediction())
@@ -110,6 +111,7 @@ const MatchComponent = ({ data, disable }: MatchComponentProps) => {
                   teamB={item.teamb_name}
                   item={item}
                   disable={disable}
+                  point={point}
                   // item={item}
                   // value={checkedValue(item?.id)}
                 />
@@ -139,6 +141,7 @@ const RadioGroupComponent = ({
   rightImage,
   teamA,
   teamB,
+  point,
 }: any) => {
   // console.log('radio group item', item, disable)
   // const [radioNumber, setValue] = useState<number>(value)
@@ -220,7 +223,36 @@ const RadioGroupComponent = ({
       <Box alEnd flexBox>
         <Box>
           <Title>{teamA}</Title>
-          <div style={{ marginTop: 10 }}>
+          <div style={{ marginTop: 10, position: 'relative' }}>
+            {item.status === 1 && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  border: 1,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                {/* <div>Winner</div> */}
+                <div
+                  style={{
+                    padding: 2,
+                    backgroundColor: '#eeeedd',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <MdOutlineDoneAll size={24} color="#0000FF" />
+                  {radioValue == teamA && `+${point}`}
+                </div>
+              </div>
+            )}
             <img src={leftImage} alt={'teama_logo'} />
           </div>
           <FormControlLabel
@@ -238,6 +270,11 @@ const RadioGroupComponent = ({
         <Box flexBox vertical>
           <div>
             <Title>VS</Title>
+            {item.status == 3 && (
+              <Title>
+                {radioValue == 'Draw' ? `- Draw(+${0.5}) ` : `- Draw`}
+              </Title>
+            )}
           </div>
           <FormControlLabel
             value="Draw"
@@ -253,7 +290,36 @@ const RadioGroupComponent = ({
         </Box>
         <Box>
           <Title>{teamB}</Title>
-          <div style={{ marginTop: 10 }}>
+          <div style={{ marginTop: 10, position: 'relative' }}>
+            {item.status === 2 && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  border: 1,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                {/* <div>Winner</div> */}
+                <div
+                  style={{
+                    padding: 2,
+                    backgroundColor: '#eeeedd',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <MdOutlineDoneAll size={24} color="#0000FF" />
+                  {radioValue == teamB && `+${point}`}
+                </div>
+              </div>
+            )}
             <img src={rightImage} alt={'teamb_logo'} />
           </div>
           <FormControlLabel

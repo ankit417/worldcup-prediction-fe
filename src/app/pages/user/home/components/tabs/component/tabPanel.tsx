@@ -9,7 +9,6 @@ interface TabPanelProps {
 
 export const TabPanel = (props: TabPanelProps) => {
   const { children, value, index, group, deadline, ...other } = props
-  // console.l
   return (
     <div
       role="tabpanel"
@@ -21,7 +20,11 @@ export const TabPanel = (props: TabPanelProps) => {
     >
       {value === index &&
         (group.user_select === 0 ? (
-          <SelectGame groupId={group.id} deadline={deadline} />
+          <SelectGame
+            groupId={group.id}
+            deadline={deadline}
+            point={group.match_point}
+          />
         ) : (
           <SelectTeam groupId={group.id} deadline={deadline} />
         ))}

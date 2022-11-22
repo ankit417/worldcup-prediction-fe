@@ -6,13 +6,14 @@ import { getAllGame, RootState } from '../../../../../../../../redux'
 import { MatchComponent } from '../../../.'
 
 const CURRENT_DATE = moment().format('YYYY-MM-DD')
-const SelectGame = ({ groupId, deadline }: any) => {
+const SelectGame = ({ groupId, deadline, point }: any) => {
   const dispatch = useDispatch()
   const [disableGame, setDisableGame] = useState(true)
   const {
     //  gameLoading,
     gameList,
   } = useSelector((state: RootState) => state.game)
+  // console.log('Game list', gameList, point)
   // console.log('Game list ', gameList, gameLoading)
   // console.log(
   //   'current date , deadline',
@@ -34,7 +35,7 @@ const SelectGame = ({ groupId, deadline }: any) => {
 
   return (
     <div>
-      <MatchComponent data={gameList} disable={disableGame} />
+      <MatchComponent data={gameList} disable={disableGame} point={point} />
     </div>
   )
 }

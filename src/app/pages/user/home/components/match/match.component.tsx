@@ -213,7 +213,6 @@ const RadioGroupComponent = ({
     <RadioGroup
       row
       aria-labelledby="demo-radio-buttons-group-label"
-      // defaultValue={'argentina'}
       // defaultValue={predictionDefault(item)}
       name="radio-buttons-group"
       value={radioValue}

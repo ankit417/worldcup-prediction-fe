@@ -1,14 +1,14 @@
 .user-select-team-wrapper {
   .form-wrapper {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    flex-direction: column;
     margin: 20px 0;
+    align-items: center;
 
     .number-of-teams {
-      margin-bottom: 20px;
       font-weight: bold;
+      margin-bottom: 20px;
     }
 
     .team-selection-container {

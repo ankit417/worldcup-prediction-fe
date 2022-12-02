@@ -53,7 +53,13 @@ const TabsComponent = ({ selectedTournament }: any) => {
           variant="scrollable"
         >
           {groupList.map((item: any, index: number) => {
-            return <Tab label={item.group_name} {...a11yProps(index)} />
+            return (
+              <Tab
+                label={item.group_name}
+                {...a11yProps(index)}
+                key={index.toString()}
+              />
+            )
           })}
         </Tabs>
       </Box>
@@ -64,6 +70,7 @@ const TabsComponent = ({ selectedTournament }: any) => {
             value={value}
             index={index}
             group={_item}
+            key={index.toString()}
             // deadline={predictionDeadline}
           />
         )

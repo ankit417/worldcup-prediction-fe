@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Dropdown, Menu, Modal } from 'react-uicomp'
-import { useAuth } from 'react-auth-navigation'
+import { useAuth, useNavigation } from 'react-auth-navigation'
 
 import { MdMenu, MdKeyboardArrowDown } from 'react-icons/md'
 import { BsThreeDotsVertical } from 'react-icons/bs'
@@ -20,7 +20,9 @@ import YetiLogo from '../../../assets/images/yeti_football_club_logo.png'
 
 export const Header = () => {
   const { handleLogout, setSideMenuStable, sideNavExpanded } = useAuth()
-
+  const {
+    navigation: { navigate },
+  }: any = useNavigation()
   const { passwordLoader } = useSelector((state: any) => state.login)
   const { user } = useSelector((state: any) => state.user)
 
@@ -114,6 +116,9 @@ export const Header = () => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 cursor: 'pointer',
+              }}
+              onClick={() => {
+                navigate(`/`)
               }}
             >
               <img src={YetiLogo} alt="Logo" height={50} width={50} />

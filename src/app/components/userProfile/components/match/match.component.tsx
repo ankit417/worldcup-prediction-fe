@@ -29,11 +29,10 @@ interface MatchProps {
 
 interface MatchComponentProps {
   data: Array<MatchProps>
+  point?: number | any
   // disable: boolean
 }
-const MatchComponent = ({ data }: MatchComponentProps) => {
-  // console.log('Match component data', data)
-
+const MatchComponent = ({ data, point }: MatchComponentProps) => {
   const { params }: any = useNavigation()
   const { userId } = params
 
@@ -111,6 +110,7 @@ const MatchComponent = ({ data }: MatchComponentProps) => {
               <div className="prediction_button_wrapper">
                 <RadioGroupComponent
                   item={item}
+                  point={point}
                   // disable={disable}
                   // item={item}
                   // value={checkedValue(item?.id)}
@@ -133,10 +133,30 @@ const MatchComponent = ({ data }: MatchComponentProps) => {
   )
 }
 
-const RadioGroupComponent = ({ item }: any) => {
+const RadioGroupComponent = ({ item, point }: any) => {
   // const [radioNumber, setValue] = useState<number>(value)
-  // console.log('Value', value)
+
   const [radioValue, setRadioValue] = useState<any>(null)
+  const [winner, setWinner] = useState<any>('TBD')
+  useEffect(() => {
+    if (radioValue) {
+      getWinner(item)
+    }
+  }, [item, radioValue])
+
+  const getWinner = (item: any) => {
+    switch (item.status) {
+      case 1:
+        return setWinner(item.teama_name)
+      case 2:
+        return setWinner(item.teamb_name)
+      case 3:
+        return setWinner('Draw')
+      default:
+        return setWinner('TBD')
+    }
+  }
+
   // console.log('Valueeeeeee', radioValue)
 
   // useEffect(() => {
@@ -200,52 +220,58 @@ const RadioGroupComponent = ({ item }: any) => {
   // }
 
   return (
-    <RadioGroup
-      row
-      aria-labelledby="demo-radio-buttons-group-label"
-      // defaultValue={'argentina'}
-      // defaultValue={predictionDefault(item)}
-      name="radio-buttons-group"
-      value={radioValue}
-      // onChange={(e) => handleChange(e, item.id)}
-      onChange={handleChange}
-    >
-      <div className="match-component-radio-labels">
-        <FormControlLabel
-          value={item.teama_name}
-          control={
-            <Radio
-            // checked={autoFillPrediction(item?.id, 1)}
-            />
-          }
-          label={item.teama_name}
-          // onChange={() => updatePrediction(1)}
-          disabled
-        />
-        <FormControlLabel
-          value="Draw"
-          control={
-            <Radio
-            //  checked={autoFillPrediction(item?.id, 3)}
-            />
-          }
-          label="Draw"
-          // onChange={() => updatePrediction(3)}
-          disabled
-        />
-        <FormControlLabel
-          value={item.teamb_name}
-          control={
-            <Radio
-            // checked={autoFillPrediction(item?.id, 2)}
-            />
-          }
-          label={item.teamb_name}
-          // onChange={() => updatePrediction(2)}
-          disabled
-        />
-      </div>
-    </RadioGroup>
+    <div>
+      {radioValue == winner
+        ? `Winner : ${winner} (+${point})`
+        : `Winner : ${winner}`}
+      {/* {radioValue == 'Draw' && `- Draw(+${0.5}) `} */}
+      <RadioGroup
+        row
+        aria-labelledby="demo-radio-buttons-group-label"
+        // defaultValue={'argentina'}
+        // defaultValue={predictionDefault(item)}
+        name="radio-buttons-group"
+        value={radioValue}
+        // onChange={(e) => handleChange(e, item.id)}
+        onChange={handleChange}
+      >
+        <div className="match-component-radio-labels">
+          <FormControlLabel
+            value={item.teama_name}
+            control={
+              <Radio
+              // checked={autoFillPrediction(item?.id, 1)}
+              />
+            }
+            label={item.teama_name}
+            // onChange={() => updatePrediction(1)}
+            disabled
+          />
+          <FormControlLabel
+            value="Draw"
+            control={
+              <Radio
+              //  checked={autoFillPrediction(item?.id, 3)}
+              />
+            }
+            label="Draw"
+            // onChange={() => updatePrediction(3)}
+            disabled
+          />
+          <FormControlLabel
+            value={item.teamb_name}
+            control={
+              <Radio
+              // checked={autoFillPrediction(item?.id, 2)}
+              />
+            }
+            label={item.teamb_name}
+            // onChange={() => updatePrediction(2)}
+            disabled
+          />
+        </div>
+      </RadioGroup>
+    </div>
   )
 }
 

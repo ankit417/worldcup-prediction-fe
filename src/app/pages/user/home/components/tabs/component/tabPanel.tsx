@@ -24,9 +24,15 @@ export const TabPanel = (props: TabPanelProps) => {
             groupId={group.id}
             deadline={deadline}
             point={group.match_point}
+            key={index.toString()}
           />
         ) : (
-          <SelectTeam groupId={group.id} deadline={deadline} />
+          <SelectTeam
+            groupId={group.id}
+            point={group.match_point}
+            deadline={deadline}
+            key={index.toString()}
+          />
         ))}
     </div>
   )

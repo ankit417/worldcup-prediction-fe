@@ -9,7 +9,7 @@ import { getAllGame, RootState } from '../../../../../../../redux'
 import { MatchComponent } from '../../../.'
 
 // const CURRENT_DATE = moment().format('YYYY-MM-DD')
-const SelectGame = ({ groupId }: any) => {
+const SelectGame = ({ groupId, point }: any) => {
   const dispatch = useDispatch()
   // const [disableGame, setDisableGame] = useState(true)
   const {
@@ -32,7 +32,7 @@ const SelectGame = ({ groupId }: any) => {
 
   return (
     <div>
-      <MatchComponent data={gameList} />
+      <MatchComponent data={gameList} point={point} />
     </div>
   )
 }

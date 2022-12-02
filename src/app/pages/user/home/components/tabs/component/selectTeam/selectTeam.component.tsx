@@ -5,7 +5,7 @@ import moment from 'moment'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { useFormInput } from 'use-form-input'
-
+import { TiTick } from 'react-icons/ti'
 import {
   getAllTeam,
   RootState,
@@ -13,6 +13,7 @@ import {
   addTieSheetPrediction,
   getGroupInfo,
   deleteTieSheetPrediction,
+  getAllTieSheet,
 } from '../../../../../../../../redux'
 import Autocomplete from '@mui/material/Autocomplete'
 import { Button, Box, Table } from '../../../../../../../common'
@@ -20,7 +21,7 @@ import toast from 'react-hot-toast'
 
 const CURRENT_DATE = moment().format('YYYY-MM-DD')
 
-const SelectTeam = ({ groupId, deadline }: any) => {
+const SelectTeam = ({ groupId, deadline, point }: any) => {
   const [disableGame, setDisableGame] = useState(true)
   // console.log('Select group group Id', groupId)
   const GROUP_ID = groupId
@@ -31,7 +32,12 @@ const SelectTeam = ({ groupId, deadline }: any) => {
   )
 
   const { groupInfoList } = useSelector((state: RootState) => state.group)
-  // console.log('Tie sheet prediction list', tiesheetPredictionList)
+  const { tiesheetList } = useSelector((state: RootState) => state.tiesheet)
+
+  useEffect(() => {
+    dispatch(getAllTieSheet(groupId))
+  }, [dispatch, groupId])
+
   useEffect(() => {
     dispatch(getAllTeam())
   }, [dispatch])
@@ -83,6 +89,28 @@ const SelectTeam = ({ groupId, deadline }: any) => {
     }
   }
 
+  const winnerTiesheet = (rowData: any) => {
+    const tieSheet = tiesheetList.filter(
+      (item: any) => item.team_name == rowData
+    )
+    if (tieSheet.length > 0) {
+      return (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
+          }}
+        >
+          {rowData} (+{point})
+          <TiTick size={24} color={'#F55536'} />
+        </div>
+      )
+    } else {
+      return rowData
+    }
+  }
+
   return (
     <div className="user-select-team-wrapper">
       <div className="form-wrapper">
@@ -113,7 +141,8 @@ const SelectTeam = ({ groupId, deadline }: any) => {
           {
             field: 'team_name',
             name: 'Team Name',
-            render: (rowData: any) => rowData,
+            render: (rowData: any) =>
+              tiesheetList.length > 0 ? winnerTiesheet(rowData) : rowData,
           },
         ]}
         data={tiesheetPredictionList}

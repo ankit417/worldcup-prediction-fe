@@ -7,6 +7,7 @@ import { useNavigation } from 'react-auth-navigation'
 // import Box from '@mui/material/Box'
 // import TextField from '@mui/material/TextField'
 // import moment from 'moment'
+import { TiTick } from 'react-icons/ti'
 
 import { useDispatch, useSelector } from 'react-redux'
 // import { useFormInput } from 'use-form-input'
@@ -18,6 +19,7 @@ import {
   // addTieSheetPrediction,
   getGroupInfo,
   // deleteTieSheetPrediction,
+  getAllTieSheet,
 } from '../../../../../../../redux'
 // import Autocomplete from '@mui/material/Autocomplete'
 import {
@@ -28,7 +30,7 @@ import {
 
 // const CURRENT_DATE = moment().format('YYYY-MM-DD')
 
-const SelectTeam = ({ groupId }: any) => {
+const SelectTeam = ({ groupId, point }: any) => {
   // const [disableGame, setDisableGame] = useState(true)
   // console.log('Select group group Id', groupId)
   const { params }: any = useNavigation()
@@ -42,6 +44,8 @@ const SelectTeam = ({ groupId }: any) => {
   )
 
   const { groupInfoList } = useSelector((state: RootState) => state.group)
+  const { tiesheetList } = useSelector((state: RootState) => state.tiesheet)
+
   // console.log('Tie sheet prediction list', tiesheetPredictionList)
   // useEffect(() => {
   //   dispatch(getAllTeam())
@@ -61,6 +65,10 @@ const SelectTeam = ({ groupId }: any) => {
 
   useEffect(() => {
     dispatch(getGroupInfo(groupId))
+  }, [dispatch, groupId])
+
+  useEffect(() => {
+    dispatch(getAllTieSheet(groupId))
   }, [dispatch, groupId])
 
   // const [data, { setValue, clear }] = useFormInput({
@@ -90,6 +98,28 @@ const SelectTeam = ({ groupId }: any) => {
   //     toast.error('Please select a team')
   //   }
   // }
+
+  const winnerTiesheet = (rowData: any) => {
+    const tieSheet = tiesheetList.filter(
+      (item: any) => item.team_name == rowData
+    )
+    if (tieSheet.length > 0) {
+      return (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
+          }}
+        >
+          {rowData} (+{point})
+          <TiTick size={24} color={'#F55536'} />
+        </div>
+      )
+    } else {
+      return rowData
+    }
+  }
 
   return (
     <div className="user-select-team-wrapper">
@@ -121,7 +151,8 @@ const SelectTeam = ({ groupId }: any) => {
           {
             field: 'team_name',
             name: 'Team Name',
-            render: (rowData: any) => rowData,
+            render: (rowData: any) =>
+              tiesheetList.length > 0 ? winnerTiesheet(rowData) : rowData,
           },
         ]}
         data={tiesheetPredictionList}

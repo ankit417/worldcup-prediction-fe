@@ -31,7 +31,6 @@ interface MatchComponentProps {
   point?: number | any
 }
 const MatchComponent = ({ data, disable, point }: MatchComponentProps) => {
-  console.log('Match component data', data, point)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getUserPrediction())
